@@ -131,7 +131,8 @@ void CANRcv_Task(void *p_arg)
 	uint8_t i = 0;
  
 	while(1){
-		if((RxMsg = (CanRxMsg *)OSQPend(CANRcv_Q, 0, &error)) != (void *)0){
+		
+		if((RxMsg = (CanRxMsg *)OSQPend(CANRcv_Q, 0, &error)) != (void *)0){		/* 等待时间无穷大 */
 			msg.cob_id = RxMsg->head.StdId;				   //CAN-ID
 			
 			if(CAN_RTR_REMOTE == RxMsg->head.RTR)
@@ -140,12 +141,12 @@ void CANRcv_Task(void *p_arg)
 				msg.rtr = 0;																			//数据帧
 			msg.len = (UNS8)RxMsg->head.DLC;				//长度
 			
-			printf("CAN Rcv 0x%x  ",msg.cob_id);
+			CAN_RCV_MSG("CAN Rcv 0x%x  ",msg.cob_id);
 			for(i=0; i<msg.len; i++){								//数据
 				msg.data[i] = RxMsg->Data[i];
-				printf("-0x%x ",msg.data[i]);
+				CAN_RCV_MSG("-0x%x ",msg.data[i]);
 			}
-			printf("\r\n");
+			CAN_RCV_MSG("\r\n");
 
 			//HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);
 			canDispatch(&TestMaster_Data, &msg);	   //处理接收到的CAN帧，调用协议库相关接口
@@ -164,9 +165,10 @@ void CANSend_Task(void *p_arg)
 {
 	CanTxMsg * TxMsg;
 
-    (void)p_arg;   
-     while (1){
-		if((TxMsg = (CanTxMsg *)OSQPend(CANSend_Q, 0, &error)) != (void *)0) //获取发送队列中数据
+		(void)p_arg; 
+	
+	while (1){
+		if((TxMsg = (CanTxMsg *)OSQPend(CANSend_Q, 0, &error)) != (void *)0) //获取发送队列中数据 		/* 等待时间无穷大 */
 		{
 			static MAIL pmailbox;
 			if(MX_CANx_send(pHCANx, TxMsg, pmailbox) != HAL_OK ){
@@ -174,22 +176,24 @@ void CANSend_Task(void *p_arg)
 				MX_CANx_send(pHCANx, TxMsg, pmailbox);
 			}
 			else{
-				MSG("can send %u\r\n",OSTime);
-				printf("CAN Send 0x%x  ",TxMsg->head.StdId);
-				for(int i=0; i<TxMsg->head.DLC; i++){				   //数据
-					printf("-0x%x ",TxMsg->Data[i]);
+				CAN_SEND_MSG("can send %u\r\n",OSTime);
+				CAN_SEND_MSG("CAN Send 0x%x  ",TxMsg->head.StdId);
+				for(int i=0; i<TxMsg->head.DLC; i++){
+					CAN_SEND_MSG("-0x%x ",TxMsg->Data[i]);
 				}
-				printf("\r\n");
+				CAN_SEND_MSG("\r\n");
 			}
 		}
-    }
+	}
 }
 
 
 void Remote_App_Init(void)
 {
+	/* 串口配置 */
 	/*OSTaskCreate(Remote_Task,(void *)0,		  				//创建 infra-red 控制任务
 		   &remote_task_stk[TASK_A_STK_SIZE-1], TASK_remote_PRIO);*/
+	
 	OSTaskCreateExt(RemoteController_Task,(void *)0,&remote_task_stk[TASK_A_STK_SIZE-1],
 		TASK_remote_PRIO,0,&remote_task_stk[0],TASK_A_STK_SIZE,(void *)0,(OS_TASK_OPT_STK_CHK | OS_TASK_OPT_STK_CLR));
 }

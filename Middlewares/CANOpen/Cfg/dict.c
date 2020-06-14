@@ -257,8 +257,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1603_2_mapped, NULL },
 					 };
 										 
-/* index 0x1800 :   TPDO 1 .    Index 1800h-19FFh,  Transmit PDO Communication Parameter  
-										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
+/* index 0x1800 :   TPDO 1 .    Index 1800h-19FFh,  Transmit PDO Communication Parameter  */ 
 					UNS8 ClientNumber_0x1800 = 5;
 					UNS32 TestMaster_obj1800_COB_ID_PDO = 0x40000180;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1800_Transmiss_Type  = 1;
@@ -366,13 +365,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 };
 					 
 /* 0x1A00  Index 1A00h-1BFFh，Transmit PDO Mapping Parameter */
-					UNS8 TestMaster_obj1A00_Number_mapped = 2; //服务器，也就是需要修改的节点
-					UNS32 TestMaster_1_mapped = 0x60400010;
+					UNS8 TestMaster_obj1A00_Number_mapped = 1; //服务器，也就是需要修改的节点
+					//UNS32 TestMaster_1_mapped = 0x60400010;
 					UNS32 TestMaster_2_mapped = 0x20620020;
                     subindex TestMaster_Index1A00[] = 
                      {
                        { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A00_Number_mapped, NULL },
-                       { RO, uint32, sizeof (UNS32), (void*)&TestMaster_1_mapped, NULL },
+                       //{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_1_mapped, NULL },
                        { RO, uint32, sizeof (UNS32), (void*)&TestMaster_2_mapped, NULL },
                      };
 
@@ -478,10 +477,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					   { RW, uint32, sizeof (UNS32), (void*)&mode4, NULL },
 					 }; 
 /*0x2062 */
-					UNS32 Pos_SET_VALUE = 0x0;//服务器，也就是需要修改的节点
+					INTEGER32 Pos_SET_VALUE = 0x0;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index2062[] =
 					 {
-					   { RW, uint32, sizeof (UNS32), (void*)&Pos_SET_VALUE, NULL },
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE, NULL },
 					 };
 /* 0x6041   Status */
 					UNS16 Statusword = 0x00;//服务器，也就是需要修改的节点
@@ -490,10 +489,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					   { RW, uint16, sizeof (UNS16), (void*)&Statusword, NULL },
 					 };
 /* 0x6064   Pos_Actual_Val */
-					UNS16 Pos_Actual_Val = 0x00;//服务器，也就是需要修改的节点
+					INTEGER32 Pos_Actual_Val = 0x00;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index6064[] =
 					 {
-					   { RW, uint32, sizeof (UNS32), (void*)&Pos_Actual_Val, NULL },
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val, NULL },
 					 };
 
 /**************************************************************************/

@@ -56,7 +56,7 @@ INT8U rxindex = 0;
 #ifndef TEST_ON
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-	MSG("can Qrcv %u\r\n",OSTime);
+	CAN_RCV_MSG("can Qrcv %u\r\n",OSTime);
 	CANRcv_DateFromISR();
 }
 #endif

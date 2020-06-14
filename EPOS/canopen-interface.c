@@ -58,20 +58,27 @@ void _stopped(CO_Data* d)
  * Window > Preferences > C/C++ > Editor > Templates.
  */
 
+uint8_t start = 0;
+uint16_t endP = 102;
 #include "gait.h"
 uint8_t pdoindex = 0;
 uint8_t Index = 0;
-void _post_TPDO(CO_Data* d){
+extern Uint32 pos;										//֧ܺλ׃
+extern int x;												//އ׈ؔҤ extern int x=0;ˇխքìһŜՙһՎԵʼۯ
+extern int angle_sensor;
 
-	/*UNS32 code, ByteSize, angle;
+void assive (CO_Data* d);
+void Test_curve(CO_Data* d);
+void _post_TPDO(CO_Data* d){
+/*
+	UNS32 code, ByteSize, angle;
 	UNS32 retcode;(void)retcode;
 
 	ByteSize = 4;
 	angle = test_angle[Index];
-	//angle = 0xFFFFB1E0;
 
-	 * ���Ϳ��ƼĴ���0x0F��0x7F, ����λ��ģʽ�ĸı�
-	 1
+
+ 
 	if(pdoindex % 2 == 0){
 		code = 0x4F;
 		ByteSize = 2;
@@ -87,8 +94,8 @@ void _post_TPDO(CO_Data* d){
 	}
 	pdoindex++;
 
-	if(Index == 10) Index = 0;*/
-
+	if(Index == sizeof(test_angle)/sizeof(test_angle[0])) Index = 0;
+*/
 /*	UNS32 re;
 	UNS32 angle = angle_2[Index]-11740;
 	re = Edit_Dict(d , Pos_SET_VALUE, 0, &angle);
@@ -99,17 +106,61 @@ void _post_TPDO(CO_Data* d){
 		MSG("-TPDO update error- 0x%lx\r\n",re);
 	if(++Index == 323) Index = 0;*/
 
-	UNS32 re;
-	UNS32 angle = test_angle[Index];
-	re = Edit_Dict(d , Pos_SET_VALUE, 0, &angle);
-
-	if(re == OD_SUCCESSFUL)
-		MSG("-TPDO_update- index %d\r\n",Index);
-	else
-		MSG("-TPDO update error- 0x%lx\r\n",re);
-	if(++Index == 120) Index = 0;
+Test_curve(d);
 }
 
+
+
+void assive (CO_Data* d)
+{
+	UNS32 re;
+	
+	if(start == 0){
+		endP = sizeof(knee_0_5m)/sizeof(*knee_0_5m);
+		pos = knee_0_5m[x++];
+		if( x==endP){
+			endP = sizeof(knee_1_5m)/sizeof(*knee_1_5m);
+			start = 1;
+			x = 0;
+		}
+	}
+	else{
+		pos = knee_1_5m[x++];
+		if( x==endP)
+			x = 0;
+	}
+	
+	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	
+	
+	if(re == OD_SUCCESSFUL)
+		TPDO_MSG("-TPDO_update- index %d\r\n",Index);
+	else
+		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
+	
+	
+	ROW_MSG("%d\t%d\r\n",Pos_Actual_Val,pos);
+}
+
+
+
+void Test_curve (CO_Data* d)
+{
+	UNS32 re;
+	endP = sizeof(test_angle)/sizeof(*test_angle);
+		pos = test_angle[x++]/2;
+		if( x==endP)
+			x = 0;
+	
+	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	
+	
+	if(re == OD_SUCCESSFUL)
+		TPDO_MSG("-TPDO_update- index %d\r\n",Index);
+	else
+		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
+	ROW_MSG("%d\t%d\r\n",Pos_Actual_Val,pos);
+}
 
 
 /*
@@ -122,7 +173,7 @@ void _post_TPDO(CO_Data* d){
 void _post_sync(CO_Data* d)
 {
 	(void)d;
-	MSG("-post_sync-\r\n");
+	SYNC_MSG("-post_sync-\r\n");
 }
 
 

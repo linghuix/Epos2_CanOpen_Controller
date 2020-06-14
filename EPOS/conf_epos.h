@@ -56,7 +56,7 @@ extern Uint32 pos_value_RH;
 /************常数*************/
 
 #define PPMODE 0x01
-#define MAX_ACC 100000
+#define MAX_ACC 50000
 #define MAX_DEC 50000
 #define MODE_NONE 0x00
 #define MAX_F_ERR 2000
@@ -231,7 +231,7 @@ enum E_OBJ_DICTIONARY
     OD_STORE = 0x1010,      //Save all Parameters, Subindex 0x01, Type UNSIGNED32
         SAVE_Code = 0x73617665,
 
-    OD_CAN_BITRATE = 0x2001, //Subindex 0x00, Type UNSIGNED16
+    OD_CAN_BITRATE = 0x20010010, //Subindex 0x00, Type UNSIGNED16
 
     OD_CURRENT_AVG = 0x2027, //Current Actual Value Averaged, Subindex 0x00,Type INTEGER16
 
@@ -281,7 +281,12 @@ enum E_OBJ_DICTIONARY
     OD_Max_Acceleration = 0x60C50020,
 
     OD_TARGET_VELOCITY = 0x60FF0020,  //target velocity, Sub-index 0x00, INTEGER32
-    OD_MOTOR_DATA = 0x3001  //motor data, number of entries 0x06,具体含义参照firmware
+    OD_MOTOR_DATA = 0x6410,  //motor data, number of entries 0x06,具体含义参照firmware
+		OD_MOTOR_DATA_MAX_V = 0x64100420,  //motor data, number of entries 0x06,具体含义参照firmware
+		OD_MOTOR_DATA_continue_I = 0x64100120,
+		OD_MOTOR_DATA_MAX_I = 0x64100220,
+		OD_MOTOR_DATA_MAX_MPP = 0x64100320,
+		OD_MOTOR_DATA_TH_CONT = 0x64100520
 };
 
 

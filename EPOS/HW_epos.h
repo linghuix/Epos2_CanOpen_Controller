@@ -17,10 +17,13 @@ void Epos_ReceiveDate(void);
 void Epos_Conroller_TIMBack(void);
 void EPOS_Start(void);
 void EPOS_Reset(void);
-
+void Epos_PosSet(Epos* epos, Uint32 pos);
 
 void Epos_ControlTask(void);
 
 void Node_Initial_Postion(void);
+
+
+#define Node_To_Home_Postion(e) Epos_PosSet(e,0)
 #endif
 

@@ -9,7 +9,7 @@
 uint8_t NODE_ID[] = {2,3,4,5,6,7};                          																//EPOS ID
 Epos Controller1, Controller2, Controller3, Controller4, Controller5, Controller6;        //控制器对
 Epos *Controller[] = {&Controller1, &Controller2, &Controller3, &Controller4, &Controller5, &Controller6};
-uint8_t NumControllers = 2;
+uint8_t NumControllers = 1;
 
 /*
  * author lhx
@@ -96,11 +96,12 @@ void PM_SetAngle(Epos* epos, Uint32 angle){
 
 
 /** Position Set */
-void Epos_PosSet(Epos* epos, Uint32 pos){
+void Epos_PosSet(Epos* epos, Uint32 pos)
+	{
 	
-		 SDO_Write(Controller[1],OD_CTRL_WORD ,0x00,0x0F);	
+		 SDO_Write(epos,OD_CTRL_WORD ,0x00,0x0F);	
 		 PM_SetAngle(epos,pos);
-		 SDO_Write(Controller[1],OD_CTRL_WORD ,0x00,0x7F);	
+		 SDO_Write(epos,OD_CTRL_WORD ,0x00,0x7F);	
 }
 
 
@@ -214,7 +215,7 @@ void State(void){
 #include "gait.h"
 
 uint32_t flag = 0xff;          //用于标志是否接收到数据，在中断函数中赋
-UNS32 pos=0;                       //电机位置
+int pos=0;                       //电机位置
 int x=0;                            //角度自变
 int angle_sensor;
 	
