@@ -199,7 +199,6 @@ UNS8 proceedPDO (CO_Data * d, Message * m)
 
               case state2:
                 pwCobId = d->objdict[offsetObjdict].pSubindex[1].pObject;
-                uint32_t fjdskjf=*pwCobId;
                 if (*pwCobId == UNS16_LE(m->cob_id))
                   {
                     /* The cobId is recognized */

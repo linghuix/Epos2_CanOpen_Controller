@@ -97,13 +97,13 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
   GPIO_InitTypeDef GPIO_InitStruct;
   if(canHandle->Instance==CAN1)
   {
-    __HAL_RCC_CAN1_CLK_ENABLE();
+    /*__HAL_RCC_CAN1_CLK_ENABLE();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
-    /**CAN GPIO Configuration
-    PA11     ------> CAN_RX
-    PA12     ------> CAN_TX
-    */
+//    CAN GPIO Configuration
+//    PA11     ------> CAN_RX
+//    PA12     ------> CAN_TX
+    
     GPIO_InitStruct.Pin = GPIO_PIN_11;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -114,11 +114,39 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    /* CAN1 interrupt Init */
-    /*HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0,1);
-    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);*/
+//    CAN1 interrupt Init 
+//    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0,1);
+//    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
     HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 1, 2);
-    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);*/
+		
+
+__HAL_RCC_CAN1_CLK_ENABLE();
+__HAL_RCC_AFIO_CLK_ENABLE();
+__HAL_RCC_GPIOB_CLK_ENABLE();
+
+
+//CAN GPIO Configuration
+//PB8     ------> CAN_RX
+//PB9     ------> CAN_TX
+
+GPIO_InitStruct.Pin = GPIO_PIN_8;
+GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+GPIO_InitStruct.Pull = GPIO_PULLUP;
+GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+GPIO_InitStruct.Pin = GPIO_PIN_9;
+GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+__HAL_AFIO_REMAP_CAN1_2();
+//CAN1 interrupt Init 
+//HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0,1);
+//HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
+HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
+HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
+		
   }
 }
 

@@ -13,7 +13,7 @@
 
 /* Definition of error and warning macros */
 /* -------------------------------------- */
-#	define MYMSG(...) printf (__VA_ARGS__);printf("  %s,%d\r\n",__FILE__, __LINE__)
+#	define MYMSG(...) printf (__VA_ARGS__)//;printf("--%s,%d\r\n",__FILE__, __LINE__)
 #	define MSG_deviceTest(...) printf (__VA_ARGS__);printf("  %s,%d\r\n",__FILE__, __LINE__)
 #	define Task_MSG(...) printf (__VA_ARGS__);printf("  %s,%d\r\n",__FILE__, __LINE__)
 #	define MMSG(...) printf (__VA_ARGS__);printf("  %s,%d\r\n",__FILE__, __LINE__)

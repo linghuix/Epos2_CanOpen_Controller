@@ -27,7 +27,7 @@ Error MX_CANx_get(CAN_HandleTypeDef *phcan, CanRxMsg *msg, uint32_t FIFO)
 void CAN_Start(CAN_HandleTypeDef *phcan)
 {
 	if(HAL_CAN_Start(phcan) != HAL_OK){
-		Error_Handler();
+		Error_Handler()
 	}
 }
 
