@@ -430,12 +430,13 @@ ARM Macro Assembler    Page 7
               00000000 
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M3 --apcs=interw
-ork --depend=.\objects\os_cpu_a.d -o.\objects\os_cpu_a.o -IH:\0-重要文档\worksp
-ace_1.0.2\Epos2_node\Keil\RTE -IG:\0-Embeded\KEIL\Keil_v5.1\ARM\PACK\ARM\CMSIS\
-4.5.0\CMSIS\Include -IG:\0-Embeded\KEIL\Keil_v5.1\ARM\PACK\Keil\STM32F1xx_DFP\2
-.3.0\Device\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERS
-ION SETA 518" --predefine="_RTE_ SETA 1" --predefine="STM32F10X_HD SETA 1" --li
-st=.\listings\os_cpu_a.lst ..\Middlewares\uCOS-II\Ports\os_cpu_a.asm
+ork --depend=.\objects\os_cpu_a.d -o.\objects\os_cpu_a.o -I"D:\10-Chip_learning
+\0-硬件\3-motor\0-MOTOR controller\Epos2_node\Keil\RTE" -IG:\0-Embeded\KEIL\Kei
+l_v5.1\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include -IG:\0-Embeded\KEIL\Keil_v5.1\ARM
+\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include --predefine="__MICROLIB SETA 1" -
+-predefine="__UVISION_VERSION SETA 518" --predefine="_RTE_ SETA 1" --predefine=
+"STM32F10X_HD SETA 1" --list=.\listings\os_cpu_a.lst ..\Middlewares\uCOS-II\Por
+ts\os_cpu_a.asm
 
 
 

@@ -20,7 +20,7 @@ extern UNS32 TestMaster_obj1006;
 void SetMyDict(void)
 {
 	uint32_t data;
-	TestMaster_obj1006 = MS10;		//set sync cycle
+	TestMaster_obj1006 = MS5;		//set sync cycle
 	data = 0x182;
 	//data = 0x250;
 	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO

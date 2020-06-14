@@ -106,26 +106,27 @@ void _post_TPDO(CO_Data* d){
 		MSG("-TPDO update error- 0x%lx\r\n",re);
 	if(++Index == 323) Index = 0;*/
 
-Test_curve(d);
+assive(d);
 }
 
 
-
+#define ARRAY   knee_0_5m
+#define ARRAY_1 knee_1_5m
 void assive (CO_Data* d)
 {
 	UNS32 re;
 	
 	if(start == 0){
-		endP = sizeof(knee_0_5m)/sizeof(*knee_0_5m);
-		pos = knee_0_5m[x++];
+		endP = sizeof(ARRAY)/sizeof(*ARRAY);
+		pos = ARRAY[x++];
 		if( x==endP){
-			endP = sizeof(knee_1_5m)/sizeof(*knee_1_5m);
+			endP = sizeof(ARRAY_1)/sizeof(*ARRAY_1);
 			start = 1;
 			x = 0;
 		}
 	}
 	else{
-		pos = knee_1_5m[x++];
+		pos = ARRAY_1[x++];
 		if( x==endP)
 			x = 0;
 	}
