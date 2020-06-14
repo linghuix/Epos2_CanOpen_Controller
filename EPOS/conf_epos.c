@@ -5,27 +5,31 @@
 #include "canopen_interface.h"
 
 extern CanRxMsg RxMessage;
-
-
+#define MS10 0x2710
+#define MS5 0x1388
+#define MS15 0x3A98
+#define S1 0xF4240
 /*
  * author lhx
  *
- * @brief : EPOS控制器的初始化
+ * @brief : 配置字典结构体中的重要参数
+ *  EPOS控制器的初始化
  * Window > Preferences > C/C++ > Editor > Templates.
  */
 extern UNS32 TestMaster_obj1006;
 void SetMyDict(void)
 {
 	uint32_t data;
-	TestMaster_obj1006 = 0xC350;	//sync cycle
-	//data = 0x182;
-	data = 0x250;
-	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);
+	TestMaster_obj1006 = MS10;		//set sync cycle
+	data = 0x182;
+	//data = 0x250;
+	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO
 	data = 0x202;
-	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);
+	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO
 	data = 0x203;
-	Edit_Dict(&TestMaster_Data,0x18010120, 0x01, &data);
+	Edit_Dict(&TestMaster_Data,0x18010120, 0x01, &data);		//TPDO
 }
+
 
 void EposMaster_Init(void)
 {
@@ -37,26 +41,28 @@ void EposMaster_Init(void)
 void EposMaster_Start(void)
 {
 	uint32_t data;
+	SetMyDict();
+	
 	setState(&TestMaster_Data, Initialisation);
 
-	if (!(*(TestMaster_Data.iam_a_slave)))
+	if (!(*(TestMaster_Data.iam_a_slave)))		//master
 		{
-			SetMyDict();
 			EPOS_Reset();
 			Epos_NodeEnable();
-			Node_Initial_Postion();
+			Node_To_Home_Postion(Controller[0]);
 			EPOS_Start();
 		}
+	/* 验证是否进入 Operational 模式 */
 	data = SDO_Read(Controller[0], Statusword, 0X00);
-	MSG("get - %lx\r\n",data);
-	/*if((data>>9)&0x01){*/
+	MSG("get - %x\r\n",data);
+	if((data>>9)&0x01){
 			MSG("already start MNT\r\n");
 			printf("-----------------------------------------------\r\n");
 			printf("-----------------PDO_ENABLE -------------------\r\n");
 			printf("-----------------------------------------------\r\n");
 			//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
 			setState(&TestMaster_Data, Operational);
-	/*}*/
+	}
 }
 
 
@@ -86,14 +92,17 @@ void writeNetwork (UNS8 nodeId, UNS16 index,UNS8 subIndex, UNS32 count, UNS8 dat
 void Node_ParamConfig(Epos* epos)
 {
     //SDO_Read(epos,OD_STATUS_WORD,0x00);                  //Fault Status=0x0108  红灯闪烁
-	SDO_Write(epos, OD_CTRL_WORD, 0x00, 0x00);
+    SDO_Write(epos, OD_CTRL_WORD, 0x00, 0x00);
     SDO_Write(epos, OD_CTRL_WORD, 0x00, Fault_Reset);      //Fault_Reset command 控制字设置为0x80 第7位置1，参考固件手册 Fault reset figure3-3 事件15 驱动初始化完成
 
     //SDO_Read(epos,OD_STATUS_WORD,0x00);                  //Switch On    Status=0x0540/0140   绿灯闪烁
 
     SDO_Write(epos, OD_Following_ERR_window, 0x00, MAX_F_ERR); //最大误差设置
+	
+		SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, MAX_P_V);//MAX_P_V);  //最大速度
+		SDO_Write(epos, OD_MOTOR_DATA, 0x04, MAX_P_V);     //最大允许速度
 
-    SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, 1000);//MAX_P_V);  //最大速度
+    SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);//MAX_P_V);  //最大速度
 
     SDO_Write(epos, OD_Max_Acceleration, 0x00, epos->acc);	//max acc set
 
@@ -142,7 +151,7 @@ void Print(CanRxMsg RxMessage){
     
     int i;
 //    printf("0x%x\t",RxMessage.StdId);
-    printf("0x%lx\t",RxMessage.head.StdId);
+    printf("0x%x\t",RxMessage.head.StdId);
 
     printf("0x");
     for(i=0;i<8;i++) printf("%02X ",RxMessage.Data[i]);
@@ -199,11 +208,11 @@ void Node_setMode(Epos* epos, Uint16 mode){
 			break;
 
 	case(Current_Mode):
-			SDO_Write(epos,OD_MOTOR_DATA,0x01,2000);         // set Continuous Current Limit 连续输出电流最大值 mA
-			SDO_Write(epos, OD_MOTOR_DATA, 0x02, 4000);     //输出最大电流，推荐为两倍连续最大电流
-			SDO_Write(epos, OD_MOTOR_DATA, 0x03, 1);        //Changes only in “Disable” state.Number of magnetic pole pairs 参考电机手册
-			SDO_Write(epos, OD_MOTOR_DATA, 0x04, 25000);     //限制电机最大速度 rpm
-			SDO_Write(epos, OD_MOTOR_DATA, 0x05, 1);         // thermal time constant
+			SDO_Write(epos,OD_MOTOR_DATA_continue_I,0x01,2000);         // set Continuous Current Limit 连续输出电流最大值 mA
+			SDO_Write(epos, OD_MOTOR_DATA_MAX_I, 0x02, 4000);     //输出最大电流，推荐为两倍连续最大电流
+			SDO_Write(epos, OD_MOTOR_DATA_MAX_MPP, 0x03, 1);        //Changes only in “Disable” state.Number of magnetic pole pairs 参考电机手册
+			SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, 25000);     //限制电机最大速度 rpm
+			SDO_Write(epos, OD_MOTOR_DATA_TH_CONT, 0x05, 1);         // thermal time constant
 			break;
 
 	case(Profile_Position_Mode):	//CONFIGURATION PARAMETERS
