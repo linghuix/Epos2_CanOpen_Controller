@@ -97,7 +97,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
   GPIO_InitTypeDef GPIO_InitStruct;
   if(canHandle->Instance==CAN1)
   {
-    /*__HAL_RCC_CAN1_CLK_ENABLE();
+    __HAL_RCC_CAN1_CLK_ENABLE();
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
 //    CAN GPIO Configuration
@@ -118,9 +118,9 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
 //    HAL_NVIC_SetPriority(CAN1_TX_IRQn, 0,1);
 //    HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
     HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 1, 2);
-    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);*/
+    HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
 		
-
+/*
 __HAL_RCC_CAN1_CLK_ENABLE();
 __HAL_RCC_AFIO_CLK_ENABLE();
 __HAL_RCC_GPIOB_CLK_ENABLE();
@@ -146,7 +146,7 @@ __HAL_AFIO_REMAP_CAN1_2();
 //HAL_NVIC_EnableIRQ(CAN1_TX_IRQn);
 HAL_NVIC_SetPriority(CAN1_RX0_IRQn, 0, 0);
 HAL_NVIC_EnableIRQ(CAN1_RX0_IRQn);
-		
+*/
   }
 }
 

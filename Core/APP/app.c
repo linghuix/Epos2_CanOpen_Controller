@@ -107,6 +107,7 @@ void CANOpen_App_Init(void)
  * Window > Preferences > C/C++ > Editor > Templates.
  */
 #include "conf_epos.h"
+uint8_t START = 0;
 void Epos_Task(void *p_arg)
 {
 	//Task_MSG("CANApp_Task ... ");
@@ -114,6 +115,10 @@ void Epos_Task(void *p_arg)
 	EposMaster_Start();
 	for(;;)
 	{
+		if(START == 1){
+			START = 0;
+			EposMaster_Start();
+		}
 		OSTimeDlyHMSM(0, 0,0,5); 
 	}
 }

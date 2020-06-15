@@ -35,13 +35,13 @@ void EposMaster_Init(void)
 {
 	unsigned char nodeID = 0x01;
 	setNodeId(&TestMaster_Data, nodeID);
+	SetMyDict();
 }
 
 #include "canopen_interface.h"
 void EposMaster_Start(void)
 {
 	uint32_t data;
-	SetMyDict();
 	
 	setState(&TestMaster_Data, Initialisation);
 
@@ -50,6 +50,9 @@ void EposMaster_Start(void)
 			EPOS_Reset();
 			Epos_NodeEnable();
 			Node_To_Home_Postion(Controller[0]);
+			
+			OSTimeDlyHMSM(0, 0,5,0); //等待复位
+			
 			EPOS_Start();
 		}
 	/* 验证是否进入 Operational 模式 */
@@ -250,7 +253,7 @@ void Node_setMode(Epos* epos, Uint16 mode){
 			break;
 
 	default:
-			printf("error mode\r\n");
+			printf("error mode %d\r\n",(int16_t)mode);
         
     }
 }

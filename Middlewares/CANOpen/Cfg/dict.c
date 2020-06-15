@@ -630,8 +630,8 @@ const quick_index TestMaster_lastIndex = {
   6, /* SDO_CLT */
   7, /* PDO_RCV */
   11, /* PDO_RCV_MAP */
-  16, /* PDO_TRS */
-  22 /* PDO_TRS_MAP */
+  15, /* PDO_TRS */
+  21 /* PDO_TRS_MAP */
 };
 
 const UNS16 TestMaster_ObjdictSize = sizeof(TestMaster_objdict)/sizeof(TestMaster_objdict[0]); 

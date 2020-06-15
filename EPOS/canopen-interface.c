@@ -110,25 +110,41 @@ assive(d);
 }
 
 
-#define ARRAY   knee_0_5m
-#define ARRAY_1 knee_1_5m
+//#define ARRAY   knee_0_5m
+//#define ARRAY_1 knee_1_5m
+#define PERIOD 4
+uint8_t period = 0;
+extern UNS32 TestMaster_obj1006;
+#define MS10 0x2710
+#define MS5 0x1388
+#define MS15 0x3A98
+#define S1 0xF4240
+uint8_t IN = 0;
+int * curve_0[] = {hip_0_5m,hip_0_10m,hip_0_15m,knee_0_5m, knee_0_10m, knee_0_15m};
+int * curve_1[] = {hip_1_5m,hip_1_10m,hip_1_15m,knee_1_5m, knee_1_10m, knee_1_15m};
+uint16_t size_0[] = {114,57,38,58,29,19};
+uint16_t size_1[] = {204,102,68,204,102,68};
+UNS32 sync_period[] = {MS5,MS10,MS15,MS5,MS10,MS15};
+extern uint8_t START;
 void assive (CO_Data* d)
 {
 	UNS32 re;
 	
 	if(start == 0){
-		endP = sizeof(ARRAY)/sizeof(*ARRAY);
-		pos = ARRAY[x++];
+		endP = size_0[IN];
+		pos = curve_0[IN][x++];
 		if( x==endP){
-			endP = sizeof(ARRAY_1)/sizeof(*ARRAY_1);
+			endP = size_1[IN];
 			start = 1;
 			x = 0;
 		}
 	}
 	else{
-		pos = ARRAY_1[x++];
-		if( x==endP)
+		pos = curve_1[IN][x++];
+		if( x==endP){
 			x = 0;
+			period++;
+		}
 	}
 	
 	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
@@ -140,7 +156,26 @@ void assive (CO_Data* d)
 		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
 	
 	
-	ROW_MSG("%d\t%d\r\n",Pos_Actual_Val,pos);
+	
+	ROW_MSG("%d\t%d\t%d\r\n",Pos_Actual_Val,pos,endP);
+	
+	if(period == PERIOD){
+		start = 0;		//开始新的曲线
+		x = 0;
+		period = 0;
+		IN++;
+		if(IN == 6) while(1);
+		ROW_MSG("---------------\r\n");
+		
+		
+		setState(&TestMaster_Data, Stopped);
+		//OSTimeDlyHMSM(0, 0,0,100);
+		
+		TestMaster_obj1006 = sync_period[IN];		//set sync cycle
+		START = 1;
+		
+		//EposMaster_Start();	//该函数在中断中调用，因为任务无法切换，所以无法发送CAN帧
+	}
 }
 
 
@@ -160,7 +195,7 @@ void Test_curve (CO_Data* d)
 		TPDO_MSG("-TPDO_update- index %d\r\n",Index);
 	else
 		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
-	ROW_MSG("%d\t%d\r\n",Pos_Actual_Val,pos);
+	ROW_MSG("%d\t%d\t%d\r\n",Pos_Actual_Val,pos,endP);
 }
 
 
