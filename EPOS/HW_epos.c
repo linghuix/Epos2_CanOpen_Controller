@@ -9,7 +9,7 @@
 uint8_t NODE_ID[] = {2,3,4,5,6,7};                          																//EPOS ID
 Epos Controller1, Controller2, Controller3, Controller4, Controller5, Controller6;        //控制器对
 Epos *Controller[] = {&Controller1, &Controller2, &Controller3, &Controller4, &Controller5, &Controller6};
-uint8_t NumControllers = 1;
+uint8_t NumControllers = 2;
 
 /*
  * author lhx
@@ -73,7 +73,7 @@ void EPOS_Start(void)
 	printf("---------NMT -enter into operation-------------\r\n");
 	printf("-----------------------------------------------\r\n");
 	for(int i=0;i<NumControllers;i++){
-		masterNMT(&TestMaster_Data, Controller[0], NMT_Start_Node);	//to operation
+		masterNMT(&TestMaster_Data, Controller[i], NMT_Start_Node);	//to operation
 	}
 }
 
@@ -211,6 +211,7 @@ void State(void){
  * 描述  
  * 调用  
  */
+
 #define PI 3.1415
 #include "gait.h"
 
@@ -219,7 +220,7 @@ int pos=0;                       //电机位置
 int x=0;                            //角度自变
 int angle_sensor;
 	
-void Epos_Conroller_TIMBack(){
+/*void Epos_Conroller_TIMBack(){
 
 //		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);		//清除中断标志
 
@@ -237,7 +238,7 @@ void Epos_Conroller_TIMBack(){
 
 }
 
-
+*/
 void Node_Initial_Postion(void)
 {
 //	SDO_Read(Epos* epos,Uint32 Index_Type,Uint8 SubIndex);

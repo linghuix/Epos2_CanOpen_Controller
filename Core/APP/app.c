@@ -36,8 +36,8 @@ void Task_Start(void *p_arg)
 {
   (void)p_arg;                // 'p_arg' 并没有用到，防止编译器提示警告
 
-	Task_MSG("Canopen motor controller ...");
-	Task_MSG("task priority include: 2 3 5 6 7 ");
+	Task_MSG("Canopen motor controller ...\r\n");
+	Task_MSG("task priority include: 2 3 5 6 7 \r\n");
 
 	CANOpen_App_Init();			//CANOpen协议初始化
 	//Remote_App_Init();		// 红外通讯远程信息接收初始化
@@ -68,7 +68,7 @@ void CANOpen_App_Init(void)
 	MX_CAN1_Init(CAN_MODE_NORMAL);
 	MX_TIM_CounterInterrupt(CANOPEN_TIMx, CANOPEN_TIM_COUNTER_CLOCK, CANOPEN_TIM_PERIOD);
 
-	HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
+	//HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);			//在EposMaster_Start函数中启动
 	CAN_Start(&hcan1);
 	
 
@@ -164,24 +164,17 @@ void CANRcv_Task(void *p_arg)
 void CANSend_Task(void *p_arg)
 {
 	CanTxMsg * TxMsg;
-
-		(void)p_arg; 
+	uint8_t HAL_status;
+	(void)p_arg; 
 	
 	while (1){
-		if((TxMsg = (CanTxMsg *)OSQPend(CANSend_Q, 0, &error)) != (void *)0) //获取发送队列中数据 		/* 等待时间无穷大 */
+		if((TxMsg = (CanTxMsg *)OSQPend(CANSend_Q, 0, &error)) != (void *)0)	 //获取发送队列中数据    /* 等待时间无穷大 */
 		{
 			static MAIL pmailbox;
-			if(MX_CANx_send(pHCANx, TxMsg, pmailbox) != HAL_OK ){
-				OSTimeDly(1);	//第一次发送失败, 延时1个滴答, 再次发送
-				MX_CANx_send(pHCANx, TxMsg, pmailbox);
-			}
-			else{
-				CAN_SEND_MSG("can send %u\r\n",OSTime);
-				CAN_SEND_MSG("CAN Send 0x%x  ",TxMsg->head.StdId);
-				for(int i=0; i<TxMsg->head.DLC; i++){
-					CAN_SEND_MSG("-0x%x ",TxMsg->Data[i]);
-				}
-				CAN_SEND_MSG("\r\n");
+			HAL_status = MX_CANx_send(pHCANx, TxMsg, pmailbox);
+			while( HAL_status != HAL_OK ){				//第一次发送失败, 延时1个滴答, 再次发送
+				OSTimeDly(1);
+				HAL_status = MX_CANx_send(pHCANx, TxMsg, pmailbox);
 			}
 		}
 	}

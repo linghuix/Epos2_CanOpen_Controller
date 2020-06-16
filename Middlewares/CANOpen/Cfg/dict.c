@@ -163,20 +163,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                      };
 										 
 /* index 0x1401 :   RPDO 2 parameter. */
-                    UNS8 TestMaster_highestSubIndex_obj1401 = 5; /* number of subindex - 1*/
+                    UNS8 TestMaster_highestSubIndex_obj1401 = 2; /* number of subindex - 1*/
                     UNS32 TestMaster_obj1401_COB_ID  = 0x000;
-                    UNS8 TestMaster_obj1401_Transmission_type = 0x000;
-										UNS16 TestMaster_obj1401_inhibit_time = 0x00;
-										UNS8 TestMaster_obj1401_compatibility_entry = 0x00;
-										UNS16 TestMaster_obj1401_event_time = 0x00;
+                    UNS8 TestMaster_obj1401_Transmission_type = TRANS_EVERY_N_SYNC(1);
                     subindex TestMaster_Index1401[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1401, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1401_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1401_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1401_Transmission_type, NULL },
-                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1401_inhibit_time, NULL },
-                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1401_compatibility_entry, NULL },
-											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1401_event_time, NULL }
                      };
 										 
 /* index 0x1402 :   RPDO 3 parameter. */
@@ -225,13 +219,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 };
 						 
  /* 0x1601	 Index 1601h-17FFh，Receive PDO Mapping Parameter */
-					 UNS8 TestMaster_obj1601_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1601_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1601_2_mapped = 0x60640020;
+					 UNS8 TestMaster_obj1601_Number_mapped = 1; //服务器，也就是需要修改的节点
+					 //UNS32 TestMaster_obj1601_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1601_2_mapped = 0x60630020;
 					 subindex TestMaster_Index1601[] = 
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_Number_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_1_mapped, NULL },
+						 //{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_1_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_2_mapped, NULL },
 					 };
 						 
@@ -295,7 +289,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /* index 0x1802 :   TPDO .    Index 1802h-19FFh,  Transmit PDO Communication Parameter  
 										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
 					UNS8 ClientNumber_0x1802 = 5;
-					UNS32 TestMaster_obj1802_COB_ID_PDO = 0x40000180;//服务器，也就是需要修改的节点
+					UNS32 TestMaster_obj1802_COB_ID_PDO = 0x40000185;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1802_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
 					UNS16 TestMaster_obj1802_Inhibit_time = 10;
 					UNS8 TestMaster_obj1802_compatibility_entry = 0;
@@ -313,7 +307,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /* index 0x1803 :   TPDO 4 .    Index 1803h-19FFh,  Transmit PDO Communication Parameter  
 										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
 					UNS8 ClientNumber_0x1803 = 5;
-					UNS32 TestMaster_obj1803_COB_ID_PDO = 0x40000180;//服务器，也就是需要修改的节点
+					UNS32 TestMaster_obj1803_COB_ID_PDO = 0x40000186;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1803_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
 					UNS16 TestMaster_obj1803_Inhibit_time = 10;
 					UNS8 TestMaster_obj1803_compatibility_entry = 0;
@@ -331,7 +325,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /* index 0x1804 :   TPDO 4 .    Index 1804h-19FFh,  Transmit PDO Communication Parameter  
 										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
 					UNS8 ClientNumber_0x1804 = 5;
-					UNS32 TestMaster_obj1804_COB_ID_PDO = 0x40000581;//服务器，也就是需要修改的节点
+					UNS32 TestMaster_obj1804_COB_ID_PDO = 0x40000187;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1804_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
 					UNS16 TestMaster_obj1804_Inhibit_time = 10;
 					UNS8 TestMaster_obj1804_compatibility_entry = 0;
@@ -349,7 +343,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /* index 0x1805 :   TPDO 4 .    Index 1805h-19FFh,  Transmit PDO Communication Parameter  
 										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
 					UNS8 ClientNumber_0x1805 = 5;
-					UNS32 TestMaster_obj1805_COB_ID_PDO = 0x40000681;//服务器，也就是需要修改的节点
+					UNS32 TestMaster_obj1805_COB_ID_PDO = 0x40000188;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1805_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
 					UNS16 TestMaster_obj1805_Inhibit_time = 10;
 					UNS8 TestMaster_obj1805_compatibility_entry = 0;
@@ -376,20 +370,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                      };
 
 /* 0x1A01	 Index 1A01h-1BFFh，Transmit PDO Mapping Parameter */
-					 UNS8 TestMaster_obj1A01_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1A01_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1A01_2_mapped = 0x20620020;
+					 UNS8 TestMaster_obj1A01_Number_mapped = 1; //服务器，也就是需要修改的节点
+					 //UNS32 TestMaster_obj1A01_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1A01_2_mapped = 0x20630020;
 					 subindex TestMaster_Index1A01[] = 
 					 {
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A01_Number_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A01_1_mapped, NULL },
+						 //{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A01_1_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A01_2_mapped, NULL },
 					 };
 
 /* 0x1A02	 Index 1A02h-1BFFh，Transmit PDO Mapping Parameter */
 					 UNS8 TestMaster_obj1A02_Number_mapped = 2; //服务器，也就是需要修改的节点
 					 UNS32 TestMaster_obj1A02_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1A02_2_mapped = 0x20620020;
+					 UNS32 TestMaster_obj1A02_2_mapped = 0x20630020;
 					 subindex TestMaster_Index1A02[] = 
 					 {
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A02_Number_mapped, NULL },
@@ -449,7 +443,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index6060[] = 
                      {
                        { RW, uint32, sizeof (UNS32), (void*)&mode, NULL },
-                     };		
+                     };
 /* 0x6065   mode1 */
 				   UNS32 mode1 = 0x6065;//服务器，也就是需要修改的节点
 				   subindex TestMaster_Index6065[] = 
@@ -482,6 +476,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 {
 					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE, NULL },
 					 };
+
 /* 0x6041   Status */
 					UNS16 Statusword = 0x00;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index6041[] =
@@ -493,6 +488,20 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					subindex TestMaster_Index6064[] =
 					 {
 					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val, NULL },
+					 };
+
+/*0x2063 */
+					INTEGER32 Pos_SET_VALUE_node3 = 0x0;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index2063[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
+					 };
+
+/* 0x6063   Pos_Actual_Val for node3*/
+					INTEGER32 Pos_Actual_Val_node3 = 0x00;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index6063[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val_node3, NULL },
 					 };
 
 /**************************************************************************/
@@ -544,6 +553,8 @@ const indextable TestMaster_objdict[] =
 	{ (subindex*)TestMaster_Index2062,sizeof(TestMaster_Index2062)/sizeof(TestMaster_Index2062[0]), 0x2062},
 	{ (subindex*)TestMaster_Index6041,sizeof(TestMaster_Index6041)/sizeof(TestMaster_Index6041[0]), 0x6041},
 	{ (subindex*)TestMaster_Index6064,sizeof(TestMaster_Index6064)/sizeof(TestMaster_Index6064[0]), 0x6064},
+	{ (subindex*)TestMaster_Index2063,sizeof(TestMaster_Index2063)/sizeof(TestMaster_Index2063[0]), 0x2063},
+	{ (subindex*)TestMaster_Index6063,sizeof(TestMaster_Index6063)/sizeof(TestMaster_Index6063[0]), 0x6063},
 };
 
 
@@ -597,6 +608,8 @@ const indextable * TestMaster_scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * err
 		case 0x2062: i = 34;break;
 		case 0x6041: i = 35;break;
 		case 0x6064: i = 36;break;
+		case 0x2063: i = 37;break;
+		case 0x6063: i = 38;break;
 
 		default:
 			*errorCode = OD_NO_SUCH_OBJECT;
@@ -612,6 +625,7 @@ const indextable * TestMaster_scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * err
  * Even if no pdoTransmit are defined, at least one entry is computed
  * for compilations issues.
  */
+//PDO 通讯管道的数量，要控制6个EPOS，就需要6个结构体
 s_PDO_status TestMaster_PDO_status[6] = 
 	{s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer,
 	s_PDO_status_Initializer,s_PDO_status_Initializer,s_PDO_status_Initializer};
@@ -628,10 +642,10 @@ const quick_index TestMaster_firstIndex = {
 const quick_index TestMaster_lastIndex = {
   4, /* SDO_SVR */
   6, /* SDO_CLT */
-  7, /* PDO_RCV */
-  11, /* PDO_RCV_MAP */
-  16, /* PDO_TRS */
-  22 /* PDO_TRS_MAP */
+  8, /* PDO_RCV */
+  12, /* PDO_RCV_MAP */
+  20, /* PDO_TRS */
+  26 /* PDO_TRS_MAP */
 };
 
 const UNS16 TestMaster_ObjdictSize = sizeof(TestMaster_objdict)/sizeof(TestMaster_objdict[0]); 

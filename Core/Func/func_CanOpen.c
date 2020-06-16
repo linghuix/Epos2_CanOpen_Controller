@@ -163,7 +163,8 @@ unsigned char canSend(CAN_PORT notused, Message *m)
 	// 判断是否在执行中断
 	if((err=OSQPost(CANSend_Q, &cantxmsg[txindex])) != OS_ERR_NONE){  //加入队列失败
 		if(err == OS_ERR_Q_FULL)
-			MSG("send Q is full\r\n");
+			
+			ERROR(5,"CANSend_Q is full  Size>%d \r\n", ((OS_Q *)CANSend_Q->OSEventPtr)->OSQSize);
 	  return 0xFF;
 	}
 	else{

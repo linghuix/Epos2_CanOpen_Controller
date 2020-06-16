@@ -9,8 +9,7 @@
 write parameter to Object Dictionary through CAN use SDO messages
 ******/
 uint8_t waiting_sdo = 0;
-uint8_t last_success = 1;	//上一次是否发送成功，这关系到发送ｌｉｎｅ是否被初始化
-int NEST = 0;           //Ƕ�ײ���
+uint8_t last_success = 1;	//上一次是否发送成功，这关系到发送line是否被初始化
 
 /**
  * 在SDOTimeoutAlarm 中回调 | sdo发送成功后调用
@@ -37,8 +36,14 @@ uint8_t SDO_Write(Epos* epos,Uint32 Index_Type,Uint8 SubIndex,Uint32 param)
 	//_writeNetworkDict(&TestMaster_Data,epos->node_ID ,Index, SubIndex, Size, Type, &param, _sdocallback, 1, 0);	//��can�����еĽڵ㷢��
 	do{
 		waiting_sdo = 1;
-		if(last_success == 0)
+		if(last_success == 0){	//
 			resetSDO(&TestMaster_Data);
+		}
+		
+		if(i != 3){				//上一次发送失败了
+			resetSDO(&TestMaster_Data);
+		}
+		
 		_writeNetworkDict(&TestMaster_Data,epos->node_ID ,Index, SubIndex, Size, Type, &param, _sdocallback, 1, 0);
 		OSSemPend(CRCV_WAIT_Semp, 200, &err); // 500ms. ����Ҫ���ӳ�ʱ��,����Ļ�����ϵͳ��������������,Ҳ���޷�����CAN֡
 	}while( i-- && (SDO_state = getWriteResultNetworkDict(&TestMaster_Data, epos->node_ID , &abortCode)) == SDO_DOWNLOAD_IN_PROGRESS );
@@ -47,11 +52,11 @@ uint8_t SDO_Write(Epos* epos,Uint32 Index_Type,Uint8 SubIndex,Uint32 param)
 
 	if (SDO_state == SDO_FINISHED){
 		last_success = 1;
-		MMSG("write SDO OK!\r\n");
+		MMSG(" node %d write SDO OK! 0x%X\r\n",epos->node_ID, Index_Type);
 	}
 	else{
 		last_success = 0;
-		MMSG("write SDO error! state = %u \r\n",SDO_state);
+		ERROR(1," node %d write SDO error!  0x%X  0x%X state = %u \r\n",epos->node_ID, Index_Type, param, SDO_state);
 		//resetSDO(&TestMaster_Data);
 		//SDO_Write(epos, Index_Type,SubIndex,param);
 	}

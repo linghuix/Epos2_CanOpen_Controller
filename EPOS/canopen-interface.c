@@ -58,60 +58,38 @@ void _stopped(CO_Data* d)
  * Window > Preferences > C/C++ > Editor > Templates.
  */
 
-uint8_t start = 0;
-uint16_t endP = 102;
-#include "gait.h"
-uint8_t pdoindex = 0;
-uint8_t Index = 0;
-extern Uint32 pos;										//֧ܺλ׃
-extern int x;												//އ׈ؔҤ extern int x=0;ˇխքìһŜՙһՎԵʼۯ
-extern int angle_sensor;
 
 void assive (CO_Data* d);
 void Test_curve(CO_Data* d);
-void _post_TPDO(CO_Data* d){
-/*
-	UNS32 code, ByteSize, angle;
-	UNS32 retcode;(void)retcode;
-
-	ByteSize = 4;
-	angle = test_angle[Index];
-
-
- 
-	if(pdoindex % 2 == 0){
-		code = 0x4F;
-		ByteSize = 2;
-		retcode = setODentry( d, 0x6040, 0, &code, &ByteSize, 1 );
-		retcode = setODentry( d, 0x607A, 0, &angle, &ByteSize, 1 );
-	}
-	else{
-		code = 0x7F;
-		ByteSize = 2;
-		retcode = setODentry( d, 0x6040, 0, &code, &ByteSize, 1 );
-		retcode = setODentry( d, 0x607A, 0, &angle, &ByteSize, 1 );
-		Index++;
-	}
-	pdoindex++;
-
-	if(Index == sizeof(test_angle)/sizeof(test_angle[0])) Index = 0;
-*/
-/*	UNS32 re;
-	UNS32 angle = angle_2[Index]-11740;
-	re = Edit_Dict(d , Pos_SET_VALUE, 0, &angle);
-
-	if(re == OD_SUCCESSFUL)
-		MSG("-TPDO_update-\r\n");
-	else
-		MSG("-TPDO update error- 0x%lx\r\n",re);
-	if(++Index == 323) Index = 0;*/
-
-assive(d);
+void _post_TPDO(CO_Data* d)
+	{
+	assive(d);
 }
 
 
-#define ARRAY   knee_0_5m
-#define ARRAY_1 knee_1_5m
+
+#include "gait.h"
+
+//node2
+uint8_t start = 0;
+uint16_t endP = 0;
+uint8_t Index = 0;
+extern Uint32 pos;										//֧ܺλ׃
+extern int x;												//extern int x=0;语法错误
+extern INTEGER32 Pos_Actual_Val;
+#define ARRAY   hip_0_5m
+#define ARRAY_1 hip_1_5m
+
+//node3
+extern INTEGER32 Pos_Actual_Val_node3;
+extern INTEGER32 Pos_SET_VALUE_node3;
+int x3;
+Uint32 pos3;
+uint8_t start3 = 0;
+uint16_t endP3 = 0;
+#define ARRAY_H   knee_0_5m
+#define ARRAY_H_1 knee_1_5m
+
 void assive (CO_Data* d)
 {
 	UNS32 re;
@@ -131,8 +109,23 @@ void assive (CO_Data* d)
 			x = 0;
 	}
 	
-	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	if(start3 == 0){
+		endP3 = sizeof(ARRAY_H)/sizeof(*ARRAY_H);
+		pos3 = ARRAY_H[x3++];
+		if( x3==endP3){
+			endP3 = sizeof(ARRAY_H_1)/sizeof(*ARRAY_H_1);
+			start3 = 1;
+			x3 = 0;
+		}
+	}
+	else{
+		pos3 = ARRAY_H_1[x3++];
+		if( x3==endP3)
+			x3 = 0;
+	}
 	
+	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
 	
 	if(re == OD_SUCCESSFUL)
 		TPDO_MSG("-TPDO_update- index %d\r\n",Index);
@@ -140,7 +133,7 @@ void assive (CO_Data* d)
 		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
 	
 	
-	ROW_MSG("%d\t%d\r\n",Pos_Actual_Val,pos);
+	ROW_MSG("%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3);
 }
 
 

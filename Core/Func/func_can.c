@@ -7,12 +7,20 @@
 #include "func_can.h"
 
 
+#include "ucos_ii.h"
 Error MX_CANx_send(CAN_HandleTypeDef *phcan, CanTxMsg *msg, MAIL pmailbox)
 {
 	Error error;
 
 	error = HAL_CAN_AddTxMessage(phcan, (CAN_TxHeaderTypeDef *)& (msg->head), msg->Data, & pmailbox);
-
+	
+	if(error == HAL_OK){
+		CAN_SEND_MSG("%u CAN Send 0x%x  ",OSTime, msg->head.StdId);
+		for(int i=0; i < msg->head.DLC; i++){
+			CAN_SEND_MSG("-0x%x ",msg->Data[i]);
+		}
+		CAN_SEND_MSG("\r\n");
+	}
 	return error;
 }
 

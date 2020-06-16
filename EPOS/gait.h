@@ -2,9 +2,6 @@
 #define __gait_H__
 #include "stdint.h"
 
-extern double ang[51];
-extern uint32_t angle_1[323];
-extern uint32_t angle_2[404];
 extern int test_angle[114];
 
 extern int hip_0_5m[114], hip_1_5m[204], hip_0_10m[57], hip_1_10m[102], hip_0_15m[38],hip_1_15m[68];

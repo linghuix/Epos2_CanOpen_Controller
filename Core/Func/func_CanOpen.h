@@ -35,7 +35,7 @@
 #define CANOPEN_TIM_PERIOD                  65535          //定时周期
 
 
-#define N_MESSAGES 20
+#define N_MESSAGES 100
 
 /* 函数申明 ------------------------------------------------------------------*/
 

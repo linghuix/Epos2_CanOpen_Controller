@@ -12,5 +12,4 @@ const indextable * TestMaster_scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * err
 
 /* Master node data struct */
 extern CO_Data TestMaster_Data;
-extern INTEGER32 Pos_Actual_Val;
 #endif // TESTMASTER_H

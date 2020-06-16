@@ -8,6 +8,7 @@ extern CanRxMsg RxMessage;
 #define MS10 0x2710
 #define MS5 0x1388
 #define MS15 0x3A98
+#define MS50 0xC350
 #define S1 0xF4240
 /*
  * author lhx
@@ -21,9 +22,12 @@ void SetMyDict(void)
 {
 	uint32_t data;
 	TestMaster_obj1006 = MS5;		//set sync cycle
+	
 	data = 0x182;
-	//data = 0x250;
 	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO
+	data = 0x183;
+	Edit_Dict(&TestMaster_Data,0x14010120, 0x01, &data);		//RPDO
+	
 	data = 0x202;
 	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO
 	data = 0x203;
@@ -38,9 +42,10 @@ void EposMaster_Init(void)
 }
 
 #include "canopen_interface.h"
+#include "func_CanOpen.h"
 void EposMaster_Start(void)
 {
-	uint32_t data;
+	uint32_t data[6];
 	SetMyDict();
 	
 	setState(&TestMaster_Data, Initialisation);
@@ -50,19 +55,23 @@ void EposMaster_Start(void)
 			EPOS_Reset();
 			Epos_NodeEnable();
 			Node_To_Home_Postion(Controller[0]);
+			Node_To_Home_Postion(Controller[1]);
 			EPOS_Start();
 		}
 	/* 验证是否进入 Operational 模式 */
-	data = SDO_Read(Controller[0], Statusword, 0X00);
-	MSG("get - %x\r\n",data);
-	if((data>>9)&0x01){
+	data[0] = SDO_Read(Controller[0], Statusword, 0X00);
+	MSG("get - %x\r\n",data[0]);
+	data[1] = SDO_Read(Controller[1], Statusword, 0X00);
+	MSG("get - %x\r\n",data[1]);
+	//if(((data[1]>>9)&0x01) & ((data[0]>>9)&0x01)){
+			HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
 			MSG("already start MNT\r\n");
 			printf("-----------------------------------------------\r\n");
 			printf("-----------------PDO_ENABLE -------------------\r\n");
 			printf("-----------------------------------------------\r\n");
 			//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
 			setState(&TestMaster_Data, Operational);
-	}
+	//}
 }
 
 
@@ -91,16 +100,18 @@ void writeNetwork (UNS8 nodeId, UNS16 index,UNS8 subIndex, UNS32 count, UNS8 dat
  */
 void Node_ParamConfig(Epos* epos)
 {
+	MSG("Epos_ParamInit node %d : \r\n", epos->node_ID);
+	
     //SDO_Read(epos,OD_STATUS_WORD,0x00);                  //Fault Status=0x0108  红灯闪烁
     SDO_Write(epos, OD_CTRL_WORD, 0x00, 0x00);
+	
     SDO_Write(epos, OD_CTRL_WORD, 0x00, Fault_Reset);      //Fault_Reset command 控制字设置为0x80 第7位置1，参考固件手册 Fault reset figure3-3 事件15 驱动初始化完成
-
     //SDO_Read(epos,OD_STATUS_WORD,0x00);                  //Switch On    Status=0x0540/0140   绿灯闪烁
 
     SDO_Write(epos, OD_Following_ERR_window, 0x00, MAX_F_ERR); //最大误差设置
-	
-		SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, MAX_P_V);//MAX_P_V);  //最大速度
-		SDO_Write(epos, OD_MOTOR_DATA, 0x04, MAX_P_V);     //最大允许速度
+
+	SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, MAX_P_V);//MAX_P_V);  //最大速度
+	//SDO_Write(epos, OD_MOTOR_DATA, 0x04, MAX_P_V);     //最大允许速度
 
     SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);//MAX_P_V);  //最大速度
 
@@ -114,7 +125,6 @@ void Node_ParamConfig(Epos* epos)
 
     SDO_Write(epos,OD_CAN_BITRATE,0x00,0x00);              	//set value = 0. set CAN bitrate 1M/s.
 
-	MSG("Epos_ParamInit: node %d\r\n", epos->node_ID);
 }
 
 
