@@ -209,12 +209,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
  /* 0x1600	 Index 1600h-17FFh，Receive PDO Mapping Parameter */
 					 UNS8 TestMaster_obj1600_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1600_1_mapped = 0x60410010;
+					 //UNS32 TestMaster_obj1600_1_mapped = 0x60410010;
 					 UNS32 TestMaster_obj1600_2_mapped = 0x60640020;
 					 subindex TestMaster_Index1600[] = 
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1600_Number_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1600_1_mapped, NULL },
+						 //{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1600_1_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1600_2_mapped, NULL },
 					 };
 						 
@@ -351,7 +351,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					subindex TestMaster_Index1805[] = 
 					 {
 						 { RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1805, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1805_COB_ID_PDO, NULL },
+						 { RW, uint32, sizeof (UNS32), (void*)&TestMaster_obj1805_COB_ID_PDO, NULL },
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1805_Transmiss_Type, NULL },
 						 { RW, uint16,  sizeof (UNS16), (void*)&TestMaster_obj1805_Inhibit_time, NULL },
 						 { RW, uint8, sizeof (UNS8), (void*)&TestMaster_obj1805_compatibility_entry, NULL },
@@ -644,7 +644,7 @@ const quick_index TestMaster_lastIndex = {
   6, /* SDO_CLT */
   8, /* PDO_RCV */
   12, /* PDO_RCV_MAP */
-  20, /* PDO_TRS */
+  16, /* PDO_TRS */
   26 /* PDO_TRS_MAP */
 };
 

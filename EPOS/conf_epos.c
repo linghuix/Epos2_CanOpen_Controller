@@ -9,6 +9,7 @@ extern CanRxMsg RxMessage;
 #define MS5 0x1388
 #define MS15 0x3A98
 #define MS50 0xC350
+#define MS20 0x4E20
 #define S1 0xF4240
 /*
  * author lhx
@@ -21,17 +22,25 @@ extern UNS32 TestMaster_obj1006;
 void SetMyDict(void)
 {
 	uint32_t data;
-	TestMaster_obj1006 = MS5;		//set sync cycle
+	TestMaster_obj1006 = MS10;		//set sync cycle
 	
 	data = 0x182;
-	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO
+	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO	node 2
 	data = 0x183;
-	Edit_Dict(&TestMaster_Data,0x14010120, 0x01, &data);		//RPDO
+	Edit_Dict(&TestMaster_Data,0x14010120, 0x01, &data);		//RPDO	node 3
 	
 	data = 0x202;
-	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO
+	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO	node 2
+	data = 0x210;
+	Edit_Dict(&TestMaster_Data,0x18010120, 0x01, &data);		//TPDO	node 3
 	data = 0x203;
-	Edit_Dict(&TestMaster_Data,0x18010120, 0x01, &data);		//TPDO
+	Edit_Dict(&TestMaster_Data,0x18020120, 0x01, &data);		//TPDO	node 2
+	data = 0x204;
+	Edit_Dict(&TestMaster_Data,0x18030120, 0x01, &data);		//TPDO	node 3
+	data = 0x205;
+	Edit_Dict(&TestMaster_Data,0x18040120, 0x01, &data);		//TPDO	node 2
+	data = 0x206;
+	Edit_Dict(&TestMaster_Data,0x18050120, 0x01, &data);		//TPDO	node 3
 }
 
 

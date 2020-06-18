@@ -172,10 +172,11 @@ void CANSend_Task(void *p_arg)
 		{
 			static MAIL pmailbox;
 			HAL_status = MX_CANx_send(pHCANx, TxMsg, pmailbox);
-			while( HAL_status != HAL_OK ){				//第一次发送失败, 延时1个滴答, 再次发送
+			while( HAL_status != HAL_OK ){										//发送失败, 延时1个滴答, 再次发送
 				OSTimeDly(1);
 				HAL_status = MX_CANx_send(pHCANx, TxMsg, pmailbox);
 			}
+			OSTimeDlyHMSM(0, 0,0,2); 
 		}
 	}
 }

@@ -56,7 +56,7 @@ uint8_t SDO_Write(Epos* epos,Uint32 Index_Type,Uint8 SubIndex,Uint32 param)
 	}
 	else{
 		last_success = 0;
-		ERROR(1," node %d write SDO error!  0x%X  0x%X state = %u \r\n",epos->node_ID, Index_Type, param, SDO_state);
+		ERROR(1," node %d write SDO error!  0x%X  0x%X state = %u",epos->node_ID, Index_Type, param, SDO_state);
 		//resetSDO(&TestMaster_Data);
 		//SDO_Write(epos, Index_Type,SubIndex,param);
 	}

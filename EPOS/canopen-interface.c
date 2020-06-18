@@ -61,6 +61,8 @@ void _stopped(CO_Data* d)
 
 void assive (CO_Data* d);
 void Test_curve(CO_Data* d);
+
+void sin_cos_test (CO_Data* d);
 void _post_TPDO(CO_Data* d)
 	{
 	assive(d);
@@ -77,8 +79,8 @@ uint8_t Index = 0;
 extern Uint32 pos;										//֧ܺλ׃
 extern int x;												//extern int x=0;语法错误
 extern INTEGER32 Pos_Actual_Val;
-#define ARRAY   hip_0_5m
-#define ARRAY_1 hip_1_5m
+#define ARRAY   hip_0_10m
+#define ARRAY_1 hip_1_10m
 
 //node3
 extern INTEGER32 Pos_Actual_Val_node3;
@@ -87,8 +89,8 @@ int x3;
 Uint32 pos3;
 uint8_t start3 = 0;
 uint16_t endP3 = 0;
-#define ARRAY_H   knee_0_5m
-#define ARRAY_H_1 knee_1_5m
+#define ARRAY_H   knee_0_10m
+#define ARRAY_H_1 knee_1_10m
 
 void assive (CO_Data* d)
 {
@@ -105,8 +107,9 @@ void assive (CO_Data* d)
 	}
 	else{
 		pos = ARRAY_1[x++];
-		if( x==endP)
+		if( x==endP){
 			x = 0;
+		}
 	}
 	
 	if(start3 == 0){
@@ -120,40 +123,64 @@ void assive (CO_Data* d)
 	}
 	else{
 		pos3 = ARRAY_H_1[x3++];
-		if( x3==endP3)
+		if( x3==endP3){
 			x3 = 0;
+		}
 	}
 	
 	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
-	re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
+	if(re != OD_SUCCESSFUL){
+		ERROR(0,"-TPDO update error- 0x%x",re);
+	}
 	
-	if(re == OD_SUCCESSFUL)
-		TPDO_MSG("-TPDO_update- index %d\r\n",Index);
-	else
-		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
+	re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
+	if(re != OD_SUCCESSFUL){
+		ERROR(0,"-TPDO update error- 0x%x",re);
+	}
 	
 	
 	ROW_MSG("%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3);
 }
 
-
+int subI = 0;
+void sin_cos_test (CO_Data* d)
+{
+	UNS32 re;
+	
+	pos = (int)(10000*sin(2.0f*3.14f*0.005f*subI));
+	pos3 = pos;
+	
+	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	if(re != OD_SUCCESSFUL){
+		ERROR(0,"-TPDO update error- 0x%x",re);
+	}
+	
+	re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
+	if(re != OD_SUCCESSFUL){
+		ERROR(0,"-TPDO update error- 0x%x",re);
+	}
+	
+	subI++;
+	ROW_MSG("%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3);
+}
 
 void Test_curve (CO_Data* d)
 {
 	UNS32 re;
 	endP = sizeof(test_angle)/sizeof(*test_angle);
-		pos = test_angle[x++]/2;
-		if( x==endP)
+		pos = test_angle[x++];
+		if( x==endP){
 			x = 0;
+		}
 	
 	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	re = Edit_Dict(d , 0x20630020, 0x00, &pos);
 	
+	if(re != OD_SUCCESSFUL){
+		ERROR(0,"-TPDO update error- 0x%x",re);
+	}
 	
-	if(re == OD_SUCCESSFUL)
-		TPDO_MSG("-TPDO_update- index %d\r\n",Index);
-	else
-		TPDO_MSG("-TPDO update error- 0x%x\r\n",re);
-	ROW_MSG("%d\t%d\r\n",Pos_Actual_Val,pos);
+	ROW_MSG("%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3);
 }
 
 
