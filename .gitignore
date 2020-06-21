@@ -18,4 +18,5 @@
 *.XLH
 *.zip
 
-
+*.pc
+*.uvoptx
