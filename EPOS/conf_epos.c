@@ -72,7 +72,7 @@ void EposMaster_Start(void)
 	MSG("get - %x\r\n",data[0]);
 	data[1] = SDO_Read(Controller[1], Statusword, 0X00);
 	MSG("get - %x\r\n",data[1]);
-	//if(((data[1]>>9)&0x01) & ((data[0]>>9)&0x01)){
+	if(((data[1]>>9)&0x01) & ((data[0]>>9)&0x01)){
 			HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
 			MSG("already start MNT\r\n");
 			printf("-----------------------------------------------\r\n");
@@ -80,7 +80,7 @@ void EposMaster_Start(void)
 			printf("-----------------------------------------------\r\n");
 			//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
 			setState(&TestMaster_Data, Operational);
-	//}
+	}
 }
 
 

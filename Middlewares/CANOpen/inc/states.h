@@ -60,10 +60,12 @@ typedef struct
 	INTEGER8 csLSS;
 } s_state_communication;
 
+
 /** 
  * @brief Function that user app can overload
  * @ingroup statemachine
  */
+typedef struct struct_CO_Data CO_Data;
 typedef void (*initialisation_t)(CO_Data*);
 typedef void (*preOperational_t)(CO_Data*);
 typedef void (*operational_t)(CO_Data*);
