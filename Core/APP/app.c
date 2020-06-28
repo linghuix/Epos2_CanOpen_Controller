@@ -106,6 +106,9 @@ void CANOpen_App_Init(void)
  * 			1.SDO配置  2.NMT 进入ENABLE模式  3.PDO控制
  * Window > Preferences > C/C++ > Editor > Templates.
  */
+extern int epos_state;
+
+extern uint8_t NumControllers;
 #include "conf_epos.h"
 void Epos_Task(void *p_arg)
 {
@@ -114,7 +117,18 @@ void Epos_Task(void *p_arg)
 	EposMaster_Start();
 	for(;;)
 	{
-		OSTimeDlyHMSM(0, 0,0,5); 
+		if(epos_state == 0){
+		
+			for(int i= 0;i < NumControllers;i++){
+		masterNMT(&TestMaster_Data, Controller[i], NMT_Enter_PreOperational);	//to operation
+		}
+		setState(&TestMaster_Data, Initialisation);
+		
+			Node_To_Home_Postion(Controller[0]);
+			Node_To_Home_Postion(Controller[1]);
+			epos_state = 50;
+		}
+		OSTimeDlyHMSM(0, 0,0,10); 
 	}
 }
 

@@ -72,6 +72,10 @@ void _post_TPDO(CO_Data* d)
 
 #include "gait.h"
 
+#define PERIOD 5		//运行次数
+uint8_t period = 0;
+
+
 //node2
 uint8_t start = 0;
 uint16_t endP = 0;
@@ -79,6 +83,8 @@ uint8_t Index = 0;
 extern Uint32 pos;										//֧ܺλ׃
 extern int x;												//extern int x=0;语法错误
 extern INTEGER32 Pos_Actual_Val;
+extern INTEGER16 Current_Actual_Val_node2;
+
 #define ARRAY   hip_0_10m
 #define ARRAY_1 hip_1_10m
 
@@ -92,10 +98,13 @@ uint16_t endP3 = 0;
 #define ARRAY_H   knee_0_10m
 #define ARRAY_H_1 knee_1_10m
 
+
+int epos_state = 50;
+#include "func_CanOpen.h"
 void assive (CO_Data* d)
 {
 	UNS32 re;
-	
+
 	if(start == 0){
 		endP = sizeof(ARRAY)/sizeof(*ARRAY);
 		pos = ARRAY[x++];
@@ -125,6 +134,7 @@ void assive (CO_Data* d)
 		pos3 = ARRAY_H_1[x3++];
 		if( x3==endP3){
 			x3 = 0;
+			period++;
 		}
 	}
 	
@@ -139,7 +149,18 @@ void assive (CO_Data* d)
 	}
 	
 	
-	ROW_MSG("%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3);
+	ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3,Current_Actual_Val_node2);
+	
+	
+	if(period == PERIOD){
+		period = 5;
+		setState(&TestMaster_Data, Stopped);		//停止
+		HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
+		
+		
+		
+		epos_state = 0;
+	}
 }
 
 int subI = 0;

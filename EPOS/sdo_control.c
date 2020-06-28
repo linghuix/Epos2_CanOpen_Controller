@@ -21,6 +21,7 @@ void _sdocallback(CO_Data* d, UNS8 nodeId){
 }
 
 
+/* writing SDO to Node for 3 times at most. it doesn't need CANOpen TIMER to send time out signal, so TIMER doesn't need to START IT */
 uint8_t SDO_Write(Epos* epos,Uint32 Index_Type,Uint8 SubIndex,Uint32 param)
 {
 	int i = 3;
@@ -45,8 +46,8 @@ uint8_t SDO_Write(Epos* epos,Uint32 Index_Type,Uint8 SubIndex,Uint32 param)
 		}
 		
 		_writeNetworkDict(&TestMaster_Data,epos->node_ID ,Index, SubIndex, Size, Type, &param, _sdocallback, 1, 0);
-		OSSemPend(CRCV_WAIT_Semp, 200, &err); // 500ms. ����Ҫ���ӳ�ʱ��,����Ļ�����ϵͳ��������������,Ҳ���޷�����CAN֡
-	}while( i-- && (SDO_state = getWriteResultNetworkDict(&TestMaster_Data, epos->node_ID , &abortCode)) == SDO_DOWNLOAD_IN_PROGRESS );
+		OSSemPend(CRCV_WAIT_Semp, 100, &err); // 100ms waiting for CAN receive a frame.
+	}while( --i && (SDO_state = getWriteResultNetworkDict(&TestMaster_Data, epos->node_ID , &abortCode)) == SDO_DOWNLOAD_IN_PROGRESS );
 
 	waiting_sdo = 0;
 
