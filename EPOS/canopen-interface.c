@@ -72,7 +72,7 @@ void _post_TPDO(CO_Data* d)
 
 #include "gait.h"
 
-#define PERIOD 5		//运行次数
+#define PERIOD 1		//运行次数
 uint8_t period = 0;
 
 
@@ -103,62 +103,60 @@ int epos_state = 50;
 #include "func_CanOpen.h"
 void assive (CO_Data* d)
 {
+	
 	UNS32 re;
-
-	if(start == 0){
-		endP = sizeof(ARRAY)/sizeof(*ARRAY);
-		pos = ARRAY[x++];
-		if( x==endP){
-			endP = sizeof(ARRAY_1)/sizeof(*ARRAY_1);
-			start = 1;
-			x = 0;
+	if(PERIOD != 0){
+		if(start == 0){
+			endP = sizeof(ARRAY)/sizeof(*ARRAY);
+			pos = ARRAY[x++];
+			if( x==endP){
+				endP = sizeof(ARRAY_1)/sizeof(*ARRAY_1);
+				start = 1;
+				x = 0;
+			}
 		}
-	}
-	else{
-		pos = ARRAY_1[x++];
-		if( x==endP){
-			x = 0;
+		else{
+			pos = ARRAY_1[x++];
+			if( x==endP){
+				x = 0;
+			}
 		}
-	}
-	
-	if(start3 == 0){
-		endP3 = sizeof(ARRAY_H)/sizeof(*ARRAY_H);
-		pos3 = ARRAY_H[x3++];
-		if( x3==endP3){
-			endP3 = sizeof(ARRAY_H_1)/sizeof(*ARRAY_H_1);
-			start3 = 1;
-			x3 = 0;
+		
+		if(start3 == 0){
+			endP3 = sizeof(ARRAY_H)/sizeof(*ARRAY_H);
+			pos3 = ARRAY_H[x3++];
+			if( x3==endP3){
+				endP3 = sizeof(ARRAY_H_1)/sizeof(*ARRAY_H_1);
+				start3 = 1;
+				x3 = 0;
+			}
 		}
-	}
-	else{
-		pos3 = ARRAY_H_1[x3++];
-		if( x3==endP3){
-			x3 = 0;
-			period++;
+		else{
+			pos3 = ARRAY_H_1[x3++];
+			if( x3==endP3){
+				x3 = 0;
+				period++;
+			}
 		}
+		
+		re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+		if(re != OD_SUCCESSFUL){
+			ERROR(0,"-TPDO update error- 0x%x",re);
+		}
+		
+		re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
+		if(re != OD_SUCCESSFUL){
+			ERROR(0,"-TPDO update error- 0x%x",re);
+		}
+		
+		
+		ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3,Current_Actual_Val_node2);
 	}
-	
-	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
-	if(re != OD_SUCCESSFUL){
-		ERROR(0,"-TPDO update error- 0x%x",re);
-	}
-	
-	re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
-	if(re != OD_SUCCESSFUL){
-		ERROR(0,"-TPDO update error- 0x%x",re);
-	}
-	
-	
-	ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3,Current_Actual_Val_node2);
-	
 	
 	if(period == PERIOD){
-		period = 5;
-		setState(&TestMaster_Data, Stopped);		//停止
 		HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
-		
-		
-		
+		period = 5;
+		setState(&TestMaster_Data, Pre_operational);		//停止
 		epos_state = 0;
 	}
 }
