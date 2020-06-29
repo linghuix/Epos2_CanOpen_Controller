@@ -65,7 +65,7 @@ void Test_curve(CO_Data* d);
 void sin_cos_test (CO_Data* d);
 void _post_TPDO(CO_Data* d)
 	{
-	assive(d);
+	sin_cos_test(d);
 }
 
 
@@ -83,7 +83,7 @@ uint8_t Index = 0;
 extern Uint32 pos;										//֧ܺλ׃
 extern int x;												//extern int x=0;语法错误
 extern INTEGER32 Pos_Actual_Val;
-extern INTEGER16 Current_Actual_Val_node2;
+extern INTEGER16 Current_Actual_Val_node2,Pos_Actual_Val_node4,Pos_Actual_Val_node5;
 
 #define ARRAY   hip_0_10m
 #define ARRAY_1 hip_1_10m
@@ -167,20 +167,14 @@ void sin_cos_test (CO_Data* d)
 	UNS32 re;
 	
 	pos = (int)(10000*sin(2.0f*3.14f*0.005f*subI));
-	pos3 = pos;
 	
-	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
-	if(re != OD_SUCCESSFUL){
-		ERROR(0,"-TPDO update error- 0x%x",re);
-	}
-	
-	re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
-	if(re != OD_SUCCESSFUL){
-		ERROR(0,"-TPDO update error- 0x%x",re);
-	}
+	re = Edit_Dict(d , 0x20620020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20630020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20640020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20650020, 0x00, &pos);
 	
 	subI++;
-	ROW_MSG("%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3);
+	ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,Pos_Actual_Val_node3,Pos_Actual_Val_node4, Pos_Actual_Val_node5,pos);
 }
 
 void Test_curve (CO_Data* d)
@@ -192,14 +186,16 @@ void Test_curve (CO_Data* d)
 			x = 0;
 		}
 	
-	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	re = Edit_Dict(d , 0x20620020, 0x00, &pos);
 	re = Edit_Dict(d , 0x20630020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20640020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20650020, 0x00, &pos);
 	
 	if(re != OD_SUCCESSFUL){
 		ERROR(0,"-TPDO update error- 0x%x",re);
 	}
 	
-	ROW_MSG("%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3);
+	ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,Pos_Actual_Val_node3,Pos_Actual_Val_node4, Pos_Actual_Val_node5,pos);
 }
 
 
