@@ -28,6 +28,10 @@ void SetMyDict(void)
 	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO	node 2
 	data = 0x183;
 	Edit_Dict(&TestMaster_Data,0x14010120, 0x01, &data);		//RPDO	node 3
+	data = 0x184;
+	Edit_Dict(&TestMaster_Data,0x14020120, 0x01, &data);		//RPDO	node 2
+	data = 0x185;
+	Edit_Dict(&TestMaster_Data,0x14030120, 0x01, &data);		//RPDO	node 3
 	
 	data = 0x202;
 	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO	node 2
@@ -37,10 +41,6 @@ void SetMyDict(void)
 	Edit_Dict(&TestMaster_Data,0x18020120, 0x01, &data);		//TPDO	node 2
 	data = 0x204;
 	Edit_Dict(&TestMaster_Data,0x18030120, 0x01, &data);		//TPDO	node 3
-	data = 0x205;
-	Edit_Dict(&TestMaster_Data,0x18040120, 0x01, &data);		//TPDO	node 2
-	data = 0x206;
-	Edit_Dict(&TestMaster_Data,0x18050120, 0x01, &data);		//TPDO	node 3
 }
 
 
@@ -52,6 +52,7 @@ void EposMaster_Init(void)
 
 #include "canopen_interface.h"
 #include "func_CanOpen.h"
+extern uint8_t NumControllers;
 void EposMaster_Start(void)
 {
 	uint32_t data[6];
@@ -63,26 +64,29 @@ void EposMaster_Start(void)
 	{
 		EPOS_Reset();
 		Epos_NodeEnable();
-		Node_To_Home_Postion(Controller[0]);
-		OSTimeDlyHMSM(0, 0,0,50);
-		Node_To_Home_Postion(Controller[1]);
-		OSTimeDlyHMSM(0, 0,0,50);
+		
+		for(int i=0;i<NumControllers;i++){
+			Node_To_Home_Postion(Controller[i]);
+		}
+		OSTimeDlyHMSM(0, 0,0,200);
+		
 		EPOS_Start();
+		
+	}
+	
+	/* 验证是否进入位于home */
+	for(int i=0;i<NumControllers;i++){
+		data[i] = SDO_Read(Controller[i], Pos_Actual_Value, 0X00);
+		MSG("pos - %x\r\n",data[i]);
 	}
 	
 	/* 验证是否进入 Operational 模式 */
-	data[0] = SDO_Read(Controller[0], Pos_Actual_Value, 0X00);
-	MSG("get - %x\r\n",data[0]);
-	data[1] = SDO_Read(Controller[1], Pos_Actual_Value, 0X00);
-	MSG("get - %x\r\n",data[1]);
+	for(int i=0;i<NumControllers;i++){
+		data[i] = SDO_Read(Controller[i], Statusword, 0X00);
+		MSG("state - %x\r\n",data[i]);
+	}
 	
-	/* 验证是否进入 Operational 模式 */
-	data[0] = SDO_Read(Controller[0], Statusword, 0X00);
-	MSG("get - %x\r\n",data[0]);
-	data[1] = SDO_Read(Controller[1], Statusword, 0X00);
-	MSG("get - %x\r\n",data[1]);
-		
-	if(((data[1]>>9)&0x01) & ((data[0]>>9)&0x01)){
+	//if(((data[0]>>9)&0x01) & ((data[1]>>9)&0x01) & ((data[2]>>9)&0x01) & ((data[3]>>9)&0x01)){
 		HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
 		MSG("already start MNT\r\n");
 		printf("-----------------------------------------------\r\n");
@@ -90,7 +94,7 @@ void EposMaster_Start(void)
 		printf("-----------------------------------------------\r\n");
 		//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
 		setState(&TestMaster_Data, Operational);
-	}
+	//}
 }
 
 

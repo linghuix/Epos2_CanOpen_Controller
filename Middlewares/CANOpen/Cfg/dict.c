@@ -109,7 +109,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                        { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1018_Revision_Number, NULL },
                        { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1018_Serial_Number, NULL }
                      };
-										 
+
 /* index 0x1200 :   SDO server parameter.     Index 1200h-127Fh，Sever SDO Parameter，1200h可选*/
 					UNS8 ServerNumber_0x1200 = 2;
 					UNS32 TestMaster_obj1200_COB_ID_SDO_CS_RX  = 0x600;
@@ -120,14 +120,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                        { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1200_COB_ID_SDO_CS_RX, NULL },
 						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1200_COB_ID_SDO_SC_TX, NULL },
 					};
-									 
+
 /* index 0x1280 :   SDO clit .    Index 1280h-12FFh，Client SDO Parameter，必须如果支持对应的Client SDO  
 										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
-					#define Node 2
 					UNS8 ClientNumber_0x1280 = 3;
-					UNS32 TestMaster_obj1280_COB_ID_SDO_CS_TX  = 0x600 + Node;
-					UNS32 TestMaster_obj1280_COB_ID_SDO_SC_RX = 0x580 + Node;
-					UNS8 TestMaster_obj1280_COB_ID_Server = Node;//服务器，也就是需要修改的节点
+					UNS32 TestMaster_obj1280_COB_ID_SDO_CS_TX  = 0x602;
+					UNS32 TestMaster_obj1280_COB_ID_SDO_SC_RX = 0x582;
+					UNS8 TestMaster_obj1280_COB_ID_Server = 2;//服务器，也就是需要修改的节点
                     subindex TestMaster_Index1280[] = 
                      {
 						{ RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1280, NULL },
@@ -150,8 +149,78 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						{ RO, uint8,  sizeof (UNS8), (void*)&TestMaster_obj1281_COB_ID_Server, NULL },
 					 };
 
+/* index 0x1282 :   SDO clit .    Index 1280h-12FFh，Client SDO Parameter，必须如果支持对应的Client SDO
+										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/
+					UNS8 ClientNumber_0x1282 = 3;
+					UNS32 TestMaster_obj1282_COB_ID_SDO_CS_TX  = 0x604;
+					UNS32 TestMaster_obj1282_COB_ID_SDO_SC_RX = 0x584;
+					UNS8 TestMaster_obj1282_COB_ID_Server = 4;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index1282[] =
+					 {
+						{ RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1282, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1282_COB_ID_SDO_CS_TX, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1282_COB_ID_SDO_SC_RX, NULL },
+						{ RO, uint8,  sizeof (UNS8), (void*)&TestMaster_obj1282_COB_ID_Server, NULL },
+					 };
+					 
+/* index 0x1283 :   SDO clit .    Index 1280h-12FFh，Client SDO Parameter，必须如果支持对应的Client SDO
+										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/
+					UNS8 ClientNumber_0x1283 = 3;
+					UNS32 TestMaster_obj1283_COB_ID_SDO_CS_TX  = 0x605;
+					UNS32 TestMaster_obj1283_COB_ID_SDO_SC_RX = 0x585;
+					UNS8 TestMaster_obj1283_COB_ID_Server = 5;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index1283[] =
+					 {
+						{ RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1283, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1283_COB_ID_SDO_CS_TX, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1283_COB_ID_SDO_SC_RX, NULL },
+						{ RO, uint8,  sizeof (UNS8), (void*)&TestMaster_obj1283_COB_ID_Server, NULL },
+					 };
+					 
+/* index 0x1284 :   SDO clit .    Index 1280h-12FFh，Client SDO Parameter，必须如果支持对应的Client SDO
+										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/
+					UNS8 ClientNumber_0x1284 = 3;
+					UNS32 TestMaster_obj1284_COB_ID_SDO_CS_TX  = 0x606;
+					UNS32 TestMaster_obj1284_COB_ID_SDO_SC_RX = 0x586;
+					UNS8 TestMaster_obj1284_COB_ID_Server = 6;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index1284[] =
+					 {
+						{ RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1284, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1284_COB_ID_SDO_CS_TX, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1284_COB_ID_SDO_SC_RX, NULL },
+						{ RO, uint8,  sizeof (UNS8), (void*)&TestMaster_obj1284_COB_ID_Server, NULL },
+					 };
+					 
+/* index 0x1285 :   SDO clit .    Index 1280h-12FFh，Client SDO Parameter，必须如果支持对应的Client SDO
+										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/
+					UNS8 ClientNumber_0x1285 = 3;
+					UNS32 TestMaster_obj1285_COB_ID_SDO_CS_TX  = 0x607;
+					UNS32 TestMaster_obj1285_COB_ID_SDO_SC_RX = 0x587;
+					UNS8 TestMaster_obj1285_COB_ID_Server = 7;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index1285[] =
+					 {
+						{ RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1285, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1285_COB_ID_SDO_CS_TX, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1285_COB_ID_SDO_SC_RX, NULL },
+						{ RO, uint8,  sizeof (UNS8), (void*)&TestMaster_obj1285_COB_ID_Server, NULL },
+					 };
+					 
+/* index 0x1286 :   SDO clit .    Index 1280h-12FFh，Client SDO Parameter，必须如果支持对应的Client SDO
+										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/
+					UNS8 ClientNumber_0x1286 = 3;
+					UNS32 TestMaster_obj1286_COB_ID_SDO_CS_TX  = 0x608;
+					UNS32 TestMaster_obj1286_COB_ID_SDO_SC_RX = 0x588;
+					UNS8 TestMaster_obj1286_COB_ID_Server = 8;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index1286[] =
+					 {
+						{ RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1286, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1286_COB_ID_SDO_CS_TX, NULL },
+						{ RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1286_COB_ID_SDO_SC_RX, NULL },
+						{ RO, uint8,  sizeof (UNS8), (void*)&TestMaster_obj1286_COB_ID_Server, NULL },
+					 };
 
-/* index 0x1400 :   RPDO 1 parameter. */
+
+/* index 0x1400 :   RPDO 1 parameter.*/ 
                     UNS8 TestMaster_highestSubIndex_obj1400 = 2; /* number of subindex - 1*/
                     UNS32 TestMaster_obj1400_COB_ID  = 0x00000200;
                     UNS8 TestMaster_obj1400_Transmission_type = TRANS_EVERY_N_SYNC(1);
@@ -161,8 +230,8 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                        { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1400_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1400_Transmission_type, NULL },
                      };
-										 
-/* index 0x1401 :   RPDO 2 parameter. */
+
+/* index 0x1401 :   RPDO 2 parameter.*/
                     UNS8 TestMaster_highestSubIndex_obj1401 = 2; /* number of subindex - 1*/
                     UNS32 TestMaster_obj1401_COB_ID  = 0x000;
                     UNS8 TestMaster_obj1401_Transmission_type = TRANS_EVERY_N_SYNC(1);
@@ -172,14 +241,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                        { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1401_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1401_Transmission_type, NULL },
                      };
-										 
+
 /* index 0x1402 :   RPDO 3 parameter. */
                     UNS8 TestMaster_highestSubIndex_obj1402 = 5; /* number of subindex - 1*/
                     UNS32 TestMaster_obj1402_COB_ID  = 0x000;
-                    UNS8 TestMaster_obj1402_Transmission_type = 0x000;
-										UNS16 TestMaster_obj1402_inhibit_time = 0x00;
-										UNS8 TestMaster_obj1402_compatibility_entry = 0x00;
-										UNS16 TestMaster_obj1402_event_time = 0x00;
+                    UNS8 TestMaster_obj1402_Transmission_type = TRANS_EVERY_N_SYNC(1);
+					UNS16 TestMaster_obj1402_inhibit_time = 0x00;
+					UNS8 TestMaster_obj1402_compatibility_entry = 0x00;
+					UNS16 TestMaster_obj1402_event_time = 0x00;
                     subindex TestMaster_Index1402[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1402, NULL },
@@ -193,7 +262,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 /* index 0x1403 :   RPDO 4 parameter. */
                     UNS8 TestMaster_highestSubIndex_obj1403 = 5; /* number of subindex - 1*/
                     UNS32 TestMaster_obj1403_COB_ID  = 0x000;
-                    UNS8 TestMaster_obj1403_Transmission_type = 0x000;
+                    UNS8 TestMaster_obj1403_Transmission_type = TRANS_EVERY_N_SYNC(1);
 										UNS16 TestMaster_obj1403_inhibit_time = 0x00;
 										UNS8 TestMaster_obj1403_compatibility_entry = 0x00;
 										UNS16 TestMaster_obj1403_event_time = 0x00;
@@ -207,7 +276,162 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1403_event_time, NULL }
                      };
 
- /* 0x1600	 Index 1600h-17FFh，Receive PDO Mapping Parameter */
+/* index 0x1404 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1404 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1404_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1404_Transmission_type = TRANS_EVERY_N_SYNC(1);
+										UNS16 TestMaster_obj1404_inhibit_time = 0x00;
+										UNS8 TestMaster_obj1404_compatibility_entry = 0x00;
+										UNS16 TestMaster_obj1404_event_time = 0x00;
+                    subindex TestMaster_Index1404[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1404, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1404_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1404_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1404_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1404_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1404_event_time, NULL }
+                     };
+
+/* index 0x1405 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1405 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1405_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1405_Transmission_type = TRANS_EVERY_N_SYNC(1);
+										UNS16 TestMaster_obj1405_inhibit_time = 0x00;
+										UNS8 TestMaster_obj1405_compatibility_entry = 0x00;
+										UNS16 TestMaster_obj1405_event_time = 0x00;
+                    subindex TestMaster_Index1405[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1405, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1405_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1405_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1405_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1405_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1405_event_time, NULL }
+                     };
+
+/* index 0x1406 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1406 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1406_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1406_Transmission_type = TRANS_EVERY_N_SYNC(1);
+										UNS16 TestMaster_obj1406_inhibit_time = 0x00;
+										UNS8 TestMaster_obj1406_compatibility_entry = 0x00;
+										UNS16 TestMaster_obj1406_event_time = 0x00;
+                    subindex TestMaster_Index1406[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1406, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1406_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1406_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1406_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1406_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1406_event_time, NULL }
+                     };
+					 
+/* index 0x1407 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1407 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1407_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1407_Transmission_type = TRANS_EVERY_N_SYNC(1);
+					UNS16 TestMaster_obj1407_inhibit_time = 0x00;
+					UNS8 TestMaster_obj1407_compatibility_entry = 0x00;
+					UNS16 TestMaster_obj1407_event_time = 0x00;
+                    subindex TestMaster_Index1407[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1407, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1407_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1407_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1407_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1407_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1407_event_time, NULL }
+                     };
+
+/* index 0x1408 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1408 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1408_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1408_Transmission_type = TRANS_EVERY_N_SYNC(1);
+                    UNS16 TestMaster_obj1408_inhibit_time = 0x00;
+                    UNS8 TestMaster_obj1408_compatibility_entry = 0x00;
+                    UNS16 TestMaster_obj1408_event_time = 0x00;
+                    subindex TestMaster_Index1408[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1408, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1408_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1408_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1408_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1408_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1408_event_time, NULL }
+                     };
+
+/* index 0x1409 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1409 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1409_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1409_Transmission_type = TRANS_EVERY_N_SYNC(1);
+                    UNS16 TestMaster_obj1409_inhibit_time = 0x00;
+                    UNS8 TestMaster_obj1409_compatibility_entry = 0x00;
+                    UNS16 TestMaster_obj1409_event_time = 0x00;
+                    subindex TestMaster_Index1409[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1409, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1409_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1409_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1409_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1409_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1409_event_time, NULL }
+                     };
+
+/* index 0x1410 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1410 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1410_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1410_Transmission_type = TRANS_EVERY_N_SYNC(1);
+                    UNS16 TestMaster_obj1410_inhibit_time = 0x00;
+                    UNS8 TestMaster_obj1410_compatibility_entry = 0x00;
+                    UNS16 TestMaster_obj1410_event_time = 0x00;
+                    subindex TestMaster_Index1410[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1410, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1410_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1410_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1410_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1410_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1410_event_time, NULL }
+                     };
+
+/* index 0x1411 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1411 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1411_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1411_Transmission_type = TRANS_EVERY_N_SYNC(1);
+                    UNS16 TestMaster_obj1411_inhibit_time = 0x00;
+                    UNS8 TestMaster_obj1411_compatibility_entry = 0x00;
+                    UNS16 TestMaster_obj1411_event_time = 0x00;
+                    subindex TestMaster_Index1411[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1411, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1411_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1411_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1411_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1411_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1411_event_time, NULL }
+                     };
+
+/* index 0x1412 :   RPDO 4 parameter. */
+                    UNS8 TestMaster_highestSubIndex_obj1412 = 5; /* number of subindex - 1*/
+                    UNS32 TestMaster_obj1412_COB_ID  = 0x000;
+                    UNS8 TestMaster_obj1412_Transmission_type = TRANS_EVERY_N_SYNC(1);
+                    UNS16 TestMaster_obj1412_inhibit_time = 0x00;
+                    UNS8 TestMaster_obj1412_compatibility_entry = 0x00;
+                    UNS16 TestMaster_obj1412_event_time = 0x00;
+                    subindex TestMaster_Index1412[] = 
+                     {
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1412, NULL },
+                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1412_COB_ID, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1412_Transmission_type, NULL },
+                       { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1412_inhibit_time, NULL },
+                       { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1412_compatibility_entry, NULL },
+											 { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1412_event_time, NULL }
+                     };
+
+
+
+ /* 0x1600	 Index 1600h-17FFh，Receive PDO Mapping Parameter  Node2*/
 					 UNS8 TestMaster_obj1600_Number_mapped = 2; //服务器，也就是需要修改的节点
 
 					 UNS32 TestMaster_obj1600_1_mapped = 0x60640020;
@@ -216,10 +440,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1600_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1600_1_mapped, NULL },
-						 { RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1600_2_mapped, NULL },
+//						 { RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1600_2_mapped, NULL },
 					 };
 						 
- /* 0x1601	 Index 1601h-17FFh，Receive PDO Mapping Parameter */
+ /* 0x1601	 Index 1601h-17FFh，Receive PDO Mapping Parameter  Node3*/
 					 UNS8 TestMaster_obj1601_Number_mapped = 1; //服务器，也就是需要修改的节点
 					 UNS32 TestMaster_obj1601_1_mapped = 0x60630020;
 					 //UNS32 TestMaster_obj1601_2_mapped = 0x60790010;	//实际电流值
@@ -227,36 +451,136 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 {
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1601_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_1_mapped, NULL },
-						 //{ RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1601_2_mapped, NULL },
 					 };
 						 
  /* 0x1602	 Index 1602h-17FFh，Receive PDO Mapping Parameter */
 					 UNS8 TestMaster_obj1602_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1602_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1602_2_mapped = 0x607A0020;
+					 UNS32 TestMaster_obj1602_1_mapped = 0x60660020;
 					 subindex TestMaster_Index1602[] = 
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1602_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1602_1_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1602_2_mapped, NULL },
 					 };
 						 
  /* 0x1603	 Index 1603h-17FFh，Receive PDO Mapping Parameter */
 					 UNS8 TestMaster_obj1603_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1603_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1603_2_mapped = 0x607A0020;
+					 UNS32 TestMaster_obj1603_1_mapped = 0x60670020;
 					 subindex TestMaster_Index1603[] = 
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1603_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1603_1_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1603_2_mapped, NULL },
 					 };
+
+ /* 0x1604	 Index 1604h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1604_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1604_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1604_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1604[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1604_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1604_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1604_2_mapped, NULL },
+					 };
+					 
+ /* 0x1605	 Index 1605h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1605_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1605_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1605_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1605[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1605_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1605_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1605_2_mapped, NULL },
+					 };
+					 
+ /* 0x1606	 Index 1606h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1606_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1606_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1606_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1606[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1606_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1606_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1606_2_mapped, NULL },
+					 };
+					 
+ /* 0x1607	 Index 1607h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1607_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1607_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1607_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1607[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1607_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1607_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1607_2_mapped, NULL },
+					 };
+					 
+ /* 0x1608	 Index 1608h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1608_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1608_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1608_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1608[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1608_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1608_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1608_2_mapped, NULL },
+					 };
+					 
+ /* 0x1609	 Index 1609h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1609_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1609_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1609_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1609[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1609_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1609_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1609_2_mapped, NULL },
+					 };
+					 
+ /* 0x1610	 Index 1610h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1610_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1610_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1610_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1610[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1610_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1610_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1610_2_mapped, NULL },
+					 };
+					 
+ /* 0x1611	 Index 1611h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1611_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1611_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1611_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1611[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1611_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1611_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1611_2_mapped, NULL },
+					 };
+					 
+					 
+ /* 0x1612	 Index 1612h-17FFh，Receive PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1612_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1612_1_mapped = 0x60400010;
+					 UNS32 TestMaster_obj1612_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1612[] = 
+					 {
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1612_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1612_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1612_2_mapped, NULL },
+					 };
+					 
+					 
+/**  TPDO***/
+					 
+					 
 										 
 /* index 0x1800 :   TPDO 1 .    Index 1800h-19FFh,  Transmit PDO Communication Parameter  */ 
 					UNS8 ClientNumber_0x1800 = 5;
 					UNS32 TestMaster_obj1800_COB_ID_PDO = 0x40000180;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1800_Transmiss_Type  = 1;
-					UNS16 TestMaster_obj1800_Inhibit_time = 10;
+					UNS16 TestMaster_obj1800_Inhibit_time = 2;
 					UNS8 TestMaster_obj1800_compatibility_entry = 0;
 					UNS16 TestMaster_obj1800_event_time  = 0;
 					subindex TestMaster_Index1800[] = 
@@ -274,7 +598,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					UNS8 ClientNumber_0x1801 = 5;
 					UNS32 TestMaster_obj1801_COB_ID_PDO = 0x40000280;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1801_Transmiss_Type  = 1;
-					UNS16 TestMaster_obj1801_Inhibit_time = 10;
+					UNS16 TestMaster_obj1801_Inhibit_time = 2;
 					UNS8 TestMaster_obj1801_compatibility_entry = 0;
 					UNS16 TestMaster_obj1801_event_time  = 0;
 					subindex TestMaster_Index1801[] = 
@@ -292,7 +616,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					UNS8 ClientNumber_0x1802 = 5;
 					UNS32 TestMaster_obj1802_COB_ID_PDO = 0x40000185;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1802_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
-					UNS16 TestMaster_obj1802_Inhibit_time = 10;
+					UNS16 TestMaster_obj1802_Inhibit_time = 2;
 					UNS8 TestMaster_obj1802_compatibility_entry = 0;
 					UNS16 TestMaster_obj1802_event_time  = 0;
 					subindex TestMaster_Index1802[] = 
@@ -359,7 +683,26 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						 { RW, uint16,  sizeof (UNS16), (void*)&TestMaster_obj1805_event_time, NULL },
 					 };
 					 
-/* 0x1A00  Index 1A00h-1BFFh，Transmit PDO Mapping Parameter */
+/* index 0x1806 :   TPDO 4 .    Index 1806h-19FFh,  Transmit PDO Communication Parameter  
+										 当我需要配置其他节点的字典值时，我变成了客户端，要求服务器自己修改自己*/ 
+					UNS8 ClientNumber_0x1806 = 5;
+					UNS32 TestMaster_obj1806_COB_ID_PDO = 0x40000188;//服务器，也就是需要修改的节点
+					UNS8 TestMaster_obj1806_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
+					UNS16 TestMaster_obj1806_Inhibit_time = 10;
+					UNS8 TestMaster_obj1806_compatibility_entry = 0;
+					UNS16 TestMaster_obj1806_event_time  = 0;
+					subindex TestMaster_Index1806[] = 
+					 {
+						 { RO, uint8,  sizeof (UNS8), (void*)&ClientNumber_0x1806, NULL },
+						 { RW, uint32, sizeof (UNS32), (void*)&TestMaster_obj1806_COB_ID_PDO, NULL },
+						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1806_Transmiss_Type, NULL },
+						 { RW, uint16,  sizeof (UNS16), (void*)&TestMaster_obj1806_Inhibit_time, NULL },
+						 { RW, uint8, sizeof (UNS8), (void*)&TestMaster_obj1806_compatibility_entry, NULL },
+						 { RW, uint16,  sizeof (UNS16), (void*)&TestMaster_obj1806_event_time, NULL },
+					 };
+					
+					 
+/* 0x1A00  Index 1A00h-1BFFh，Transmit PDO Mapping Parameter  Node2*/
 					UNS8 TestMaster_obj1A00_Number_mapped = 1; //服务器，也就是需要修改的节点
 					//UNS32 TestMaster_1_mapped = 0x60400010;
 					UNS32 TestMaster_2_mapped = 0x20620020;
@@ -370,7 +713,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                        { RO, uint32, sizeof (UNS32), (void*)&TestMaster_2_mapped, NULL },
                      };
 
-/* 0x1A01	 Index 1A01h-1BFFh，Transmit PDO Mapping Parameter */
+/* 0x1A01	 Index 1A01h-1BFFh，Transmit PDO Mapping Parameter  Node3*/
 					 UNS8 TestMaster_obj1A01_Number_mapped = 1; //服务器，也就是需要修改的节点
 					 //UNS32 TestMaster_obj1A01_1_mapped = 0x60400010;
 					 UNS32 TestMaster_obj1A01_2_mapped = 0x20630020;
@@ -381,26 +724,22 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A01_2_mapped, NULL },
 					 };
 
-/* 0x1A02	 Index 1A02h-1BFFh，Transmit PDO Mapping Parameter */
-					 UNS8 TestMaster_obj1A02_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1A02_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1A02_2_mapped = 0x20630020;
+/* 0x1A02	 Index 1A02h-1BFFh，Transmit PDO Mapping Parameter  Node4*/
+					 UNS8 TestMaster_obj1A02_Number_mapped = 1; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1A02_1_mapped = 0x20640020;
 					 subindex TestMaster_Index1A02[] = 
 					 {
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A02_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A02_1_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A02_2_mapped, NULL },
 					 };
 						 
- /* 0x1A03	 Index 1A03h-1BFFh，Transmit PDO Mapping Parameter */
-					 UNS8 TestMaster_obj1A03_Number_mapped = 2; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1A03_1_mapped = 0x60700020;
-					 UNS32 TestMaster_obj1A03_2_mapped = 0x607A0020;
+ /* 0x1A03	 Index 1A03h-1BFFh，Transmit PDO Mapping Parameter Node5*/
+					 UNS8 TestMaster_obj1A03_Number_mapped = 1; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1A03_1_mapped = 0x20650020;
 					 subindex TestMaster_Index1A03[] = 
 					 {
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A03_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A03_1_mapped, NULL },
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A03_2_mapped, NULL },
 					 };
 
  /* 0x1A04	 Index 1A04h-1BFFh，Transmit PDO Mapping Parameter */
@@ -423,6 +762,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A05_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A05_1_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A05_2_mapped, NULL },
+					 };
+					 
+ /* 0x1A06	 Index 1A06h-1BFFh，Transmit PDO Mapping Parameter */
+					 UNS8 TestMaster_obj1A06_Number_mapped = 2; //服务器，也就是需要修改的节点
+					 UNS32 TestMaster_obj1A06_1_mapped = 0x60700020;
+					 UNS32 TestMaster_obj1A06_2_mapped = 0x607A0020;
+					 subindex TestMaster_Index1A06[] = 
+					 {
+						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1A06_Number_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A06_1_mapped, NULL },
+						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1A06_2_mapped, NULL },
 					 };
 					 
 /* 0x6040   Controlword */
@@ -471,12 +821,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 {
 					   { RW, uint32, sizeof (UNS32), (void*)&mode4, NULL },
 					 }; 
-/*0x2062 */
-					INTEGER32 Pos_SET_VALUE = 0x0;//服务器，也就是需要修改的节点
-					subindex TestMaster_Index2062[] =
-					 {
-					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE, NULL },
-					 };
+
 
 /* 0x6041   Status */
 					UNS16 Statusword = 0x00;//服务器，也就是需要修改的节点
@@ -484,27 +829,71 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 {
 					   { RW, uint16, sizeof (UNS16), (void*)&Statusword, NULL },
 					 };
-/* 0x6064   Pos_Actual_Val */
-					INTEGER32 Pos_Actual_Val = 0x00;//服务器，也就是需要修改的节点
-					subindex TestMaster_Index6064[] =
-					 {
-					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val, NULL },
-					 };
 
-/*0x2063 */
-					INTEGER32 Pos_SET_VALUE_node3 = 0x0;//服务器，也就是需要修改的节点
-					subindex TestMaster_Index2063[] =
-					 {
-					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
-					 };
 
+/* %%%%%%%%%%% RPDO 存储数据区 %%%%%%%%%%%%%%%%%*/
+/* %%%%%%%%%%% RPDO 存储数据区 %%%%%%%%%%%%%%%%%*/
+/* %%%%%%%%%%% RPDO 存储数据区 %%%%%%%%%%%%%%%%%*/
+					 
+					 
 /* 0x6063   Pos_Actual_Val for node3*/
 					INTEGER32 Pos_Actual_Val_node3 = 0x00;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index6063[] =
 					 {
 					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val_node3, NULL },
 					 };
-
+					 
+/* 0x6064   Pos_Actual_Val for node2*/
+					INTEGER32 Pos_Actual_Val = 0x00;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index6064[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val, NULL },
+					 };
+					 
+/* 0x6066   Pos_Actual_Val for node4*/
+					INTEGER32 Pos_Actual_Val_node4 = 0x00;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index6066[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val_node3, NULL },
+					 };
+					 
+/* 0x6067   Pos_Actual_Val for node5*/
+					INTEGER32 Pos_Actual_Val_node5 = 0x00;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index6067[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_Actual_Val_node3, NULL },
+					 };
+					 
+					 
+/*0x2062 */
+					INTEGER32 Pos_SET_VALUE = 0x0;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index2062[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE, NULL },
+					 };
+		 			 
+/*0x2063  node3*/
+					INTEGER32 Pos_SET_VALUE_node3 = 0x0;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index2063[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
+					 };
+					 
+/*0x2064  node4*/
+					INTEGER32 Pos_SET_VALUE_node4 = 0x0;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index2064[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
+					 };
+					 
+/*0x2065  node5*/
+					INTEGER32 Pos_SET_VALUE_node5 = 0x0;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index2065[] =
+					 {
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
+					 };
+					 
+					 
 /* 0x6078   Current_Actual_Val for node2*/
 					INTEGER16 Current_Actual_Val_node2 = 0x00;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index6078[] =
@@ -529,48 +918,82 @@ const indextable TestMaster_objdict[] =
 	{ (subindex*)TestMaster_Index1017,sizeof(TestMaster_Index1017)/sizeof(TestMaster_Index1017[0]), 0x1017},
 	{ (subindex*)TestMaster_Index1018,sizeof(TestMaster_Index1018)/sizeof(TestMaster_Index1018[0]), 0x1018},
 
-	{ (subindex*)TestMaster_Index1200,sizeof(TestMaster_Index1200)/sizeof(TestMaster_Index1200[0]), 0x1200},
+	{ (subindex*)TestMaster_Index1200,sizeof(TestMaster_Index1200)/sizeof(TestMaster_Index1200[0]), 0x1200},//SDO client
 	{ (subindex*)TestMaster_Index1280,sizeof(TestMaster_Index1280)/sizeof(TestMaster_Index1280[0]), 0x1280},
 	{ (subindex*)TestMaster_Index1281,sizeof(TestMaster_Index1281)/sizeof(TestMaster_Index1281[0]), 0x1281},
-
-	{ (subindex*)TestMaster_Index1400,sizeof(TestMaster_Index1400)/sizeof(TestMaster_Index1400[0]), 0x1400},
+	{ (subindex*)TestMaster_Index1282,sizeof(TestMaster_Index1282)/sizeof(TestMaster_Index1282[0]), 0x1282},
+	{ (subindex*)TestMaster_Index1283,sizeof(TestMaster_Index1283)/sizeof(TestMaster_Index1283[0]), 0x1283},
+	{ (subindex*)TestMaster_Index1284,sizeof(TestMaster_Index1284)/sizeof(TestMaster_Index1284[0]), 0x1284},
+	{ (subindex*)TestMaster_Index1285,sizeof(TestMaster_Index1285)/sizeof(TestMaster_Index1285[0]), 0x1285},
+	{ (subindex*)TestMaster_Index1286,sizeof(TestMaster_Index1286)/sizeof(TestMaster_Index1286[0]), 0x1286},
+	
+	{ (subindex*)TestMaster_Index1400,sizeof(TestMaster_Index1400)/sizeof(TestMaster_Index1400[0]), 0x1400},//RPDO
 	{ (subindex*)TestMaster_Index1401,sizeof(TestMaster_Index1401)/sizeof(TestMaster_Index1401[0]), 0x1401},
 	{ (subindex*)TestMaster_Index1402,sizeof(TestMaster_Index1402)/sizeof(TestMaster_Index1402[0]), 0x1402},
 	{ (subindex*)TestMaster_Index1403,sizeof(TestMaster_Index1403)/sizeof(TestMaster_Index1403[0]), 0x1403},
-	{ (subindex*)TestMaster_Index1600,sizeof(TestMaster_Index1600)/sizeof(TestMaster_Index1600[0]), 0x1600},
+	{ (subindex*)TestMaster_Index1404,sizeof(TestMaster_Index1404)/sizeof(TestMaster_Index1404[0]), 0x1404},
+	{ (subindex*)TestMaster_Index1405,sizeof(TestMaster_Index1405)/sizeof(TestMaster_Index1405[0]), 0x1405},
+	{ (subindex*)TestMaster_Index1406,sizeof(TestMaster_Index1406)/sizeof(TestMaster_Index1406[0]), 0x1406},
+	{ (subindex*)TestMaster_Index1407,sizeof(TestMaster_Index1407)/sizeof(TestMaster_Index1407[0]), 0x1407},
+	{ (subindex*)TestMaster_Index1408,sizeof(TestMaster_Index1408)/sizeof(TestMaster_Index1408[0]), 0x1408},
+	{ (subindex*)TestMaster_Index1409,sizeof(TestMaster_Index1409)/sizeof(TestMaster_Index1409[0]), 0x1409},
+	{ (subindex*)TestMaster_Index1410,sizeof(TestMaster_Index1410)/sizeof(TestMaster_Index1410[0]), 0x1410},
+	{ (subindex*)TestMaster_Index1411,sizeof(TestMaster_Index1411)/sizeof(TestMaster_Index1411[0]), 0x1411},
+	{ (subindex*)TestMaster_Index1412,sizeof(TestMaster_Index1412)/sizeof(TestMaster_Index1412[0]), 0x1412},
+	
+	{ (subindex*)TestMaster_Index1600,sizeof(TestMaster_Index1600)/sizeof(TestMaster_Index1600[0]), 0x1600},//RPDO mapping
 	{ (subindex*)TestMaster_Index1601,sizeof(TestMaster_Index1601)/sizeof(TestMaster_Index1601[0]), 0x1601},
 	{ (subindex*)TestMaster_Index1602,sizeof(TestMaster_Index1602)/sizeof(TestMaster_Index1602[0]), 0x1602},
 	{ (subindex*)TestMaster_Index1603,sizeof(TestMaster_Index1603)/sizeof(TestMaster_Index1603[0]), 0x1603},
-
-	{ (subindex*)TestMaster_Index1800,sizeof(TestMaster_Index1800)/sizeof(TestMaster_Index1800[0]), 0x1800},
+	{ (subindex*)TestMaster_Index1604,sizeof(TestMaster_Index1604)/sizeof(TestMaster_Index1604[0]), 0x1604},
+	{ (subindex*)TestMaster_Index1605,sizeof(TestMaster_Index1605)/sizeof(TestMaster_Index1605[0]), 0x1605},
+	{ (subindex*)TestMaster_Index1606,sizeof(TestMaster_Index1606)/sizeof(TestMaster_Index1606[0]), 0x1606},
+	{ (subindex*)TestMaster_Index1607,sizeof(TestMaster_Index1607)/sizeof(TestMaster_Index1607[0]), 0x1607},
+	{ (subindex*)TestMaster_Index1608,sizeof(TestMaster_Index1608)/sizeof(TestMaster_Index1608[0]), 0x1608},
+	{ (subindex*)TestMaster_Index1609,sizeof(TestMaster_Index1609)/sizeof(TestMaster_Index1609[0]), 0x1609},
+	{ (subindex*)TestMaster_Index1610,sizeof(TestMaster_Index1610)/sizeof(TestMaster_Index1610[0]), 0x1610},
+	{ (subindex*)TestMaster_Index1611,sizeof(TestMaster_Index1611)/sizeof(TestMaster_Index1611[0]), 0x1611},
+	{ (subindex*)TestMaster_Index1612,sizeof(TestMaster_Index1612)/sizeof(TestMaster_Index1612[0]), 0x1612},
+	
+	{ (subindex*)TestMaster_Index1800,sizeof(TestMaster_Index1800)/sizeof(TestMaster_Index1800[0]), 0x1800},//TPDO
 	{ (subindex*)TestMaster_Index1801,sizeof(TestMaster_Index1801)/sizeof(TestMaster_Index1801[0]), 0x1801},
 	{ (subindex*)TestMaster_Index1802,sizeof(TestMaster_Index1802)/sizeof(TestMaster_Index1802[0]), 0x1802},
 	{ (subindex*)TestMaster_Index1803,sizeof(TestMaster_Index1803)/sizeof(TestMaster_Index1803[0]), 0x1803},
 	{ (subindex*)TestMaster_Index1804,sizeof(TestMaster_Index1804)/sizeof(TestMaster_Index1804[0]), 0x1804},
 	{ (subindex*)TestMaster_Index1805,sizeof(TestMaster_Index1805)/sizeof(TestMaster_Index1805[0]), 0x1805},
+	{ (subindex*)TestMaster_Index1806,sizeof(TestMaster_Index1806)/sizeof(TestMaster_Index1806[0]), 0x1806},
 	
-	{ (subindex*)TestMaster_Index1A00,sizeof(TestMaster_Index1A00)/sizeof(TestMaster_Index1A00[0]), 0x1A00},
+	{ (subindex*)TestMaster_Index1A00,sizeof(TestMaster_Index1A00)/sizeof(TestMaster_Index1A00[0]), 0x1A00},//TPDO mapping
 	{ (subindex*)TestMaster_Index1A01,sizeof(TestMaster_Index1A01)/sizeof(TestMaster_Index1A01[0]), 0x1A01},
 	{ (subindex*)TestMaster_Index1A02,sizeof(TestMaster_Index1A02)/sizeof(TestMaster_Index1A02[0]), 0x1A02},
 	{ (subindex*)TestMaster_Index1A03,sizeof(TestMaster_Index1A03)/sizeof(TestMaster_Index1A03[0]), 0x1A03},
 	{ (subindex*)TestMaster_Index1A04,sizeof(TestMaster_Index1A04)/sizeof(TestMaster_Index1A04[0]), 0x1A04},
 	{ (subindex*)TestMaster_Index1A05,sizeof(TestMaster_Index1A05)/sizeof(TestMaster_Index1A05[0]), 0x1A05},
-
+	{ (subindex*)TestMaster_Index1A06,sizeof(TestMaster_Index1A06)/sizeof(TestMaster_Index1A06[0]), 0x1A06},
+	
 	{ (subindex*)TestMaster_Index6040,sizeof(TestMaster_Index6040)/sizeof(TestMaster_Index6040[0]), 0x6040},
-	{ (subindex*)TestMaster_Index607A,sizeof(TestMaster_Index607A)/sizeof(TestMaster_Index607A[0]), 0x607A},
+	{ (subindex*)TestMaster_Index6041,sizeof(TestMaster_Index6041)/sizeof(TestMaster_Index6041[0]), 0x6041},
 	{ (subindex*)TestMaster_Index6060,sizeof(TestMaster_Index6060)/sizeof(TestMaster_Index6060[0]), 0x6060},
 	{ (subindex*)TestMaster_Index6065,sizeof(TestMaster_Index6065)/sizeof(TestMaster_Index6065[0]), 0x6065},
 	{ (subindex*)TestMaster_Index6070,sizeof(TestMaster_Index6070)/sizeof(TestMaster_Index6070[0]), 0x6070},
 	{ (subindex*)TestMaster_Index6075,sizeof(TestMaster_Index6075)/sizeof(TestMaster_Index6075[0]), 0x6075},
+	{ (subindex*)TestMaster_Index607A,sizeof(TestMaster_Index607A)/sizeof(TestMaster_Index607A[0]), 0x607A},
 	{ (subindex*)TestMaster_Index6080,sizeof(TestMaster_Index6080)/sizeof(TestMaster_Index6080[0]), 0x6080},
-
-	{ (subindex*)TestMaster_Index2062,sizeof(TestMaster_Index2062)/sizeof(TestMaster_Index2062[0]), 0x2062},
-	{ (subindex*)TestMaster_Index6041,sizeof(TestMaster_Index6041)/sizeof(TestMaster_Index6041[0]), 0x6041},
-	{ (subindex*)TestMaster_Index6064,sizeof(TestMaster_Index6064)/sizeof(TestMaster_Index6064[0]), 0x6064},
+	
+	{ (subindex*)TestMaster_Index2062,sizeof(TestMaster_Index2062)/sizeof(TestMaster_Index2062[0]), 0x2062},//receive data store
 	{ (subindex*)TestMaster_Index2063,sizeof(TestMaster_Index2063)/sizeof(TestMaster_Index2063[0]), 0x2063},
+	{ (subindex*)TestMaster_Index2064,sizeof(TestMaster_Index2064)/sizeof(TestMaster_Index2064[0]), 0x2064},
+	{ (subindex*)TestMaster_Index2065,sizeof(TestMaster_Index2065)/sizeof(TestMaster_Index2065[0]), 0x2065},
+	
 	{ (subindex*)TestMaster_Index6063,sizeof(TestMaster_Index6063)/sizeof(TestMaster_Index6063[0]), 0x6063},
+	{ (subindex*)TestMaster_Index6064,sizeof(TestMaster_Index6064)/sizeof(TestMaster_Index6064[0]), 0x6064},
+	{ (subindex*)TestMaster_Index6066,sizeof(TestMaster_Index6066)/sizeof(TestMaster_Index6066[0]), 0x6066},
+	{ (subindex*)TestMaster_Index6067,sizeof(TestMaster_Index6067)/sizeof(TestMaster_Index6067[0]), 0x6067},
+	
 	{ (subindex*)TestMaster_Index6078,sizeof(TestMaster_Index6078)/sizeof(TestMaster_Index6078[0]), 0x6078},
 	{ (subindex*)TestMaster_Index6079,sizeof(TestMaster_Index6079)/sizeof(TestMaster_Index6079[0]), 0x6079},
+
+	
 };
 
 
@@ -588,46 +1011,77 @@ const indextable * TestMaster_scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * err
 		
 		case 0x1280: i = 5;break;
 		case 0x1281: i = 6;break;
-		
-		case 0x1400: i = 7;break;/* PDO_RCV */
-		case 0x1401: i = 8;break;
-		case 0x1402: i = 9;break;
-		case 0x1403: i = 10;break;
-		
-		case 0x1600: i = 11;break;/* PDO_RCV_MAP */
-		case 0x1601: i = 12;break;
-		case 0x1602: i = 13;break;
-		case 0x1603: i = 14;break;
-		
-		case 0x1800: i = 15;break;/* PDO_TRS */
-		case 0x1801: i = 16;break;
-		case 0x1802: i = 17;break;
-		case 0x1803: i = 18;break;
-		case 0x1804: i = 19;break;
-		case 0x1805: i = 20;break;
-		
-		case 0x1A00: i = 21;break;/* PDO_TRS_MAP */
-		case 0x1A01: i = 22;break;
-		case 0x1A02: i = 23;break;
-		case 0x1A03: i = 24;break;
-		case 0x1A04: i = 25;break;
-		case 0x1A05: i = 26;break;
-		
-		case 0x6040: i = 27;break;
-		case 0x607A: i = 28;break;
-		case 0x6060: i = 29;break;
-		case 0x6065: i = 30;break;
-		case 0x6070: i = 31;break;
-		case 0x6075: i = 32;break;
-		case 0x6080: i = 33;break;
+		case 0x1282: i = 7;break;
+		case 0x1283: i = 8;break;
+		case 0x1284: i = 9;break;
+		case 0x1285: i = 10;break;
+		case 0x1286: i = 11;break;
 
-		case 0x2062: i = 34;break;
-		case 0x6041: i = 35;break;
-		case 0x6064: i = 36;break;
-		case 0x2063: i = 37;break;
-		case 0x6063: i = 38;break;
-		case 0x6078: i = 39;break;
-		case 0x6079: i = 40;break;
+		case 0x1400: i = 12;break;/* PDO_RCV */
+		case 0x1401: i = 13;break;
+		case 0x1402: i = 14;break;
+		case 0x1403: i = 15;break;
+		case 0x1404: i = 16;break;
+		case 0x1405: i = 17;break;
+		case 0x1406: i = 18;break;
+		case 0x1407: i = 19;break;
+		case 0x1408: i = 20;break;
+		case 0x1409: i = 21;break;
+		case 0x1410: i = 22;break;
+		case 0x1411: i = 23;break;
+		case 0x1412: i = 24;break;
+		
+		case 0x1600: i = 25;break;/* PDO_RCV_MAP */
+		case 0x1601: i = 26;break;
+		case 0x1602: i = 27;break;
+		case 0x1603: i = 28;break;
+		case 0x1604: i = 29;break;
+		case 0x1605: i = 30;break;
+		case 0x1606: i = 31;break;
+		case 0x1607: i = 32;break;
+		case 0x1608: i = 33;break;
+		case 0x1609: i = 34;break;
+		case 0x1610: i = 35;break;
+		case 0x1611: i = 36;break;
+		case 0x1612: i = 37;break;
+		
+		case 0x1800: i = 38;break;/* PDO_TRS */
+		case 0x1801: i = 39;break;
+		case 0x1802: i = 40;break;
+		case 0x1803: i = 41;break;
+		case 0x1804: i = 42;break;
+		case 0x1805: i = 43;break;
+		case 0x1806: i = 44;break;
+		
+		case 0x1A00: i = 45;break;/* PDO_TRS Mapping*/
+		case 0x1A01: i = 46;break;
+		case 0x1A02: i = 47;break;
+		case 0x1A03: i = 48;break;
+		case 0x1A04: i = 49;break;
+		case 0x1A05: i = 50;break;
+		case 0x1A06: i = 51;break;
+		
+		case 0x6040: i = 52;break;
+		case 0x6041: i = 53;break;
+		case 0x6060: i = 54;break;
+		case 0x6065: i = 55;break;
+		case 0x6070: i = 56;break;
+		case 0x6075: i = 57;break;
+		case 0x607A: i = 58;break;
+		case 0x6080: i = 59;break;
+
+		case 0x2062: i = 60;break;
+		case 0x2063: i = 61;break;
+		case 0x2064: i = 62;break;
+		case 0x2065: i = 63;break;
+		
+		case 0x6063: i = 64;break;
+		case 0x6064: i = 65;break;
+		case 0x6066: i = 66;break;
+		case 0x6067: i = 67;break;
+		
+		case 0x6078: i = 68;break;
+		case 0x6079: i = 69;break;
 
 		default:
 			*errorCode = OD_NO_SUCH_OBJECT;
@@ -651,19 +1105,19 @@ s_PDO_status TestMaster_PDO_status[6] =
 const quick_index TestMaster_firstIndex = {
   4, /* SDO_SVR */
   5, /* SDO_CLT */
-  7, /* PDO_RCV */
-  11, /* PDO_RCV_MAP */
-  15, /* PDO_TRS */
-  21 /* PDO_TRS_MAP */
+  12, /* PDO_RCV */
+  25, /* PDO_RCV_MAP */
+  38, /* PDO_TRS */
+  45 /* PDO_TRS_MAP */
 };
 
 const quick_index TestMaster_lastIndex = {
   4, /* SDO_SVR */
-  6, /* SDO_CLT */
-  8, /* PDO_RCV */
-  12, /* PDO_RCV_MAP */
-  16, /* PDO_TRS */
-  26 /* PDO_TRS_MAP */
+  8, /* SDO_CLT */
+  15, /* PDO_RCV */
+  28, /* PDO_RCV_MAP */
+  41, /* PDO_TRS */
+  48 /* PDO_TRS_MAP */
 };
 
 const UNS16 TestMaster_ObjdictSize = sizeof(TestMaster_objdict)/sizeof(TestMaster_objdict[0]); 

@@ -65,7 +65,7 @@ void Test_curve(CO_Data* d);
 void sin_cos_test (CO_Data* d);
 void _post_TPDO(CO_Data* d)
 	{
-	assive(d);
+	Test_curve(d);
 }
 
 
@@ -192,8 +192,10 @@ void Test_curve (CO_Data* d)
 			x = 0;
 		}
 	
-	re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
+	re = Edit_Dict(d , 0x20620020, 0x00, &pos);
 	re = Edit_Dict(d , 0x20630020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20640020, 0x00, &pos);
+	re = Edit_Dict(d , 0x20650020, 0x00, &pos);
 	
 	if(re != OD_SUCCESSFUL){
 		ERROR(0,"-TPDO update error- 0x%x",re);
