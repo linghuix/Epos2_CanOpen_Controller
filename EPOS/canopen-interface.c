@@ -72,7 +72,7 @@ void _post_TPDO(CO_Data* d)
 
 #include "gait.h"
 
-#define PERIOD 1		//运行次数
+#define PERIOD 5		//运行次数
 uint8_t period = 0;
 
 
@@ -154,7 +154,7 @@ void assive (CO_Data* d)
 	}
 	
 	if(period == PERIOD){
-		HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
+		//HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
 		period = 5;
 		setState(&TestMaster_Data, Pre_operational);		//停止
 		epos_state = 0;

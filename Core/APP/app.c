@@ -120,7 +120,7 @@ void Epos_Task(void *p_arg)
 	for(;;)
 	{
 		if(epos_state == 0){
-			OSTimeDlyHMSM(0, 0,0,200); 
+			OSTimeDlyHMSM(0, 0,1,0); 
 			for(int i= 0;i < NumControllers;i++){
 				masterNMT(&TestMaster_Data, Controller[i], NMT_Enter_PreOperational);	//to operation
 				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 1000);				//reset speed set slower
@@ -138,10 +138,10 @@ void Epos_Task(void *p_arg)
 			
 			epos_state = 50;
 			
-			for(int i= 0;i < NumControllers;i++){
+			/*for(int i= 0;i < NumControllers;i++){
 				Node_DisEn(Controller[i]);
 				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, MAX_P_V);				//reset to previous speed 
-			}
+			}*/
 		}
 		OSTimeDlyHMSM(0, 0,0,10); 
 	}
