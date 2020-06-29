@@ -221,13 +221,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 						 
  /* 0x1601	 Index 1601h-17FFh，Receive PDO Mapping Parameter */
 					 UNS8 TestMaster_obj1601_Number_mapped = 1; //服务器，也就是需要修改的节点
-					 UNS32 TestMaster_obj1601_1_mapped = 0x60400010;
-					 UNS32 TestMaster_obj1601_2_mapped = 0x60790010;	//实际电流值
+					 UNS32 TestMaster_obj1601_1_mapped = 0x60630020;
+					 //UNS32 TestMaster_obj1601_2_mapped = 0x60790010;	//实际电流值
 					 subindex TestMaster_Index1601[] = 
 					 {
-						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_Number_mapped, NULL },
+						 { RO, uint8, sizeof (UNS8), (void*)&TestMaster_obj1601_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1601_1_mapped, NULL },
-						 { RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1601_2_mapped, NULL },
+						 //{ RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1601_2_mapped, NULL },
 					 };
 						 
  /* 0x1602	 Index 1602h-17FFh，Receive PDO Mapping Parameter */
@@ -430,7 +430,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index6040[] = 
                      {
                        { RW, uint16, sizeof (UNS16), (void*)&Controlword, NULL },
-                     };			
+                     };
 										 
 /* 0x607A   Target position */
 					UNS32 Target_position = 0x1234;//服务器，也就是需要修改的节点

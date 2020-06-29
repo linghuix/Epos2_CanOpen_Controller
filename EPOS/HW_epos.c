@@ -57,7 +57,7 @@ void Epos_NodeEnable(void)
 	printf("-----------------------------------------------\r\n");
 	printf("-----------------Enable_EPOS-------------------\r\n");
 	printf("-----------------------------------------------\r\n");
-		
+	
 }
 
 void EPOS_Reset(void)
@@ -90,18 +90,18 @@ void Epos_SpeedSet(Uint32 speed){
 void PM_SetAngle(Epos* epos, Uint32 angle){
     
     #if defined SDO
-    SDO_Write(epos, Target_pos, 0x00, angle);
-        #endif 
+    SDO_Write(epos, Pos_SET_VALUE, 0x00, angle);
+    #endif 
 }
 
 
 /** Position Set */
 void Epos_PosSet(Epos* epos, Uint32 pos)
-	{
-	
-		 SDO_Write(epos,OD_CTRL_WORD ,0x00,0x0F);	
-		 PM_SetAngle(epos,pos);
-		 SDO_Write(epos,OD_CTRL_WORD ,0x00,0x7F);	
+{
+
+	 //SDO_Write(epos,OD_CTRL_WORD ,0x00,0x0F);	
+	 PM_SetAngle(epos,pos);
+	 //SDO_Write(epos,OD_CTRL_WORD ,0x00,0x7F);	
 }
 
 

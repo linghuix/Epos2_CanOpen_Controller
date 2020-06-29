@@ -60,26 +60,36 @@ void EposMaster_Start(void)
 	setState(&TestMaster_Data, Initialisation);
 
 	if (!(*(TestMaster_Data.iam_a_slave)))		//master
-		{
-			EPOS_Reset();
-			Epos_NodeEnable();
-			Node_To_Home_Postion(Controller[0]);
-			Node_To_Home_Postion(Controller[1]);
-			EPOS_Start();
-		}
+	{
+		EPOS_Reset();
+		Epos_NodeEnable();
+		Node_To_Home_Postion(Controller[0]);
+		OSTimeDlyHMSM(0, 0,0,50);
+		Node_To_Home_Postion(Controller[1]);
+		OSTimeDlyHMSM(0, 0,0,50);
+		EPOS_Start();
+	}
+	
+	/* 验证是否进入 Operational 模式 */
+	data[0] = SDO_Read(Controller[0], Pos_Actual_Value, 0X00);
+	MSG("get - %x\r\n",data[0]);
+	data[1] = SDO_Read(Controller[1], Pos_Actual_Value, 0X00);
+	MSG("get - %x\r\n",data[1]);
+	
 	/* 验证是否进入 Operational 模式 */
 	data[0] = SDO_Read(Controller[0], Statusword, 0X00);
 	MSG("get - %x\r\n",data[0]);
 	data[1] = SDO_Read(Controller[1], Statusword, 0X00);
 	MSG("get - %x\r\n",data[1]);
+		
 	if(((data[1]>>9)&0x01) & ((data[0]>>9)&0x01)){
-			HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
-			MSG("already start MNT\r\n");
-			printf("-----------------------------------------------\r\n");
-			printf("-----------------PDO_ENABLE -------------------\r\n");
-			printf("-----------------------------------------------\r\n");
-			//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
-			setState(&TestMaster_Data, Operational);
+		HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
+		MSG("already start MNT\r\n");
+		printf("-----------------------------------------------\r\n");
+		printf("-----------------PDO_ENABLE -------------------\r\n");
+		printf("-----------------------------------------------\r\n");
+		//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
+		setState(&TestMaster_Data, Operational);
 	}
 }
 
@@ -247,9 +257,9 @@ void Node_setMode(Epos* epos, Uint16 mode){
 			SDO_Write(epos, Soft_P_Limit_Max, 0x02, 0x7FFFFFFF);                //2147483647
 
 			SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00,3000);                 //最大速度 Maximal Profile Velocity
-			  	  SDO_Write(epos, OD_QS_DECELERATION, 0x00, 50000);              //快速停止负加速度
+			SDO_Write(epos, OD_QS_DECELERATION, 0x00, 50000);              //快速停止负加速度
 			SDO_Write(epos, OD_MAX_MOTOR_SPEED, 0x00, 5000);              // Maximal Profile Velocity
-				SDO_Write(epos, Max_gear_input_speed, 0x03,1000);
+			SDO_Write(epos, Max_gear_input_speed, 0x03,1000);
 			SDO_Write(epos,OD_Max_Acceleration,0x00,10000);
 
 			break;
@@ -286,6 +296,12 @@ void Node_OperEn(Epos* epos){
     Epos_Delay(500);
     
     //SDO_Read(epos,OD_STATUS_WORD,0x00);                      // Operation Enable      Status=0x0137   绿灯常亮
+}
+
+void Node_DisEn(Epos* epos){
+	
+    SDO_Write(epos,OD_CTRL_WORD,0x00,0x06);                    // Disable Operation    Controlword=0xxx 0111
+    Epos_Delay(500);
 }
 
 

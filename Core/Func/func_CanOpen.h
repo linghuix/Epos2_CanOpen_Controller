@@ -42,11 +42,11 @@
 #include <dict.h>
 #include "ucos_ii.h"
 
-//定义队列消息指针数组
+//定义队列消息指针数组,存储的是 void 指针
 extern void *cantxMsgGrp[N_MESSAGES];
 extern void *canrxMsgGrp[N_MESSAGES];
 
-//数据缓冲区(消息指针对应的数据)
+//数据缓冲区(消息指针对应的数据)，存储的是上面指针指向的数据
 extern CanTxMsg cantxmsg[N_MESSAGES];
 extern CanRxMsg canrxmsg[N_MESSAGES];
 
