@@ -109,24 +109,39 @@ void CANOpen_App_Init(void)
 extern int epos_state;
 
 extern uint8_t NumControllers;
+
 #include "conf_epos.h"
 void Epos_Task(void *p_arg)
 {
 	//Task_MSG("CANApp_Task ... ");
+	uint32_t data=50;
 	EposMaster_Init();
 	EposMaster_Start();
 	for(;;)
 	{
 		if(epos_state == 0){
-		
+			OSTimeDlyHMSM(0, 0,0,200); 
 			for(int i= 0;i < NumControllers;i++){
-		masterNMT(&TestMaster_Data, Controller[i], NMT_Enter_PreOperational);	//to operation
-		}
-		setState(&TestMaster_Data, Initialisation);
-		
+				masterNMT(&TestMaster_Data, Controller[i], NMT_Enter_PreOperational);	//to operation
+				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 1000);				//reset speed set slower
+			}
+			
+			
 			Node_To_Home_Postion(Controller[0]);
 			Node_To_Home_Postion(Controller[1]);
+			OSTimeDlyHMSM(0, 0, 1,0); 
+			
+			data = SDO_Read(Controller[0], Pos_Actual_Value, 0X00);
+			MSG("get - %x\r\n",data);
+			data = SDO_Read(Controller[1], Pos_Actual_Value, 0X00);
+			MSG("get - %x\r\n",data);
+			
 			epos_state = 50;
+			
+			for(int i= 0;i < NumControllers;i++){
+				Node_DisEn(Controller[i]);
+				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, MAX_P_V);				//reset to previous speed 
+			}
 		}
 		OSTimeDlyHMSM(0, 0,0,10); 
 	}

@@ -380,7 +380,7 @@ extern void Epos_Delay(Uint32 time);
 void Node_setMode(Epos* epos, Uint16 mode);        //设定控制器的工作模式
 
 void Node_OperEn(Epos* epos);                   //从 Switch On Disable 到 Operation Enable
-
+void Node_DisEn(Epos* epos);
 
 //Control Funtional
 void PM_SetAngle(Epos* epos, Uint32 angle);//Postion Mode
