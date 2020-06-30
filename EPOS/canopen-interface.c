@@ -83,7 +83,7 @@ uint8_t Index = 0;
 extern Uint32 pos;										//֧ܺλ׃
 extern int x;												//extern int x=0;语法错误
 extern INTEGER32 Pos_Actual_Val;
-extern INTEGER16 Current_Actual_Val_node2;
+extern INTEGER16 Current_Actual_Val_node2, Current_Actual_Val_node3;
 
 #define ARRAY   hip_0_10m
 #define ARRAY_1 hip_1_10m
@@ -150,11 +150,11 @@ void assive (CO_Data* d)
 		}
 		
 		
-		ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3,Current_Actual_Val_node2);
+		ROW_MSG("%d\t%d\t%d \t\t %d\t%d\t%d\r\n",Pos_Actual_Val,pos,Current_Actual_Val_node2,  Pos_Actual_Val_node3, pos3,Current_Actual_Val_node3);
 	}
 	
 	if(period == PERIOD){
-		//HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
+		HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
 		period = 5;
 		setState(&TestMaster_Data, Pre_operational);		//停止
 		epos_state = 0;
