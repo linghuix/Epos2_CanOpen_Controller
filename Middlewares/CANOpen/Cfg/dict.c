@@ -252,7 +252,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1402[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1402, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1402_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1402_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1402_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1402_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1402_compatibility_entry, NULL },
@@ -269,7 +269,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1403[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1403, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1403_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1403_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1403_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1403_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1403_compatibility_entry, NULL },
@@ -286,7 +286,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1404[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1404, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1404_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1404_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1404_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1404_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1404_compatibility_entry, NULL },
@@ -303,7 +303,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1405[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1405, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1405_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1405_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1405_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1405_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1405_compatibility_entry, NULL },
@@ -320,7 +320,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1406[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1406, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1406_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1406_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1406_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1406_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1406_compatibility_entry, NULL },
@@ -337,7 +337,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1407[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1407, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1407_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1407_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1407_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1407_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1407_compatibility_entry, NULL },
@@ -354,7 +354,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1408[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1408, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1408_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1408_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1408_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1408_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1408_compatibility_entry, NULL },
@@ -371,7 +371,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1409[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1409, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1409_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1409_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1409_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1409_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1409_compatibility_entry, NULL },
@@ -388,7 +388,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1410[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1410, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1410_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1410_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1410_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1410_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1410_compatibility_entry, NULL },
@@ -405,7 +405,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1411[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1411, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1411_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1411_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1411_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1411_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1411_compatibility_entry, NULL },
@@ -422,7 +422,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     subindex TestMaster_Index1412[] = 
                      {
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_highestSubIndex_obj1412, NULL },
-                       { RO, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1412_COB_ID, NULL },
+                       { RW, uint32, 	sizeof (UNS32), (void*)&TestMaster_obj1412_COB_ID, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1412_Transmission_type, NULL },
                        { RO, uint16, 	sizeof (UNS16), (void*)&TestMaster_obj1412_inhibit_time, NULL },
                        { RO, uint8, 	sizeof (UNS8), (void*)&TestMaster_obj1412_compatibility_entry, NULL },

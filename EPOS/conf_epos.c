@@ -29,18 +29,18 @@ void SetMyDict(void)
 	data = 0x183;
 	Edit_Dict(&TestMaster_Data,0x14010120, 0x01, &data);		//RPDO	node 3
 	data = 0x184;
-	Edit_Dict(&TestMaster_Data,0x14020120, 0x01, &data);		//RPDO	node 2
+	Edit_Dict(&TestMaster_Data,0x14020120, 0x01, &data);		//RPDO	node 4
 	data = 0x185;
-	Edit_Dict(&TestMaster_Data,0x14030120, 0x01, &data);		//RPDO	node 3
+	Edit_Dict(&TestMaster_Data,0x14030120, 0x01, &data);		//RPDO	node 5
 	
 	data = 0x202;
 	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO	node 2
 	data = 0x210;
 	Edit_Dict(&TestMaster_Data,0x18010120, 0x01, &data);		//TPDO	node 3
-	data = 0x203;
-	Edit_Dict(&TestMaster_Data,0x18020120, 0x01, &data);		//TPDO	node 2
 	data = 0x204;
-	Edit_Dict(&TestMaster_Data,0x18030120, 0x01, &data);		//TPDO	node 3
+	Edit_Dict(&TestMaster_Data,0x18020120, 0x01, &data);		//TPDO	node 4
+	data = 0x205;
+	Edit_Dict(&TestMaster_Data,0x18030120, 0x01, &data);		//TPDO	node 5
 }
 
 
@@ -233,58 +233,58 @@ void Node_setMode(Epos* epos, Uint16 mode){
     switch(mode){
 
 	/** EPOS4 **/
-        
+	case(Position_Mode):
+		break;
+	
 	case(Velocity_Mode):		//CONFIGURATION PARAMETERS
-			//SDO_Write(epos,OP_MODE,0x00,Velocity_Mode);
-			SDO_Write(epos,OD_Max_Acceleration,0x00,1000);                                                // set Max Acceleration
-			SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);                                            // Maximal Profile Velocity
-			break;
+		//SDO_Write(epos,OP_MODE,0x00,Velocity_Mode);
+		SDO_Write(epos,OD_Max_Acceleration,0x00,1000);                                                // set Max Acceleration
+		SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);                                            // Maximal Profile Velocity
+		break;
 
 	case(Current_Mode):
-			SDO_Write(epos,OD_MOTOR_DATA_continue_I,0x01,2000);         // set Continuous Current Limit 连续输出电流最大值 mA
-			SDO_Write(epos, OD_MOTOR_DATA_MAX_I, 0x02, 4000);     //输出最大电流，推荐为两倍连续最大电流
-			SDO_Write(epos, OD_MOTOR_DATA_MAX_MPP, 0x03, 1);        //Changes only in “Disable” state.Number of magnetic pole pairs 参考电机手册
-			SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, 25000);     //限制电机最大速度 rpm
-			SDO_Write(epos, OD_MOTOR_DATA_TH_CONT, 0x05, 1);         // thermal time constant
-			break;
+		SDO_Write(epos,OD_MOTOR_DATA_continue_I,0x01,2000);         // set Continuous Current Limit 连续输出电流最大值 mA
+		SDO_Write(epos, OD_MOTOR_DATA_MAX_I, 0x02, 4000);     //输出最大电流，推荐为两倍连续最大电流
+		SDO_Write(epos, OD_MOTOR_DATA_MAX_MPP, 0x03, 1);        //Changes only in “Disable” state.Number of magnetic pole pairs 参考电机手册
+		SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, 25000);     //限制电机最大速度 rpm
+		SDO_Write(epos, OD_MOTOR_DATA_TH_CONT, 0x05, 1);         // thermal time constant
+		break;
 
 	case(Profile_Position_Mode):	//CONFIGURATION PARAMETERS
-			SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);              // Maximal Profile Velocity
-				SDO_Write(epos, OD_MAX_MOTOR_SPEED, 0x00, 5000);								//参考电机手册
-				SDO_Write(epos, Max_gear_input_speed, 0x03,1000);
-			SDO_Write(epos, OD_QS_DECELERATION, 0x00, QDEC);                //快速停止负加速度
-			SDO_Write(epos,OD_Max_Acceleration,0x00,10000);
-			break;
+		SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);              // Maximal Profile Velocity
+			SDO_Write(epos, OD_MAX_MOTOR_SPEED, 0x00, 5000);								//参考电机手册
+			SDO_Write(epos, Max_gear_input_speed, 0x03,1000);
+		SDO_Write(epos, OD_QS_DECELERATION, 0x00, QDEC);                //快速停止负加速度
+		SDO_Write(epos,OD_Max_Acceleration,0x00,10000);
+		break;
 
 	case(Profile_Velocity_Mode):		//CONFIGURATION PARAMETERS
-			SDO_Write(epos, Soft_P_Limit_Min, 0x01, 0x80000000);                //-2147483648
-			SDO_Write(epos, Soft_P_Limit_Max, 0x02, 0x7FFFFFFF);                //2147483647
+		SDO_Write(epos, Soft_P_Limit_Min, 0x01, 0x80000000);                //-2147483648
+		SDO_Write(epos, Soft_P_Limit_Max, 0x02, 0x7FFFFFFF);                //2147483647
 
-			SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00,3000);                 //最大速度 Maximal Profile Velocity
-			SDO_Write(epos, OD_QS_DECELERATION, 0x00, 50000);              //快速停止负加速度
-			SDO_Write(epos, OD_MAX_MOTOR_SPEED, 0x00, 5000);              // Maximal Profile Velocity
-			SDO_Write(epos, Max_gear_input_speed, 0x03,1000);
-			SDO_Write(epos,OD_Max_Acceleration,0x00,10000);
-
-			break;
+		SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00,3000);                 //最大速度 Maximal Profile Velocity
+		SDO_Write(epos, OD_QS_DECELERATION, 0x00, 50000);              //快速停止负加速度
+		SDO_Write(epos, OD_MAX_MOTOR_SPEED, 0x00, 5000);              // Maximal Profile Velocity
+		SDO_Write(epos, Max_gear_input_speed, 0x03,1000);
+		SDO_Write(epos,OD_Max_Acceleration,0x00,10000);
+		break;
 
 	case(Homing_Mode):      //可以将该功能配置给某个数字口
-			SDO_Write(epos, OD_Motion_Profile_Type, 0x00,1);                 //sin2  ramp
-			break;
+		SDO_Write(epos, OD_Motion_Profile_Type, 0x00,1);                 //sin2  ramp
+		break;
 
 	case(Interpolated_Position_Mode):
-			SDO_Write(epos, OD_Interpolation_Sub_Mode, 0x00,(Uint32)(-1));//always -1 cubic spline interpolation (PVT)
-			SDO_Write(epos, Interpolation_Time_Period_1, 0x01,1);//always 1
-			SDO_Write(epos, Interpolation_Time_Period_2, 0x02,(Uint32)(-3));//always -3  插值周期 10^-3s
-			SDO_Write(epos, Soft_P_Limit_Min, 0x01, 0x80000000);                //-2147483648
-			SDO_Write(epos, Soft_P_Limit_Max, 0x02, 0x7FFFFFFF);                //2147483647
-			//SDO_Write(epos,OD_Position_Window, 0x00,4294967295);             //关闭 position window
-			SDO_Write(epos, Pos_Window_Time, 0x00, 0);
-			break;
+		SDO_Write(epos, OD_Interpolation_Sub_Mode, 0x00,(Uint32)(-1));//always -1 cubic spline interpolation (PVT)
+		SDO_Write(epos, Interpolation_Time_Period_1, 0x01,1);//always 1
+		SDO_Write(epos, Interpolation_Time_Period_2, 0x02,(Uint32)(-3));//always -3  插值周期 10^-3s
+		SDO_Write(epos, Soft_P_Limit_Min, 0x01, 0x80000000);                //-2147483648
+		SDO_Write(epos, Soft_P_Limit_Max, 0x02, 0x7FFFFFFF);                //2147483647
+		//SDO_Write(epos,OD_Position_Window, 0x00,4294967295);             //关闭 position window
+		SDO_Write(epos, Pos_Window_Time, 0x00, 0);
+		break;
 
 	default:
-			printf("error mode\r\n");
-        
+		ERROR(12,"error mode\r\n");
     }
 }
 
