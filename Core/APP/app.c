@@ -205,7 +205,7 @@ void CANSend_Task(void *p_arg)
 				OSTimeDly(1);
 				HAL_status = MX_CANx_send(pHCANx, TxMsg, pmailbox);
 			}
-			OSTimeDlyHMSM(0, 0,0,2); 
+			OSTimeDlyHMSM(0, 0,0,1); 
 		}
 	}
 }
