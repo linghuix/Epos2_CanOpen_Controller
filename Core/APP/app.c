@@ -115,6 +115,8 @@ void Epos_Task(void *p_arg)
 	EposMaster_Start();
 	for(;;)
 	{
+		//TODO
+		//add Reset before  EposMaster_Start
 		if(START == 1){
 			START = 0;
 			EposMaster_Start();
