@@ -113,10 +113,23 @@ extern uint8_t NumControllers;
 
 #include "conf_epos.h"
 
-/*轨迹曲线队列*/
-OS_EVENT * Trajectory_Q_1;
-void * trajectoryPointer_1[5];
-trajectory trajectoryBuffer_1[5];
+
+/*
+轨迹曲线队列
+OS_EVENT * Trajectory_Q_2;
+void * trajectoryPointer_2[5];
+trajectory trajectoryBuffer_2[5];
+
+轨迹曲线队列
+OS_EVENT * Trajectory_Q_3;
+void * trajectoryPointer_3[5];
+trajectory trajectoryBuffer_3[5];
+
+轨迹曲线队列
+OS_EVENT * Trajectory_Q_4;
+void * trajectoryPointer_4[5];
+trajectory trajectoryBuffer_4[5];
+*/
 
 void Epos_Task(void *p_arg)
 {
@@ -124,8 +137,6 @@ void Epos_Task(void *p_arg)
 	uint32_t data=50;
 	EposMaster_Init();
 	EposMaster_Start();
-	
-	Trajectory_Q_1 = OSQCreate(&trajectoryPointer_1[0],5);
 	
 	for(;;)
 	{

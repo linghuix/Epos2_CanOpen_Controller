@@ -84,7 +84,7 @@ void _post_TPDO(CO_Data* d)
 uint8_t period = 0;
 uint16_t endP = 0;
 uint8_t Index = 0;
-int x, temp_x;												//extern int x=0;语法错误
+int x = 0, temp_x;												//extern int x=0;语法错误
 
 extern INTEGER32 Pos_Actual_Val, Pos_Actual_Val_node3, Pos_Actual_Val_node4, Pos_Actual_Val_node5;
 extern INTEGER16 Current_Actual_Val_node2;
@@ -176,6 +176,36 @@ void Test_curve (CO_Data* d)
 	ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,Pos_Actual_Val_node3,Pos_Actual_Val_node4, Pos_Actual_Val_node5,pos);
 }
 
+
+trajectory tra;
+int times = 0;int NewCurve = 0;
+void TrajectoryQueue (CO_Data* d)
+{
+	if(times == 0)						// trajectory finish. if has new trajectory ready to run NewCurve = 1. else NewCurve = 0.
+	{
+		tra = getCurve();
+		if(tra.RunNumber == 0){
+			NewCurve = 0;
+		}
+		else
+		{
+			NewCurve = 1;
+		}
+	}
+	
+	if(NewCurve == 1)				// begin new trajectory
+	{
+		Edit_Dict(d , 0x20620020, 0x00, &(tra.LHArrayName[x]));
+		Edit_Dict(d , 0x20630020, 0x00, &(tra.LHArrayName[x]));
+		Edit_Dict(d , 0x20640020, 0x00, &(tra.LHArrayName[x]));
+		Edit_Dict(d , 0x20650020, 0x00, &(tra.LHArrayName[x]));
+		x++;
+		if(x == tra.len[0]){			// finish only one time.
+			times--;
+			x = 0;
+		}
+	}
+}
 
 /*
  * author lhx
