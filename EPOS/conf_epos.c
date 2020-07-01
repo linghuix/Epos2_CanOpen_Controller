@@ -22,7 +22,7 @@ extern UNS32 TestMaster_obj1006;
 void SetMyDict(void)
 {
 	uint32_t data;
-	TestMaster_obj1006 = MS10;		//set sync cycle
+	TestMaster_obj1006 = MS15;		//set sync cycle
 	
 	data = 0x182;
 	Edit_Dict(&TestMaster_Data,0x14000120, 0x01, &data);		//RPDO	node 2
@@ -35,7 +35,7 @@ void SetMyDict(void)
 	
 	data = 0x202;
 	Edit_Dict(&TestMaster_Data,0x18000120, 0x01, &data);		//TPDO	node 2
-	data = 0x210;
+	data = 0x203;
 	Edit_Dict(&TestMaster_Data,0x18010120, 0x01, &data);		//TPDO	node 3
 	data = 0x204;
 	Edit_Dict(&TestMaster_Data,0x18020120, 0x01, &data);		//TPDO	node 4
@@ -53,6 +53,7 @@ void EposMaster_Init(void)
 #include "canopen_interface.h"
 #include "func_CanOpen.h"
 extern uint8_t NumControllers;
+int home[] = {54260, 12077, 20744, 14949};
 void EposMaster_Start(void)
 {
 	uint32_t data[6];
@@ -66,9 +67,11 @@ void EposMaster_Start(void)
 		Epos_NodeEnable();
 		
 		for(int i=0;i<NumControllers;i++){
-			Node_To_Home_Postion(Controller[i]);
+			//SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 700);				//reset speed set slower
+			Epos_PosSet(Controller[i],home[i]);
 		}
-		OSTimeDlyHMSM(0, 0,0,200);
+		
+		OSTimeDlyHMSM(0, 0,5,0);
 		
 		EPOS_Start();
 		
@@ -78,6 +81,8 @@ void EposMaster_Start(void)
 	for(int i=0;i<NumControllers;i++){
 		data[i] = SDO_Read(Controller[i], Pos_Actual_Value, 0X00);
 		MSG("pos - %x\r\n",data[i]);
+		//SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 6000);
+		//SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, MAX_P_V);				//reset to previous speed 
 	}
 	
 	/* 验证是否进入 Operational 模式 */
@@ -86,7 +91,7 @@ void EposMaster_Start(void)
 		MSG("state - %x\r\n",data[i]);
 	}
 	
-	if(((data[0]>>9)&0x01) & ((data[1]>>9)&0x01) & ((data[2]>>9)&0x01) & ((data[3]>>9)&0x01)){
+	//if(((data[0]>>9)&0x01) & ((data[1]>>9)&0x01) & ((data[2]>>9)&0x01) & ((data[3]>>9)&0x01)){
 		HAL_TIM_Base_Start_IT(CANOPEN_TIMx_handle);
 		MSG("already start MNT\r\n");
 		printf("-----------------------------------------------\r\n");
@@ -94,7 +99,7 @@ void EposMaster_Start(void)
 		printf("-----------------------------------------------\r\n");
 		//setState(&TestMaster_Data, Pre_operational); //心跳,同步周期协议配置
 		setState(&TestMaster_Data, Operational);
-	}
+	//}
 }
 
 
@@ -133,10 +138,16 @@ void Node_ParamConfig(Epos* epos)
 
     SDO_Write(epos, OD_Following_ERR_window, 0x00, MAX_F_ERR); //最大误差设置
 
-	SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, MAX_P_V);//MAX_P_V);  //最大速度
-	//SDO_Write(epos, OD_MOTOR_DATA, 0x04, MAX_P_V);     //最大允许速度
+	if(epos->node_ID != 5){
+		SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, MAX_P_V);//MAX_P_V);   //最大允许速度
 
-    SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);//MAX_P_V);  //最大速度
+		SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, MAX_P_V);//MAX_P_V);  //最大速度
+	}
+	else
+	{
+		SDO_Write(epos, OD_MOTOR_DATA_MAX_V, 0x04, 6000);
+		SDO_Write(epos, OD_MAX_P_VELOCITY, 0x00, 6000);
+	}
 
     SDO_Write(epos, OD_Max_Acceleration, 0x00, epos->acc);	//max acc set
 
@@ -167,9 +178,17 @@ void Node_StructInit(Epos* epos1, Uint8 CAN_ID, Uint8 NODE_ID)
     epos1->b_init = 1;                      //EPOS 初始化标志
     epos1->cur_mode = MODE_NONE;            //控制模式
     epos1->opt = 0x001f;
-    epos1->acc = MAX_ACC;                   //最大加速度
-    epos1->dec = MAX_DEC;                   //最大负加速度
-    epos1->b_need_shutdown = 0;             //是否需要关闭控制器
+	if(NODE_ID != 5){
+		epos1->acc = MAX_ACC;                   //最大加速度
+		epos1->dec = MAX_DEC;                   //最大负加速度
+		epos1->b_need_shutdown = 0;             //是否需要关闭控制器
+	}
+	else
+	{
+		epos1->acc = 50000; 
+		epos1->dec = 50000; 
+		epos1->b_need_shutdown = 0; 
+	}
 }
 
 

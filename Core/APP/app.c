@@ -40,7 +40,7 @@ void Task_Start(void *p_arg)
 	Task_MSG("task priority include: 2 3 5 6 7 \r\n");
 
 	CANOpen_App_Init();			//CANOpen协议初始化
-	//Remote_App_Init();		// 红外通讯远程信息接收初始化
+	Remote_App_Init();		// 红外通讯远程信息接收初始化
 	OSStatInit();
 
 	while (1){
@@ -107,29 +107,41 @@ void CANOpen_App_Init(void)
  * Window > Preferences > C/C++ > Editor > Templates.
  */
 extern int epos_state;
-
 extern uint8_t NumControllers;
 
+
+
 #include "conf_epos.h"
+
+/*轨迹曲线队列*/
+OS_EVENT * Trajectory_Q_1;
+void * trajectoryPointer_1[5];
+trajectory trajectoryBuffer_1[5];
+
 void Epos_Task(void *p_arg)
 {
 	//Task_MSG("CANApp_Task ... ");
 	uint32_t data=50;
 	EposMaster_Init();
 	EposMaster_Start();
+	
+	Trajectory_Q_1 = OSQCreate(&trajectoryPointer_1[0],5);
+	
 	for(;;)
 	{
 		if(epos_state == 0){
-			OSTimeDlyHMSM(0, 0,0,200); 
+			OSTimeDlyHMSM(0, 0,0,800); 		//waiting for PDO controlling process in EPOS end
 			for(int i= 0;i < NumControllers;i++){
 				masterNMT(&TestMaster_Data, Controller[i], NMT_Enter_PreOperational);	//to operation
-				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 1000);				//reset speed set slower
+				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 500);				//reset speed set slower
 			}
 			
 			
 			Node_To_Home_Postion(Controller[0]);
 			Node_To_Home_Postion(Controller[1]);
-			OSTimeDlyHMSM(0, 0, 1,0); 
+			Node_To_Home_Postion(Controller[2]);
+			Node_To_Home_Postion(Controller[3]);
+			OSTimeDlyHMSM(0, 0, 5,0); 
 			
 			data = SDO_Read(Controller[0], Pos_Actual_Value, 0X00);
 			MSG("get - %x\r\n",data);
@@ -138,10 +150,10 @@ void Epos_Task(void *p_arg)
 			
 			epos_state = 50;
 			
-			for(int i= 0;i < NumControllers;i++){
+			/*for(int i= 0;i < NumControllers;i++){
 				Node_DisEn(Controller[i]);
 				SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, MAX_P_V);				//reset to previous speed 
-			}
+			}*/
 		}
 		OSTimeDlyHMSM(0, 0,0,10); 
 	}
@@ -205,7 +217,7 @@ void CANSend_Task(void *p_arg)
 				OSTimeDly(1);
 				HAL_status = MX_CANx_send(pHCANx, TxMsg, pmailbox);
 			}
-			OSTimeDlyHMSM(0, 0,0,1); 
+			OSTimeDlyHMSM(0, 0,0,2); 
 		}
 	}
 }
@@ -214,6 +226,7 @@ void CANSend_Task(void *p_arg)
 void Remote_App_Init(void)
 {
 	/* 串口配置 */
+	MX_USART2_UART_Init();
 	/*OSTaskCreate(Remote_Task,(void *)0,		  				//创建 infra-red 控制任务
 		   &remote_task_stk[TASK_A_STK_SIZE-1], TASK_remote_PRIO);*/
 	
@@ -227,12 +240,32 @@ void Remote_App_Init(void)
  * @brief : infrared controller to control EPOS
  * Window > Preferences > C/C++ > Editor > Templates.
  */
+uint8_t remoteData[3] = {0};
 void RemoteController_Task(void *p_arg)
 {
 	(void)p_arg;
+	HAL_UART_Receive_IT(&huart2, remoteData,3);
 	
 	while (1){
 		OSTimeDlyHMSM(0, 0,0,5);
+	}
+}
+
+extern int PERIOD;	//canopen_interface.c
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart->Instance == USART2){
+		uint8_t receiveData = remoteData[2];
+		switch(receiveData){
+			case(0x0C):
+				PERIOD = 1;
+				break;
+			case(0x18):
+				PERIOD = 2;
+				break;
+			default:
+				ERROR(10,"error command\r\n");
+		}
 	}
 }
 

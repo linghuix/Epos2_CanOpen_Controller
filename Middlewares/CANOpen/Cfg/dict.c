@@ -443,21 +443,25 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 };
 						 
  /* 0x1602	 Index 1602h-17FFh，Receive PDO Mapping Parameter */
-					 UNS8 TestMaster_obj1602_Number_mapped = 1; //服务器，也就是需要修改的节点
+					 UNS8 TestMaster_obj1602_Number_mapped = 2; //服务器，也就是需要修改的节点
 					 UNS32 TestMaster_obj1602_1_mapped = 0x60660020;
+					 UNS32 TestMaster_obj1602_2_mapped = 0x607B0010;
 					 subindex TestMaster_Index1602[] = 
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1602_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1602_1_mapped, NULL },
+						 { RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1602_2_mapped, NULL },
 					 };
 						 
  /* 0x1603	 Index 1603h-17FFh，Receive PDO Mapping Parameter */
 					 UNS8 TestMaster_obj1603_Number_mapped = 1; //服务器，也就是需要修改的节点
 					 UNS32 TestMaster_obj1603_1_mapped = 0x60670020;
+					 UNS32 TestMaster_obj1603_2_mapped = 0x607C0010;
 					 subindex TestMaster_Index1603[] = 
 					 {
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1603_Number_mapped, NULL },
 						 { RO, uint32, sizeof (UNS32), (void*)&TestMaster_obj1603_1_mapped, NULL },
+						 { RO, uint16, sizeof (UNS16), (void*)&TestMaster_obj1603_2_mapped, NULL },
 					 };
 
  /* 0x1604	 Index 1604h-17FFh，Receive PDO Mapping Parameter */
@@ -623,7 +627,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					UNS8 ClientNumber_0x1803 = 5;
 					UNS32 TestMaster_obj1803_COB_ID_PDO = 0x40000186;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1803_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
-					UNS16 TestMaster_obj1803_Inhibit_time = 10;
+					UNS16 TestMaster_obj1803_Inhibit_time = 1;
 					UNS8 TestMaster_obj1803_compatibility_entry = 0;
 					UNS16 TestMaster_obj1803_event_time  = 0;
 					subindex TestMaster_Index1803[] = 
@@ -641,7 +645,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					UNS8 ClientNumber_0x1804 = 5;
 					UNS32 TestMaster_obj1804_COB_ID_PDO = 0x40000187;//服务器，也就是需要修改的节点
 					UNS8 TestMaster_obj1804_Transmiss_Type  = TRANS_EVERY_N_SYNC(1);
-					UNS16 TestMaster_obj1804_Inhibit_time = 10;
+					UNS16 TestMaster_obj1804_Inhibit_time = 1;
 					UNS8 TestMaster_obj1804_compatibility_entry = 0;
 					UNS16 TestMaster_obj1804_event_time  = 0;
 					subindex TestMaster_Index1804[] = 
@@ -872,14 +876,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					INTEGER32 Pos_SET_VALUE_node4 = 0x0;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index2064[] =
 					 {
-					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node4, NULL },
 					 };
 					 
 /*0x2065  node5*/
 					INTEGER32 Pos_SET_VALUE_node5 = 0x0;//服务器，也就是需要修改的节点
 					subindex TestMaster_Index2065[] =
 					 {
-					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node3, NULL },
+					   { RW, int32, sizeof (INTEGER32), (void*)&Pos_SET_VALUE_node5, NULL },
 					 };
 					 
 					 
@@ -895,7 +899,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 					 {
 					   { RW, int16, sizeof (INTEGER16), (void*)&Current_Actual_Val_node3, NULL },
 					 };
-
+/* 0x607B   Current_Actual_Val for node4*/
+					INTEGER16 Current_Actual_Val_node4 = 0x00;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index607B[] =
+					 {
+					   { RW, int16, sizeof (INTEGER16), (void*)&Current_Actual_Val_node4, NULL },
+					 };
+/* 0x607C   Current_Actual_Val for node5*/
+					INTEGER16 Current_Actual_Val_node5 = 0x00;//服务器，也就是需要修改的节点
+					subindex TestMaster_Index607C[] =
+					 {
+					   { RW, int16, sizeof (INTEGER16), (void*)&Current_Actual_Val_node5, NULL },
+					 };
+					 
 /**************************************************************************/
 /* Declaration of pointed variables                                       */
 /**************************************************************************/
@@ -981,7 +997,8 @@ const indextable TestMaster_objdict[] =
 	
 	{ (subindex*)TestMaster_Index6078,sizeof(TestMaster_Index6078)/sizeof(TestMaster_Index6078[0]), 0x6078},
 	{ (subindex*)TestMaster_Index6079,sizeof(TestMaster_Index6079)/sizeof(TestMaster_Index6079[0]), 0x6079},
-
+	{ (subindex*)TestMaster_Index607B,sizeof(TestMaster_Index607B)/sizeof(TestMaster_Index607B[0]), 0x607B},
+	{ (subindex*)TestMaster_Index607C,sizeof(TestMaster_Index607C)/sizeof(TestMaster_Index607C[0]), 0x607C},
 	
 };
 
@@ -1071,6 +1088,8 @@ const indextable * TestMaster_scanIndexOD (CO_Data *d, UNS16 wIndex, UNS32 * err
 		
 		case 0x6078: i = 68;break;
 		case 0x6079: i = 69;break;
+		case 0x607B: i = 70;break;
+		case 0x607C: i = 71;break;
 
 		default:
 			*errorCode = OD_NO_SUCH_OBJECT;

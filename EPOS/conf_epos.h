@@ -56,11 +56,11 @@ extern Uint32 pos_value_RH;
 /************常数*************/
 
 #define PPMODE 0x01
-#define MAX_ACC 80000
-#define MAX_DEC 80000
+#define MAX_ACC 30000
+#define MAX_DEC 30000
 #define MODE_NONE 0x00
-#define MAX_F_ERR 500
-#define MAX_P_V 5000//5000
+#define MAX_F_ERR 20000//500
+#define MAX_P_V 700//2720//5000
 #define QDEC MAX_ACC
 #define ALL 0
 

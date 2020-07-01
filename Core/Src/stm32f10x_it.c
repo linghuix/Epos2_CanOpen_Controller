@@ -239,6 +239,11 @@ void USART1_IRQHandler(void)
 	debug_IRQ();
 }
 
+void USART2_IRQHandler(void)
+{
+	HAL_UART_IRQHandler(&huart2);
+}
+
 /**
   * @}
   */ 

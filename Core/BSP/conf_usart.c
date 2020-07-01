@@ -24,11 +24,20 @@ void MX_USART1_UART_Init(void)
   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
 	
-  if (HAL_UART_Init(&huart1) != HAL_OK)
-  {
-    Error_Handler();
+  if (HAL_UART_Init(&huart1) != HAL_OK){
+    Error_Handler()
   }
 }
+
+/*
+ * author lhx
+ * May 13, 2020
+ *
+ * @brief : 调用自HAL_UART_MspInit
+ * 			引脚初始化
+ * 			时钟开启
+ * Window > Preferences > C/C++ > Editor > Templates.
+ */
 
 void USART_Hardware_Init(UART_HandleTypeDef* uartHandle)
 {
@@ -63,52 +72,75 @@ void USART_Hardware_Init(UART_HandleTypeDef* uartHandle)
 
       /* Peripheral clock enable */
       __HAL_RCC_USART2_CLK_ENABLE();
+      __HAL_RCC_GPIOA_CLK_ENABLE();
 
       /**USART2 GPIO Configuration
-      PD6     ------> USART2_RX
-      PD5     ------> USART2_TX
+      PA3     ------> USART2_RX
+      PA2     ------> USART2_TX
       */
-      GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_5;
-      GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-      GPIO_InitStruct.Pull = GPIO_NOPULL;
-      GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-      HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    GPIO_InitStruct.Pin = GPIO_PIN_2;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_3;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
     }
     else if(uartHandle->Instance==USART3)
     {
       /* Peripheral clock enable */
       __HAL_RCC_USART3_CLK_ENABLE();
+      __HAL_RCC_GPIOB_CLK_ENABLE();
 
       /**USART3 GPIO Configuration
-      PD9     ------> USART3_RX
-      PD8     ------> USART3_TX
+      PB11     ------> USART3_RX
+      PB10     ------> USART3_TX
       */
-      GPIO_InitStruct.Pin = GPIO_PIN_9|GPIO_PIN_8;
+      
+	/*GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11;  这种配置，可以发送，但是不能接受数据
       GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
       GPIO_InitStruct.Pull = GPIO_NOPULL;
       GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-      HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+      HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);*/
+
+    GPIO_InitStruct.Pin = GPIO_PIN_10;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    GPIO_InitStruct.Pin = GPIO_PIN_11;
+    GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
     }
 }
 
+/*
+ * author lhx
+ * May 13, 2020
+ *
+ * @brief : 串口中断功能设置和开启
+ * Window > Preferences > C/C++ > Editor > Templates.
+ */
 void USART_NVIC_Init(UART_HandleTypeDef* uartHandle)
 {
     if(uartHandle->Instance==USART1)
     {
-		HAL_NVIC_SetPriority(USART1_IRQn, 1, 0);
+		HAL_NVIC_SetPriority(USART1_IRQn, 0, 0);
 		HAL_NVIC_EnableIRQ(USART1_IRQn);
 
     }
     else if(uartHandle->Instance==USART2)
     {
-		HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+		HAL_NVIC_SetPriority(USART2_IRQn, 1, 0);
 		HAL_NVIC_EnableIRQ(USART2_IRQn);
-		__HAL_UART_ENABLE_IT(&huart2,UART_IT_RXNE);
     }
     else if(uartHandle->Instance==USART3)
     {
 		/* Peripheral interrupt init */
-		HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
+		HAL_NVIC_SetPriority(USART3_IRQn, 1, 0);
 		HAL_NVIC_EnableIRQ(USART3_IRQn);
     }
 }
@@ -118,7 +150,7 @@ void MX_USART2_UART_Init(void)
 {
 
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 9600;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -127,7 +159,7 @@ void MX_USART2_UART_Init(void)
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
   if (HAL_MultiProcessor_Init(&huart2, 0, UART_WAKEUPMETHOD_IDLELINE) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler()
   }
 
 }
@@ -146,11 +178,18 @@ void MX_USART3_UART_Init(void)
   huart3.Init.OverSampling = UART_OVERSAMPLING_16;
   if (HAL_MultiProcessor_Init(&huart3, 0, UART_WAKEUPMETHOD_IDLELINE) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler()
   }
 
 }
 
+/*
+ * author lhx
+ * May 13, 2020
+ *
+ * @brief : 调用自 HAL_UART_Init，用于硬件初始化
+ * Window > Preferences > C/C++ > Editor > Templates.
+ */
 
 void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 {
