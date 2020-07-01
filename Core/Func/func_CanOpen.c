@@ -26,15 +26,17 @@ void CANOpen_Inital(void)
 }
 
 
-// 定义队列消息指针数组
-void *cantxMsgGrp[N_MESSAGES];
-void *canrxMsgGrp[N_MESSAGES];
+/*发送CAN队列*/
+OS_EVENT * CANSend_Q;
+void *cantxMsgGrp[N_MESSAGES];				// 定义队列消息指针数组
+CanTxMsg cantxmsg[N_MESSAGES];				// 数据缓冲区(消息指针对应的数据)
 
-//数据缓冲区(消息指针对应的数据)
-CanTxMsg cantxmsg[N_MESSAGES];
+
+/*接收CAN队列*/
+OS_EVENT * CANRcv_Q;
+void *canrxMsgGrp[N_MESSAGES];
 CanRxMsg canrxmsg[N_MESSAGES];
 
-OS_EVENT * CANRcv_Q, * CANSend_Q;
 
 /* 定时器TIM相关变量 */
 static TIMEVAL last_counter_val = 0;

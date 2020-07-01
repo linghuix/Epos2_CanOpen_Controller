@@ -16,7 +16,12 @@ UNS32 Edit_Dict(CO_Data* d, Uint32 Index_Type,Uint8 SubIndex, void* pdata)
 
 	retcode = setODentry( d, Index, SubIndex, pdata, &ByteSize, 1 );
 
-	return retcode;
+	if(retcode != OD_SUCCESSFUL){
+		ERROR(0,"-Edit Dict Error- 0x%x",retcode);
+		return 0;
+	}
+	
+	return 1;
 }
 
 /*
@@ -61,8 +66,8 @@ void _stopped(CO_Data* d)
 
 void assive (CO_Data* d);
 void Test_curve(CO_Data* d);
-
 void sin_cos_test (CO_Data* d);
+
 void _post_TPDO(CO_Data* d)
 	{
 	sin_cos_test(d);
@@ -73,84 +78,57 @@ void _post_TPDO(CO_Data* d)
 #include "gait.h"
 
 #define PERIOD 1		//运行次数
+#define ARRAY_K   knee_flexion
+#define ARRAY_H   hip_flexion
+
 uint8_t period = 0;
-
-
-//node2
-uint8_t start = 0;
 uint16_t endP = 0;
 uint8_t Index = 0;
-extern Uint32 pos;										//֧ܺλ׃
-extern int x;												//extern int x=0;语法错误
-extern INTEGER32 Pos_Actual_Val;
-extern INTEGER16 Current_Actual_Val_node2,Pos_Actual_Val_node4,Pos_Actual_Val_node5;
+int x, temp_x;												//extern int x=0;语法错误
 
-#define ARRAY   hip_0_10m
-#define ARRAY_1 hip_1_10m
-
-//node3
-extern INTEGER32 Pos_Actual_Val_node3;
+extern INTEGER32 Pos_Actual_Val, Pos_Actual_Val_node3, Pos_Actual_Val_node4, Pos_Actual_Val_node5;
+extern INTEGER16 Current_Actual_Val_node2;
 extern INTEGER32 Pos_SET_VALUE_node3;
-int x3;
-Uint32 pos3;
-uint8_t start3 = 0;
-uint16_t endP3 = 0;
-#define ARRAY_H   knee_0_10m
-#define ARRAY_H_1 knee_1_10m
 
+Uint32 Position[6];
 
 int epos_state = 50;
+
 #include "func_CanOpen.h"
+
 void assive (CO_Data* d)
 {
-	
-	UNS32 re;
 	if(PERIOD != 0){
-		if(start == 0){
-			endP = sizeof(ARRAY)/sizeof(*ARRAY);
-			pos = ARRAY[x++];
-			if( x==endP){
-				endP = sizeof(ARRAY_1)/sizeof(*ARRAY_1);
-				start = 1;
-				x = 0;
-			}
-		}
-		else{
-			pos = ARRAY_1[x++];
-			if( x==endP){
-				x = 0;
-			}
+		
+		endP = sizeof(ARRAY_H)/sizeof(*ARRAY_H);	// period size
+		
+		Position[0] = ARRAY_H[x];					//for node2
+		
+		Position[1] = ARRAY_K[x];					//for node3
+		
+		temp_x = x + endP/2;						//start form half period. another side
+		if(temp_x >= endP){
+			temp_x = temp_x - endP;
 		}
 		
-		if(start3 == 0){
-			endP3 = sizeof(ARRAY_H)/sizeof(*ARRAY_H);
-			pos3 = ARRAY_H[x3++];
-			if( x3==endP3){
-				endP3 = sizeof(ARRAY_H_1)/sizeof(*ARRAY_H_1);
-				start3 = 1;
-				x3 = 0;
-			}
-		}
-		else{
-			pos3 = ARRAY_H_1[x3++];
-			if( x3==endP3){
-				x3 = 0;
-				period++;
-			}
+		Position[2] = ARRAY_H[temp_x];				//for node4
+
+		
+		Position[3] = ARRAY_K[temp_x];				//for node5
+
+		x++;
+		if( x == endP){
+			x = 0;
+			period++;
 		}
 		
-		re = Edit_Dict(d , Pos_SET_VALUE, 0x00, &pos);
-		if(re != OD_SUCCESSFUL){
-			ERROR(0,"-TPDO update error- 0x%x",re);
-		}
-		
-		re = Edit_Dict(d , 0x20630020, 0x00, &pos3);
-		if(re != OD_SUCCESSFUL){
-			ERROR(0,"-TPDO update error- 0x%x",re);
-		}
+		Edit_Dict(d , Pos_SET_VALUE, 0x00, &Position[0]);
+		Edit_Dict(d , 0x20630020, 0x00, &Position[1]);
+		Edit_Dict(d , 0x20640020, 0x00, &Position[2]);
+		Edit_Dict(d , 0x20650020, 0x00, &Position[3]);
 		
 		
-		ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,pos,Pos_Actual_Val_node3, pos3,Current_Actual_Val_node2);
+		ROW_MSG("%d\t%d\t%d\t%d\r\n", Pos_Actual_Val, Pos_Actual_Val_node3, Position[0], Current_Actual_Val_node2);
 	}
 	
 	if(period == PERIOD){
@@ -161,17 +139,17 @@ void assive (CO_Data* d)
 	}
 }
 
+Uint32 pos;
 int subI = 0;
 void sin_cos_test (CO_Data* d)
 {
-	UNS32 re;
 	
 	pos = (int)(10000*sin(2.0f*3.14f*0.005f*subI));
 	
-	re = Edit_Dict(d , 0x20620020, 0x00, &pos);
-	re = Edit_Dict(d , 0x20630020, 0x00, &pos);
-	re = Edit_Dict(d , 0x20640020, 0x00, &pos);
-	re = Edit_Dict(d , 0x20650020, 0x00, &pos);
+	Edit_Dict(d , 0x20620020, 0x00, &pos);
+	Edit_Dict(d , 0x20630020, 0x00, &pos);
+	Edit_Dict(d , 0x20640020, 0x00, &pos);
+	Edit_Dict(d , 0x20650020, 0x00, &pos);
 	
 	subI++;
 	ROW_MSG("%d\t%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,Pos_Actual_Val_node3,Pos_Actual_Val_node4, Pos_Actual_Val_node5,pos);

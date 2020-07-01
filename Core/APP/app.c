@@ -107,16 +107,26 @@ void CANOpen_App_Init(void)
  * Window > Preferences > C/C++ > Editor > Templates.
  */
 extern int epos_state;
-
 extern uint8_t NumControllers;
 
+
+
 #include "conf_epos.h"
+
+/*轨迹曲线队列*/
+OS_EVENT * Trajectory_Q_1;
+void * trajectoryPointer_1[5];
+trajectory trajectoryBuffer_1[5];
+
 void Epos_Task(void *p_arg)
 {
 	//Task_MSG("CANApp_Task ... ");
 	uint32_t data=50;
 	EposMaster_Init();
 	EposMaster_Start();
+	
+	Trajectory_Q_1 = OSQCreate(&trajectoryPointer_1[0],5);
+	
 	for(;;)
 	{
 		if(epos_state == 0){

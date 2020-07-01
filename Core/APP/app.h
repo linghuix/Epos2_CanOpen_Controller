@@ -5,6 +5,7 @@
 #include  "ucos_ii.h" 		// uC/OS-II header
 #include "debug.h"
 #include "HW_epos.h"
+#include "gait.h"
 
 /******************任务优先级*******************/
 #define STARTUP_TASK_PRIO     		2

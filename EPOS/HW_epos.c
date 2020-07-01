@@ -212,33 +212,8 @@ void State(void){
  * 调用  
  */
 
-#define PI 3.1415
 #include "gait.h"
 
-uint32_t flag = 0xff;          //用于标志是否接收到数据，在中断函数中赋
-int pos=0;                       //电机位置
-int x=0;                            //角度自变
-int angle_sensor;
-	
-/*void Epos_Conroller_TIMBack(){
-
-//		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);		//清除中断标志
-
-
-		//if(flag==0xff) flag = 0;
-
-		pos = (x>=323) ? angle_2[x-323]:angle_1[x];
-
-		//angle_sensor = SDO_Read(Controller,Pos_Actual_Value,0x00);
-
-		PM_SetAngle(Controller[1], pos);
-		PM_SetAngle(Controller[1],pos);
-
-		if( ++x==727 ) x = 0;
-
-}
-
-*/
 void Node_Initial_Postion(void)
 {
 //	SDO_Read(Epos* epos,Uint32 Index_Type,Uint8 SubIndex);
