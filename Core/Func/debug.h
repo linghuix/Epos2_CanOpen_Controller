@@ -20,7 +20,7 @@
 #define CAN_RCV_MSG(...)		//MYMSG(__VA_ARGS__)
 #define TPDO_MSG(...)			//MYMSG(__VA_ARGS__)
 #define SYNC_MSG(...)			//MYMSG(__VA_ARGS__)
-#define ROW_MSG(...)			MYMSG(__VA_ARGS__)					//需要发送到PC等地方进行进一步处理的信息
+#define ROW_MSG(...)			//MYMSG(__VA_ARGS__)					//需要发送到PC等地方进行进一步处理的信息
 #define ERROR(s,...)			printf("#ERROR %d# ",s);MYMSG(__VA_ARGS__);printf("\t--%s,%d\r\n",__FILE__, __LINE__)	//发送严重错误，必须指明错误语句和地点
 
 /*

@@ -54,6 +54,7 @@ void EposMaster_Init(void)
 #include "func_CanOpen.h"
 extern uint8_t NumControllers;
 int home[] = {54260, 12077, 20744, 14949};
+extern int PERIOD ;
 void EposMaster_Start(void)
 {
 	uint32_t data[6];
@@ -65,6 +66,12 @@ void EposMaster_Start(void)
 	{
 		EPOS_Reset();
 		Epos_NodeEnable();
+		
+		printf("waiting\r\n");
+		while(PERIOD == 0){
+			OSTimeDlyHMSM(0, 0,0,5);
+			
+		}
 		
 		for(int i=0;i<NumControllers;i++){
 			//SDO_Write(Controller[i], OD_MAX_P_VELOCITY, 0x00, 700);				//reset speed set slower

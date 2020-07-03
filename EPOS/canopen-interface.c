@@ -82,8 +82,8 @@ void _post_TPDO(CO_Data* d)
 #define ARRAY_K   knee_flexion
 #define ARRAY_H   hip_flexion
 
-int PERIOD = 100;							// 设定运行次数
-uint8_t period = 0;						// 实际运行次数
+int PERIOD = 0;							// 设定运行次数
+int period = 0;						// 实际运行次数
 uint16_t endP = 0;
 uint8_t Index = 0;
 int x=0, temp_x;						//extern int x=0;语法错误
@@ -132,6 +132,7 @@ void assive (CO_Data* d)
 		if( x == endP){
 			x = 0;
 			period++;
+			MYMSG("#%d\t%d\r\n",period,PERIOD);
 		}
 		
 		Edit_Dict(d , 0x20620020, 0x00, &Position[0]);//Pos_SET_VALUE node_1
@@ -145,7 +146,7 @@ void assive (CO_Data* d)
 		ROW_MSG("%d\t%d\t%d\t%d\r\n",Pos_Actual_Val,Pos_Actual_Val_node3,Pos_Actual_Val_node4, Pos_Actual_Val_node5);
 	}
 	
-	if(period == PERIOD){
+	if(period >= PERIOD){
 		HAL_TIM_Base_Stop_IT(CANOPEN_TIMx_handle);	//关闭定时器
 		period = 5;
 		setState(&TestMaster_Data, Pre_operational);		//停止

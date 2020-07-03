@@ -251,7 +251,8 @@ void RemoteController_Task(void *p_arg)
 	}
 }
 
-extern int PERIOD;	//canopen_interface.c
+
+extern int PERIOD,period;	//canopen_interface.c
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 	if(huart->Instance == USART2){
@@ -263,9 +264,17 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 			case(0x18):
 				PERIOD = 2;
 				break;
+			case(0x19):
+				PERIOD = 60*60/7;
+				break;
+			case(0x0D):
+				PERIOD = 120*60/7;
+				break;
 			default:
-				ERROR(10,"error command\r\n");
+				ERROR(10,"error command 0x%X\r\n",receiveData);
 		}
 	}
+	MYMSG("#%d\t%d\r\n",period,PERIOD);
+	HAL_UART_Receive_IT(&huart2, remoteData,3);
 }
 
