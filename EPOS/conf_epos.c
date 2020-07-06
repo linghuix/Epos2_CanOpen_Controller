@@ -63,7 +63,7 @@ void EposMaster_Start(void)
 	setState(&TestMaster_Data, Initialisation);
 
 	if (!(*(TestMaster_Data.iam_a_slave)))		//master
-	{
+    {
 		EPOS_Reset();
 		Epos_NodeEnable();
 		

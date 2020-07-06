@@ -1,7 +1,8 @@
-app.c:31:6:Task_Start	16	static
-app.c:62:6:CANOpen_App_Init	32	static
-app.c:96:6:Epos_Task	16	static
-app.c:109:6:CANRcv_Task	40	static
-app.c:146:6:CANSend_Task	24	static
-app.c:172:6:Remote_App_Init	32	static
-app.c:186:6:RemoteController_Task	16	static
+app.c:35:6:Task_Start	16	static
+app.c:66:6:CANOpen_App_Init	32	static
+app.c:121:6:Epos_Task	24	static
+app.c:166:6:CANRcv_Task	40	static
+app.c:205:6:CANSend_Task	24	static
+app.c:226:6:Remote_App_Init	32	static
+app.c:244:6:RemoteController_Task	16	static
+app.c:256:6:HAL_UART_RxCpltCallback	24	static

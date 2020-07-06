@@ -7,6 +7,7 @@
 "Core/BSP/conf_tim.o"
 "Core/BSP/conf_usart.o"
 "Core/BSP/prinf_debug_ITM.o"
+"Core/Func/buffer.o"
 "Core/Func/debug.o"
 "Core/Func/func_CanOpen.o"
 "Core/Func/func_can.o"
@@ -59,4 +60,5 @@
 "Middlewares/uCOS-II/Cfg-Interface/os_cpu_c.o"
 "Middlewares/uCOS-II/Ports/os_cpu_a.o"
 "Middlewares/uCOS-II/Source/ucos_ii.o"
+"Startup/startup_stm32f103rctx_keil.o"
 "Startup/startup_stm32f103zetx.o"

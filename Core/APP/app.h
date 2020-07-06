@@ -13,6 +13,7 @@
 #define	TASK_cansend_PRIO			5
 #define	TASK_remote_PRIO			7
 #define	TASK_canapp_PRIO			3
+#define	TASK_Epos_PRIO			    3
 
 
 
@@ -20,7 +21,7 @@
 #define STARTUP_TASK_STK_SIZE   	80
 #define	TASK_A_STK_SIZE				300
 #define	TASK_B_STK_SIZE				400
-#define	TASK_remote_STK_SIZE				400
+#define	TASK_remote_STK_SIZE		400
 #define	TASK_canapp_STK_SIZE		500
 #define CAN_RECEIVE_STK 			700
 

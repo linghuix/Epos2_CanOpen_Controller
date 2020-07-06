@@ -46,8 +46,8 @@ cc_1.list \
 all: cc_1.elf secondary-outputs
 
 # Tool invocations
-cc_1.elf: $(OBJS) $(USER_OBJS) /home/test/STM32CubeIDE/workspace_1.0.2/cc_1/STM32F103ZETX_FLASH.ld
-	arm-none-eabi-gcc -o "cc_1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/test/STM32CubeIDE/workspace_1.0.2/cc_1/STM32F103ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="cc_1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+cc_1.elf: $(OBJS) $(USER_OBJS) /mnt/Documents/10-Chip_learning/0-硬件/3-motor/0-MOTOR\ controller/Epos2_CanOpen_Controller/STM32F103ZETX_FLASH.ld
+	arm-none-eabi-gcc -o "cc_1.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/mnt/Documents/10-Chip_learning/0-硬件/3-motor/0-MOTOR controller/Epos2_CanOpen_Controller/STM32F103ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="cc_1.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

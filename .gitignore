@@ -21,3 +21,8 @@
 *.pc
 *.uvoptx
 *.uvprojx
+
+# git root 下的Debug目录
+Debug/
+# git root 下的tags文件
+tags

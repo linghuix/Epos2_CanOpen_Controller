@@ -10,3 +10,4 @@ stm32f10x_it.c:180:6:USB_LP_CAN1_RX0_IRQHandler	8	static
 stm32f10x_it.c:188:6:USB_HP_CAN1_TX_IRQHandler	8	static
 stm32f10x_it.c:201:6:TIM2_IRQHandler	8	static
 stm32f10x_it.c:236:6:USART1_IRQHandler	8	static
+stm32f10x_it.c:242:6:USART2_IRQHandler	8	static

@@ -1,8 +1,8 @@
 conf_usart.c:16:6:MX_USART1_UART_Init	8	static
-conf_usart.c:33:6:USART_Hardware_Init	32	static
-conf_usart.c:94:6:USART_NVIC_Init	16	static
-conf_usart.c:117:6:MX_USART2_UART_Init	8	static
-conf_usart.c:136:6:MX_USART3_UART_Init	8	static
-conf_usart.c:155:6:HAL_UART_MspInit	16	static
-conf_usart.c:162:6:HAL_UART_MspDeInit	16	static
-conf_usart.c:227:6:USART_init	8	static
+conf_usart.c:42:6:USART_Hardware_Init	40	static
+conf_usart.c:127:6:USART_NVIC_Init	16	static
+conf_usart.c:149:6:MX_USART2_UART_Init	8	static
+conf_usart.c:168:6:MX_USART3_UART_Init	8	static
+conf_usart.c:194:6:HAL_UART_MspInit	16	static
+conf_usart.c:201:6:HAL_UART_MspDeInit	16	static
+conf_usart.c:266:6:USART_init	8	static

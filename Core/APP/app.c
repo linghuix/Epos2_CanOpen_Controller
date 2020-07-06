@@ -42,7 +42,7 @@ void Task_Start(void *p_arg)
 	CANOpen_App_Init();			//CANOpen协议初始化
 	Remote_App_Init();		// 红外通讯远程信息接收初始化
 	OSStatInit();
-
+	
 	while (1){
 		OSTimeDlyHMSM(0, 100,0,0);
 	}
