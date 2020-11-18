@@ -21,3 +21,5 @@
 *.pc
 *.uvoptx
 *.uvprojx
+*.flyleaf
+Keil/
