@@ -1,0 +1,205 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AAM	1-EPOS/epos.h	/^   Uint16      AAM:1;          \/\/ 29, The auto answer mode bit$/;"	m	struct:CANMSGID_BITS
+ALL	1-EPOS/epos.h	65;"	d
+AME	1-EPOS/epos.h	/^   Uint16      AME:1;          \/\/ 30, The acceptance mask enable bit$/;"	m	struct:CANMSGID_BITS
+BOOL	1-EPOS/epos.h	/^typedef uint8_t                 BOOL;$/;"	t
+BusFault_Handler	6-CONF/stm32f10x_it.c	/^void BusFault_Handler(void)$/;"	f
+CANFrame_t	1-EPOS/epos.h	/^typedef struct CANFrame_t$/;"	s
+CANMSGID_BITS	1-EPOS/epos.h	/^struct  CANMSGID_BITS {        \/\/ bits  description$/;"	s
+CANMSGID_REG	1-EPOS/epos.h	/^union CANMSGID_REG {$/;"	u
+CAN_Config	2-CAN/can.c	/^void CAN_Config(void)$/;"	f
+CAN_Filter_Config	2-CAN/can.c	/^static void CAN_Filter_Config(void)$/;"	f	file:
+CAN_GPIO_Config	2-CAN/can.c	/^static void CAN_GPIO_Config(void)$/;"	f	file:
+CAN_Handles	1-EPOS/epos.h	/^    stcCAN* CAN_Handles;\/\/EPOS$/;"	m	struct:__Epos
+CAN_Mode_Config	2-CAN/can.c	/^static void CAN_Mode_Config(void)$/;"	f	file:
+CAN_NVIC_Config	2-CAN/can.c	/^static void CAN_NVIC_Config(void)$/;"	f	file:
+CAN_SetMsg	2-CAN/can.c	/^void CAN_SetMsg(uint32_t ID, uint32_t low, uint32_t high){$/;"	f
+CMSIS_device_header	RTE/_Target_1/RTE_Components.h	17;"	d
+CM_SET_VALUE	1-EPOS/epos.h	/^        CM_SET_VALUE = 0x2030,$/;"	e	enum:E_OBJ_MODE
+Controller	main.c	/^Epos Controller,Controller1;        \/\/控制器对象$/;"	v
+Controller1	main.c	/^Epos Controller,Controller1;        \/\/控制器对象$/;"	v
+Current_Demand_Value	1-EPOS/epos.h	/^        Current_Demand_Value = 0x606B,$/;"	e	enum:E_OBJ_MODE
+Current_Mode	1-EPOS/epos.h	/^    Current_Mode  = (uint8_t)-3,$/;"	e	enum:E_OBJ_MODE
+Current_Threshold	1-EPOS/epos.h	/^        Current_Threshold = 0x2080,$/;"	e	enum:E_OBJ_MODE
+DataLen	1-EPOS/epos.h	/^    Uint8   DataLen;$/;"	m	struct:CANFrame_t
+DebugMon_Handler	6-CONF/stm32f10x_it.c	/^void DebugMon_Handler(void)$/;"	f
+Delay	3-DELAY/delay.c	/^void Delay(__IO u32 nCount)	 \/\/$/;"	f
+Delay_ms	3-DELAY/delay.c	/^void Delay_ms(__IO u32 nTime)$/;"	f
+Delay_us	3-DELAY/delay.c	/^void Delay_us(__IO u32 nTime)$/;"	f
+Diagnostic_Mode	1-EPOS/epos.h	/^    Diagnostic_Mode = (uint8_t)-4,$/;"	e	enum:E_OBJ_MODE
+EPOS_DELAY1	1-EPOS/epos.h	218;"	d
+EPOS_DELAY2	1-EPOS/epos.h	219;"	d
+EPOS_DELAY3	1-EPOS/epos.h	220;"	d
+EPOS_H	1-EPOS/epos.h	2;"	d
+EXTMSGID_H	1-EPOS/epos.h	/^   Uint16      EXTMSGID_H:2;   \/\/ 16:17$/;"	m	struct:CANMSGID_BITS
+EXTMSGID_L	1-EPOS/epos.h	/^   Uint16      EXTMSGID_L:16;  \/\/ 0:15$/;"	m	struct:CANMSGID_BITS
+E_OBJ_DICTIONARY	1-EPOS/epos.h	/^enum E_OBJ_DICTIONARY$/;"	g
+E_OBJ_MODE	1-EPOS/epos.h	/^enum E_OBJ_MODE$/;"	g
+Epos	1-EPOS/epos.h	/^}Epos;$/;"	t	typeref:struct:__Epos
+Epos_Delay	1-EPOS/epos.c	/^void Epos_Delay(Uint32 time){$/;"	f
+Epos_Init	1-EPOS/epos.c	/^void Epos_Init(Epos* epos1, Uint8 CAN_ID, Uint8 NODE_ID)$/;"	f
+Epos_OperEn	1-EPOS/epos.c	/^void Epos_OperEn(Epos* epos){$/;"	f
+Epos_ParamInit	1-EPOS/epos.c	/^void Epos_ParamInit(Epos* epos)$/;"	f
+Epos_setMode	1-EPOS/epos.c	/^void Epos_setMode(Epos* epos, Uint16 mode){$/;"	f
+Fault_Reset	1-EPOS/epos.h	/^    Fault_Reset = 0x0080,   \/\/重置错误$/;"	e	enum:E_OBJ_DICTIONARY
+HardFault_Handler	6-CONF/stm32f10x_it.c	/^void HardFault_Handler(void)$/;"	f
+Home_Offset	1-EPOS/epos.h	/^        Home_Offset = 0x607C,$/;"	e	enum:E_OBJ_MODE
+Home_Pos	1-EPOS/epos.h	/^        Home_Pos = 0x2081,$/;"	e	enum:E_OBJ_MODE
+Homing_Acceleration	1-EPOS/epos.h	/^        Homing_Acceleration = 0x609A,$/;"	e	enum:E_OBJ_MODE
+Homing_Method	1-EPOS/epos.h	/^        Homing_Method = 0x6098,$/;"	e	enum:E_OBJ_MODE
+Homing_Mode	1-EPOS/epos.h	/^    Homing_Mode = (uint8_t)6,$/;"	e	enum:E_OBJ_MODE
+Homing_Speeds	1-EPOS/epos.h	/^        Homing_Speeds = 0x6099,$/;"	e	enum:E_OBJ_MODE
+IDE	1-EPOS/epos.h	/^   Uint16      IDE:1;          \/\/ 31, The identifier extension bit$/;"	m	struct:CANMSGID_BITS
+Interpolated_Position_Mode	1-EPOS/epos.h	/^    Interpolated_Position_Mode = (uint8_t)7,$/;"	e	enum:E_OBJ_MODE
+Interpolation_Buffer	1-EPOS/epos.h	/^        Interpolation_Buffer = 0x20C4,\/\/FIFO 缓冲区 的状态$/;"	e	enum:E_OBJ_MODE
+Interpolation_Data_Configuration	1-EPOS/epos.h	/^    Interpolation_Data_Configuration = 0x60C4,$/;"	e	enum:E_OBJ_DICTIONARY
+Interpolation_Data_Record	1-EPOS/epos.h	/^        Interpolation_Data_Record = 0x20C1,\/\/a FIFO 启动前必须包含至少两个数据点，否则无法规划轨迹。最好使用PDO进行数据传输$/;"	e	enum:E_OBJ_MODE
+Interpolation_Time_Period	1-EPOS/epos.h	/^    Interpolation_Time_Period = 0x60C2,$/;"	e	enum:E_OBJ_DICTIONARY
+IsExtend	1-EPOS/epos.h	/^    BOOL    IsExtend;$/;"	m	struct:CANFrame_t
+IsRemote	1-EPOS/epos.h	/^    BOOL    IsRemote;$/;"	m	struct:CANFrame_t
+MAX_ACC	1-EPOS/epos.h	57;"	d
+MAX_DEC	1-EPOS/epos.h	58;"	d
+MAX_F_ERR	1-EPOS/epos.h	60;"	d
+MAX_P_V	1-EPOS/epos.h	61;"	d
+MODE_NONE	1-EPOS/epos.h	59;"	d
+MS_DELAY	3-DELAY/delay.h	11;"	d
+Master_Encoder_Mode	1-EPOS/epos.h	/^    Master_Encoder_Mode = (uint8_t)-5,$/;"	e	enum:E_OBJ_MODE
+MemManage_Handler	6-CONF/stm32f10x_it.c	/^void MemManage_Handler(void)$/;"	f
+Motion_Profile_Type	1-EPOS/epos.h	/^        Motion_Profile_Type = 0x6086$/;"	e	enum:E_OBJ_MODE
+NEST	1-EPOS/epos.c	/^int NEST = 0;           \/\/嵌套层数$/;"	v
+NMI_Handler	6-CONF/stm32f10x_it.c	/^void NMI_Handler(void)$/;"	f
+NMT_Pre	1-EPOS/epos.c	/^void NMT_Pre(Epos* epos, Uint32 ID)$/;"	f
+NMT_Start	1-EPOS/epos.c	/^void NMT_Start(Epos* epos, Uint32 ID)$/;"	f
+NODE_ID	main.c	/^Uint8 NODE_ID = 1;                          \/\/EPOS的节点ID$/;"	v
+NODE_ID1	main.c	/^Uint8 NODE_ID1 = 2;$/;"	v
+NODE_LH	1-EPOS/epos.h	50;"	d
+NODE_LK	1-EPOS/epos.h	49;"	d
+NODE_RH	1-EPOS/epos.h	52;"	d
+NODE_RK	1-EPOS/epos.h	51;"	d
+NOT_USED	1-EPOS/epos.h	30;"	d
+OD_ACTUAL_POS	1-EPOS/epos.h	/^    OD_ACTUAL_POS = 0x6064,     \/\/actual position, Sub-index 0x00, INTEGER32,$/;"	e	enum:E_OBJ_DICTIONARY
+OD_ANALOG_IN	1-EPOS/epos.h	/^    OD_ANALOG_IN = 0x207C,\/\/analog inputs, number of entries 2$/;"	e	enum:E_OBJ_DICTIONARY
+OD_CAN_BITRATE	1-EPOS/epos.h	/^    OD_CAN_BITRATE = 0x2001, \/\/Subindex 0x00, Type UNSIGNED16$/;"	e	enum:E_OBJ_DICTIONARY
+OD_CM_SET	1-EPOS/epos.h	/^    OD_CM_SET = 0x2030, \/\/Setting value of current regulator in current mode [mA], Sub-index 0x00, INTEGER16$/;"	e	enum:E_OBJ_DICTIONARY
+OD_CTRL_WORD	1-EPOS/epos.h	/^    OD_CTRL_WORD = 0x6040,      \/*controlword, UNSIGNED16,$/;"	e	enum:E_OBJ_DICTIONARY
+OD_CURRENT_AVG	1-EPOS/epos.h	/^    OD_CURRENT_AVG = 0x2027, \/\/Current Actual Value Averaged, Subindex 0x00,Type INTEGER16$/;"	e	enum:E_OBJ_DICTIONARY
+OD_CURRENT_VAL	1-EPOS/epos.h	/^    OD_CURRENT_VAL = 0x6078,    \/\/Current Actual Value, Index 0x6078, Subindex 0x00,Type INTEGER16$/;"	e	enum:E_OBJ_DICTIONARY
+OD_ERR_HIS	1-EPOS/epos.h	/^    OD_ERR_HIS = 0x1003,    \/\/error history, Index 0x1003,  number of entries 0x05$/;"	e	enum:E_OBJ_DICTIONARY
+OD_ERR_REG	1-EPOS/epos.h	/^    OD_ERR_REG = 0x1001,    \/\/error register, Index 0x1001, Sub-index 0x00, UNSIGNED8$/;"	e	enum:E_OBJ_DICTIONARY
+OD_Interpolation_Sub_Mode	1-EPOS/epos.h	/^    OD_Interpolation_Sub_Mode = 0x60C0,$/;"	e	enum:E_OBJ_DICTIONARY
+OD_MAX_FLLW_ERR	1-EPOS/epos.h	/^    OD_MAX_FLLW_ERR = 0x6065,   \/\/Maximal following error, Sub-index 0x00, UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+OD_MAX_P_VELOCITY	1-EPOS/epos.h	/^    OD_MAX_P_VELOCITY = 0x607F, \/\/UNSIGNED32, [1, 25000]$/;"	e	enum:E_OBJ_DICTIONARY
+OD_MOTOR_DATA	1-EPOS/epos.h	/^    OD_MOTOR_DATA = 0x6410,  \/\/motor data, number of entries 0x06,具体含义参照firmware$/;"	e	enum:E_OBJ_DICTIONARY
+OD_Max_Acceleration	1-EPOS/epos.h	/^    OD_Max_Acceleration = 0x60C5,$/;"	e	enum:E_OBJ_DICTIONARY
+OD_Motion_Profile_Type	1-EPOS/epos.h	/^    OD_Motion_Profile_Type = 0x6086,$/;"	e	enum:E_OBJ_DICTIONARY
+OD_P_ACCELERATION	1-EPOS/epos.h	/^    OD_P_ACCELERATION = 0x6083, \/\/profile acceleration, Sub-index 0x00,UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+OD_P_DECELERATION	1-EPOS/epos.h	/^    OD_P_DECELERATION = 0x6084, \/\/profile deceleration, Sub-index 0x00,UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+OD_P_VELOCITY	1-EPOS/epos.h	/^    OD_P_VELOCITY = 0x6081,     \/\/Profile velocity, Sub-index 0x00, UNSIGNED32, Unit:rpm$/;"	e	enum:E_OBJ_DICTIONARY
+OD_Position_Window	1-EPOS/epos.h	/^    OD_Position_Window = 0x6067,\/\/实际意义参考 firmware pdf$/;"	e	enum:E_OBJ_DICTIONARY
+OD_QS_DECELERATION	1-EPOS/epos.h	/^    OD_QS_DECELERATION =  0x6085, \/\/quick stop deceleration, Sub-index 0x00, UINT32$/;"	e	enum:E_OBJ_DICTIONARY
+OD_STATUS_WORD	1-EPOS/epos.h	/^    OD_STATUS_WORD = 0x6041, \/\/Statusword, Sub-index 0x00, UNSIGNED16$/;"	e	enum:E_OBJ_DICTIONARY
+OD_STORE	1-EPOS/epos.h	/^    OD_STORE = 0x1010,      \/\/Save all Parameters, Subindex 0x01, Type UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+OD_TARGET_POS	1-EPOS/epos.h	/^    OD_TARGET_POS = 0x607A,     \/*target position, Sub-index 0x00, INTEGER32,$/;"	e	enum:E_OBJ_DICTIONARY
+OD_TARGET_VELOCITY	1-EPOS/epos.h	/^    OD_TARGET_VELOCITY = 0x60FF,  \/\/target velocity, Sub-index 0x00, INTEGER32$/;"	e	enum:E_OBJ_DICTIONARY
+OP_MODE	1-EPOS/epos.h	/^    OP_MODE = 0x6060,           \/\/Modes of operation, Sub-index 0x00, NTEGER8$/;"	e	enum:E_OBJ_MODE
+PDO_Config	1-EPOS/epos.c	/^void PDO_Config(Epos* A)$/;"	f
+PDO_Write	1-EPOS/epos.c	/^void PDO_Write(Uint16 ID, Uint32 angle)$/;"	f
+PI	main.c	15;"	d	file:
+PM_SET_VALUE	1-EPOS/epos.h	/^        PM_SET_VALUE = 0x2062,          $/;"	e	enum:E_OBJ_MODE
+PM_SetAngle	1-EPOS/epos.c	/^void PM_SetAngle(Epos* epos, Uint32 angle){$/;"	f
+PPMODE	1-EPOS/epos.h	56;"	d
+PendSV_Handler	6-CONF/stm32f10x_it.c	/^void PendSV_Handler(void)$/;"	f
+Pos_Demand_Value	1-EPOS/epos.h	/^        Pos_Demand_Value = 0x6062,      $/;"	e	enum:E_OBJ_MODE
+Pos_Window_Time	1-EPOS/epos.h	/^    Pos_Window_Time = 0x6068,   \/\/进入Position_Window的时间，单位ms$/;"	e	enum:E_OBJ_DICTIONARY
+Position_Mode	1-EPOS/epos.h	/^    Position_Mode = (uint8_t)-1,$/;"	e	enum:E_OBJ_MODE
+Print	1-EPOS/epos.c	/^void Print(CanRxMsg RxMessage){$/;"	f
+Profile_Acceleration	1-EPOS/epos.h	/^        Profile_Acceleration = 0x6083,  \/\/规划路径max Acceleration$/;"	e	enum:E_OBJ_MODE
+Profile_Deceleration	1-EPOS/epos.h	/^        Profile_Deceleration = 0x6084,  \/\/min Deceleration$/;"	e	enum:E_OBJ_MODE
+Profile_Position_Mode	1-EPOS/epos.h	/^    Profile_Position_Mode = (uint8_t)1,\/\/目标位置为零$/;"	e	enum:E_OBJ_MODE
+Profile_Velocity	1-EPOS/epos.h	/^        Profile_Velocity = 0x6081,      \/\/规划路径的最大速度$/;"	e	enum:E_OBJ_MODE
+Profile_Velocity_Mode	1-EPOS/epos.h	/^    Profile_Velocity_Mode = (uint8_t)3,\/\/目标位置有速度$/;"	e	enum:E_OBJ_MODE
+QDEC	1-EPOS/epos.h	62;"	d
+RTE_COMPONENTS_H	RTE/_Target_1/RTE_Components.h	11;"	d
+RxMessage	main.c	/^CanRxMsg RxMessage;                         \/\/接收缓冲区$/;"	v
+SAVE_Code	1-EPOS/epos.h	/^        SAVE_Code = 0x73617665,$/;"	e	enum:E_OBJ_DICTIONARY
+SDO	1-EPOS/epos.h	4;"	d
+SDO_Read	1-EPOS/epos.c	/^Uint32 SDO_Read(Epos* epos,Uint16 Index,Uint8 SubIndex)$/;"	f
+SDO_Write	1-EPOS/epos.c	/^void SDO_Write(Epos* epos,Uint16 Index,Uint8 SubIndex,Uint32 param)$/;"	f
+SI_ANALOG1	1-EPOS/epos.h	/^        SI_ANALOG1 = 0x01,  \/\/analog input 1, Index 0x207C, Sub-index 0x01,Type INTEGER16, analog input 1 [mV].$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ANALOG2	1-EPOS/epos.h	/^        SI_ANALOG2 = 0x02,  \/\/analog input 2, Index 0x207C, Sub-index 0x02,Type INTEGER16,The voltage measured at analog input 2 [mV].$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ERR_CNT	1-EPOS/epos.h	/^        SI_ERR_CNT = 0x00,  \/\/number of errors$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ERR_HIS1	1-EPOS/epos.h	/^        SI_ERR_HIS1 = 0x01, \/\/error history [1],Index 0x1003,Sub-index 0x01, UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ERR_HIS2	1-EPOS/epos.h	/^        SI_ERR_HIS2 = 0x02, \/\/error history [2],Index 0x1003,Sub-index 0x02, UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ERR_HIS3	1-EPOS/epos.h	/^        SI_ERR_HIS3 = 0x03, \/\/error history [3],Index 0x1003,Sub-index 0x03, UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ERR_HIS4	1-EPOS/epos.h	/^        SI_ERR_HIS4 = 0x04, \/\/error history [4],Index 0x1003,Sub-index 0x04, UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+SI_ERR_HIS5	1-EPOS/epos.h	/^        SI_ERR_HIS5 = 0x05, \/\/error history [5],Index 0x1003,Sub-index 0x05, UNSIGNED32$/;"	e	enum:E_OBJ_DICTIONARY
+STDMSGID	1-EPOS/epos.h	/^   Uint16      STDMSGID:11;    \/\/ 18:28$/;"	m	struct:CANMSGID_BITS
+SVC_Handler	6-CONF/stm32f10x_it.c	/^void SVC_Handler(void)$/;"	f
+Soft_P_Limit	1-EPOS/epos.h	/^    Soft_P_Limit = 0x607D,  \/\/软件限制$/;"	e	enum:E_OBJ_DICTIONARY
+Step_Direction_Mode	1-EPOS/epos.h	/^    Step_Direction_Mode = (uint8_t)-6,$/;"	e	enum:E_OBJ_MODE
+SysTick_Handler	6-CONF/stm32f10x_it.c	/^void SysTick_Handler(void)$/;"	f
+SysTick_Init	3-DELAY/delay.c	/^void SysTick_Init(){$/;"	f
+SysTick_ms_Init	3-DELAY/delay.c	/^void SysTick_ms_Init(void){$/;"	f
+SysTick_us_Init	3-DELAY/delay.c	/^void SysTick_us_Init(void){	$/;"	f
+TIM2_IRQHandler	6-CONF/stm32f10x_it.c	/^void TIM2_IRQHandler(void){$/;"	f
+TIM2_interrupt	4-TIME/time.c	/^void TIM2_interrupt(void){$/;"	f
+TIME2_Configuration	4-TIME/time.c	/^void TIME2_Configuration(void)$/;"	f
+TIME3_Configuration	4-TIME/time.c	/^void TIME3_Configuration(void)$/;"	f
+TIME_NVIC_Configuration	4-TIME/time.c	/^void TIME_NVIC_Configuration(void)$/;"	f
+Target_Position	1-EPOS/epos.h	/^        Target_Position = 0x607A,$/;"	e	enum:E_OBJ_MODE
+Target_Velocity	1-EPOS/epos.h	/^        Target_Velocity = 0x6040,          \/\/目标位置的速度$/;"	e	enum:E_OBJ_MODE
+TimingDelay	3-DELAY/delay.c	/^volatile u32 TimingDelay;$/;"	v
+TimingDelay_decrement	3-DELAY/delay.c	/^void TimingDelay_decrement(void){$/;"	f
+TxMessage	main.c	/^CanTxMsg TxMessage;                     \/\/发送缓冲区$/;"	v
+USART1_Config	5-USART/usart1.c	/^void USART1_Config(void)$/;"	f
+USART1_printf	5-USART/usart1.c	/^void USART1_printf(USART_TypeDef* USARTx, uint8_t *Data,...)$/;"	f
+USB_LP_CAN1_RX0_IRQHandler	6-CONF/stm32f10x_it.c	/^void USB_LP_CAN1_RX0_IRQHandler(void)$/;"	f
+Uint16	1-EPOS/epos.h	/^typedef uint16_t                Uint16;$/;"	t
+Uint32	1-EPOS/epos.h	/^typedef uint32_t                Uint32;$/;"	t
+Uint8	1-EPOS/epos.h	/^typedef uint8_t                 Uint8;$/;"	t
+UsageFault_Handler	6-CONF/stm32f10x_it.c	/^void UsageFault_Handler(void)$/;"	f
+VM_SET_VALUE	1-EPOS/epos.h	/^        VM_SET_VALUE = 0x206B,$/;"	e	enum:E_OBJ_MODE
+Velocity_Demand_Value	1-EPOS/epos.h	/^        Velocity_Demand_Value = 0x606B,$/;"	e	enum:E_OBJ_MODE
+Velocity_Mode	1-EPOS/epos.h	/^    Velocity_Mode = (uint8_t)-2,$/;"	e	enum:E_OBJ_MODE
+__CAN_H	2-CAN/can.h	2;"	d
+__Epos	1-EPOS/epos.h	/^typedef struct __Epos$/;"	s
+__STM32F10x_CONF_H	6-CONF/stm32f10x_conf.h	24;"	d
+__STM32F10x_IT_H	6-CONF/stm32f10x_it.h	24;"	d
+__TIMER_H	4-TIME/timer.h	2;"	d
+__USART1_H	5-USART/usart1.h	2;"	d
+__delay_H	3-DELAY/delay.h	3;"	d
+acc	1-EPOS/epos.h	/^    int32 acc;                  \/\/EPOS的加速度$/;"	m	struct:__Epos
+all	1-EPOS/epos.h	/^   Uint32                all;$/;"	m	union:CANMSGID_REG
+ang	main.c	/^double ang[51]  = {6.464,7.102,8.449,10.158,11.772,12.992,13.599,13.527,12.995,12.22,11.283,10.256,9.193,8.152,7.174,6.271,5.442,4.702,4.079,3.597,3.299,3.222,$/;"	v
+angle_1	main.c	/^int angle_1[323] = {10682,10675,10669,10665,10664,10665,10668,10674,10683,10695,10711,10729,10751,10777,10807,10840,10878,10919,10965,11015,11070,11129,11192,11260,$/;"	v
+angle_sensor	main.c	/^int angle_sensor;$/;"	v
+assert_param	6-CONF/stm32f10x_conf.h	68;"	d
+assert_param	6-CONF/stm32f10x_conf.h	72;"	d
+b_init	1-EPOS/epos.h	/^    BOOL b_init;                \/\/Epos是否初始化的标志$/;"	m	struct:__Epos
+b_need_shutdown	1-EPOS/epos.h	/^    BOOL b_need_shutdown;   \/\/是否需要关断EPOS对的标志$/;"	m	struct:__Epos
+bit	1-EPOS/epos.h	/^   struct CANMSGID_BITS  bit;$/;"	m	union:CANMSGID_REG	typeref:struct:CANMSGID_REG::CANMSGID_BITS
+buf	1-EPOS/epos.h	/^    stcCANFrame buf;        \/\/EPOS一帧数据的缓冲区$/;"	m	struct:__Epos
+cur_mode	1-EPOS/epos.h	/^    Uint8 cur_mode;         \/\/EPOS的工作模式$/;"	m	struct:__Epos
+dec	1-EPOS/epos.h	/^    int32 dec;                  \/\/EPOS的负加速度$/;"	m	struct:__Epos
+flag	main.c	/^__IO uint32_t flag = 0xff;          \/\/用于标志是否接收到数据，在中断函数中赋值$/;"	v
+fputc	5-USART/usart1.c	/^int fputc(int ch, FILE *f)$/;"	f
+high_4byte	1-EPOS/epos.h	/^    Uint32  high_4byte;$/;"	m	struct:CANFrame_t
+int16	1-EPOS/epos.h	/^typedef int                     int16;$/;"	t
+int32	1-EPOS/epos.h	/^typedef long                    int32;$/;"	t
+int8	1-EPOS/epos.h	/^typedef char                    int8;$/;"	t
+itoa	5-USART/usart1.c	/^static char *itoa(int value, char *string, int radix)$/;"	f	file:
+low_4byte	1-EPOS/epos.h	/^    Uint32  low_4byte;$/;"	m	struct:CANFrame_t
+main	main.c	/^int main(void){$/;"	f
+msg_id	1-EPOS/epos.h	/^    union CANMSGID_REG  msg_id;$/;"	m	struct:CANFrame_t	typeref:union:CANFrame_t::CANMSGID_REG
+node_ID	1-EPOS/epos.h	/^    Uint8 node_ID;          \/\/CANOPEN网络所在EPOS控制器的ID$/;"	m	struct:__Epos
+opt	1-EPOS/epos.h	/^    int32 opt;              \/\/EPOS用于保存PPMODE下的opt参数$/;"	m	struct:__Epos
+pos	main.c	/^Uint32 pos=0;                                       \/\/电机位置$/;"	v
+stcCAN	1-EPOS/epos.h	/^typedef uint16_t                stcCAN;$/;"	t
+stcCANFrame	1-EPOS/epos.h	/^}stcCANFrame;$/;"	t	typeref:struct:CANFrame_t
+test_angle	main.c	/^int test_angle[71] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,$/;"	v
+x	main.c	/^int x=0;                                                \/\/角度自变量$/;"	v

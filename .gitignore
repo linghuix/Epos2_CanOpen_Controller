@@ -19,7 +19,7 @@
 *.zip
 
 *.pc
-*.uvoptx
-*.uvprojx
+//*.uvoptx
+//*.uvprojx
 *.flyleaf
 Keil/
