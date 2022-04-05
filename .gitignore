@@ -20,7 +20,7 @@
 
 *.pc
 *.uvoptx
-*.uvprojx
+# *.uvprojx
 
 # git root 下的Debug目录
 Debug/
